@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<!-- Page loading spinner-->
+<div [class]="'page-loading '+ estado">
+    <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Cargando...</span>
+    </div>
+</div>
+
+<!-- Body -->
+<main class="page-wrapper">
+    <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>
