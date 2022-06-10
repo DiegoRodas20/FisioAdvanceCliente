@@ -158,8 +158,8 @@
 
 <!-- Page title -->
 <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
-    <h1 class="mb-2 mb-md-0">Basic hooded sweatshirt in pink</h1>
-    <span class="text-muted"><strong>Art. No.</strong> 183260098</span>
+    <h1 class="mb-2 mb-md-0">{{producto.p_nombre}}</h1>
+    <span class="text-muted"><strong>Art. No.</strong> {{producto.cA_idItem}}</span>
 </section>
 
 <!-- Single product -->
@@ -180,9 +180,8 @@
                         <div class="tns-carousel-inner" data-carousel-options=''>
 
                             <!-- Product gallery item -->
-                            <a class="gallery-item" href="../assets/img/ecommerce/shop/single/01.jpg"
-                                data-sub-html='<h6 class="text-light">Gallery image caption #1</h6>'>
-                                <img class="rounded" src="../assets/img/ecommerce/shop/single/01.jpg"
+                            <a class="gallery-item" href={{producto.p_imagen}}>
+                                <img class="rounded" src={{producto.p_imagen}}
                                     alt="Carousel image">
                                 <span class="gallery-caption">Gallery image caption #1</span>
                             </a>
@@ -224,7 +223,7 @@
                         <!-- Product gallery thumbnails -->
                         <div class="tns-thumbnails" id="tns-thumbnails">
                             <button type="button" data-nav="0">
-                                <img src="../assets/img/ecommerce/shop/single/th01.jpg" alt="Thumbnail">
+                                <img src={{producto.p_imagen}} alt="Thumbnail">
                             </button>
                             <button type="button" data-nav="1">
                                 <img src="../assets/img/ecommerce/shop/single/th02.jpg" alt="Thumbnail">
@@ -250,9 +249,9 @@
 
                         <!-- Price -->
                         <div class="d-flex align-items-center mb-sm-0 mb-4">
-                            <span class="h3 d-inline-block mb-0 text-danger">$15.50</span>
-                            <del class="d-inline-block ms-2 ps-1 fs-lg text-muted">$31.00</del>
-                            <span class="ms-4 p-2 badge bg-danger fs-base fw-bold">- 50%</span>
+                            <span class="h3 d-inline-block mb-0 text-danger">S/.{{producto.p_precio}}</span>
+                            <del class="d-inline-block ms-2 ps-1 fs-lg text-muted">S/.{{ producto.p_precio+producto.cA_descuento}}</del>
+                            <span class="ms-4 p-2 badge bg-danger fs-base fw-bold">- {{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%</span>
                         </div>
 
                     </div>
@@ -271,8 +270,8 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-2 col-4 order-lg-3 order-3">
-                            <div class="mb-4">
+                        <div class="col-lg-2 col-4 order-lg-3 order-3 d-flex align-content-center justify-content-center align-items-center">
+                            <div class="">
                                 <select class="form-control form-select pe-3" id="select-input">
                                     <option>1</option>
                                     <option>2</option>
@@ -353,12 +352,11 @@
                                 aria-labelledby="accordionHeading-2" data-bs-parent="#accordion">
                                 <div class="accordion-body pt-0">
                                     <p class="fs-sm">
-                                        You have <strong>60 days</strong> to return the item(s) using any of the
-                                        following methods:
+                                        {{producto.p_Descripcion}}
                                     </p>
                                     <ul class="ps-3">
-                                        <li>Free store return</li>
-                                        <li>Free returns via USPS Dropoff Service</li>
+                                        <li>Marca : {{producto.p_marca}}</li>
+                                        <li>Categoria : {{producto.cP_categoria}}</li>
                                     </ul>
                                 </div>
                             </div>
