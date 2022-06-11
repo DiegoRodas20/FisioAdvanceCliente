@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductoService} from '../../services/producto.service'
-import {Producto} from '../../shared/models/producto.model'
+import {Categoria, Producto} from '../../shared/models/producto.model'
 import {Router} from '@angular/router'
 
 @Component({
@@ -11,6 +11,7 @@ import {Router} from '@angular/router'
 export class CatalogoComponent implements OnInit {
 
     productos : Producto[]
+    categorias : Categoria[]
 
     constructor(private _productoService:ProductoService,private _router: Router,) { }
 
@@ -18,6 +19,10 @@ export class CatalogoComponent implements OnInit {
 
       this._productoService.getProductos().subscribe((res)=>{
         this.productos = res
+      })
+
+      this._productoService.getCategoria().subscribe((res)=>{
+        this.categorias = res
       })
     }
 
