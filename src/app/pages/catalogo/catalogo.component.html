@@ -1,431 +1,48 @@
-<!-- Breadcrumb + Active filters -->
-<nav class="bg-secondary mb-3" aria-label="breadcrumb">
-  <div class="container d-sm-flex align-items-center">
-    <ol class="breadcrumb breadcrumb-alt mb-0">
-      <li class="breadcrumb-item">
-        <a href="index.html"><i class="ci-home"></i></a>
-      </li>
-      <li class="breadcrumb-item">
-        <a href="#">Women</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">Clothes</li>
-    </ol>
-    <hr class="d-sm-none">
-  </div>
-</nav>
 <!-- Shop catalog -->
-<section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
-  <!-- Toolbar + Pagination -->
-  <div class="row mb-4 pb-2">
-    <div class="col-md-3 pe-lg-4 mb-3 mb-md-0">
+<section class="container">
+    <div class="row flex-lg-nowrap">
 
-      <!-- Show / hide filters on Desktop -->
-      <div class="d-none d-lg-block">
-        <button type="button" class="btn btn-primary d-block w-100 d-none d-lg-block"
-          data-filters-hide="#filtersSidebar">
-          <i class="ci-filter-1 me-1"></i>
-          Hide filters
-        </button>
-        <button type="button" class="btn btn-primary d-block w-100 mt-0 d-lg-none" data-filters-show="#filtersSidebar">
-          <i class="ci-filter-2 me-1"></i>
-          Show filters
-        </button>
-      </div>
+        <!-- Product grid -->
+        <div class="col">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
 
-      <!-- Show / hide filters (offcanvas) on Mobile -->
-      <button type="button" class="btn btn-primary d-block w-100 mt-0 d-lg-none" data-bs-toggle="offcanvas"
-        data-bs-target="#filtersOffcanvas">
-        <i class="ci-filter-2 me-1"></i>
-        Show filters
-      </button>
-    </div>
+                <!-- Item -->
+                <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
+                    <div class="card card-product mx-auto">
 
-    <div class="col-md-9">
-      <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5">
-          <label for="sorting-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Sort by</label>
-          <select id="sorting-top" class="form-select">
-            <option>Popularity</option>
-            <option>Low - Hight Price</option>
-            <option>High - Low Price</option>
-            <option>Average Rating</option>
-            <option>A - Z Order</option>
-            <option>Z - A Order</option>
-          </select>
-        </div>
-        <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5">
-          <label for="pager-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Show</label>
-          <select id="pager-top" class="form-select">
-            <option>12</option>
-            <option>24</option>
-            <option>48</option>
-            <option>72</option>
-            <option>96</option>
-          </select>
-          <span class="fs-sm text-muted text-nowrap ms-2 d-none d-lg-block">products per page</span>
-        </div>
-        <nav class="ms-auto" aria-label="Pagination">
-          <ul class="pagination mb-0">
-            <li class="page-item d-sm-none">
-              <span class="page-link page-link-static">1 / 5</span>
-            </li>
-            <li class="page-item active d-none d-sm-block" aria-current="page">
-              <span class="page-link">1
-                <span class="visually-hidden">(current)</span>
-              </span>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <i class="ci-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <div class="row flex-lg-nowrap">
-    <!-- Filters (sidebar) -->
-    <div id="filtersSidebar" class="col-lg-3 pe-lg-4">
-      <div id="filtersOffcanvas" class="offcanvas offcanvas-collapse offcanvas-start">
-        <div class="offcanvas-header align-items-center border-bottom mb-3">
-          <h2 class="h5 mb-0">Shop filters</h2>
-          <button class="btn-close me-n1" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body pb-4">
-          <!-- Accordion -->
-          <div class="accordion accordion-alt " id="sidebarAccordion">
-            <!-- Item -->
-            <div class="accordion-item">
-              <h6 class="accordion-header" id="sidebarAccordionHeading-2">
-                <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#sidebarAccordionCollapse-2" aria-expanded="false"
-                  aria-controls="sidebarAccordionCollapse-2">Precio</button>
-              </h6>
-              <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-2"
-                aria-labelledby="sidebarAccordionHeading-2" data-bs-parent="#sidebarAccordion">
-                <div class="accordion-body pt-0">
-                  <div class="widget ps-1 pe-3 pb-4 mt-n3">
-                    <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0" data-max="1000"
-                      data-step="1">
-                      <div class="range-slider-ui"></div>
-                      <div class="d-flex align-items-center mt-3">
-                        <div class="w-50">
-                          <div class="form-group position-relative mb-0">
-                            <input type="number" class="form-control form-control-sm range-slider-value-min">
-                          </div>
+                        <div class="card-product-img text-center" (click)="goProductoId(producto.cA_idItem)">
+                            <img [src]="producto.p_imagen" class="w-50">
                         </div>
-                        <div class="mx-1 px-2 fs-xs">—</div>
-                        <div class="w-50">
-                          <div class="form-group position-relative mb-0">
-                            <input type="number" class="form-control form-control-sm range-slider-value-max">
-                          </div>
+
+                        <div class="card-body pb-2">
+                            <h3 class="card-product-title text-truncate mb-2">
+                                {{producto.p_nombre}}
+                            </h3>
+                            <div class="d-flex align-items-center">
+                                <span class="h5 d-inline-block text-danger mb-0">
+                                    S/.{{producto.cA_precioVenta | number : '1.2-2'}}
+                                </span>
+                                <del class="d-inline-block ms-2 ps-1 text-muted">
+                                    S/.{{(producto.p_precio) | number : '1.2-2'}}
+                                </del>
+                                <span class="ms-4 badge bg-danger fw-bold">
+                                    -{{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%
+                                </span>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Item -->
-            <div class="accordion-item">
-              <h6 class="accordion-header" id="sidebarAccordionHeading-5">
-                <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#sidebarAccordionCollapse-5" aria-expanded="false"
-                  aria-controls="sidebarAccordionCollapse-5">Categoria</button>
-              </h6>
-              <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-5"
-                aria-labelledby="sidebarAccordionHeading-5" data-bs-parent="#sidebarAccordion">
-                <div class="accordion-body pt-0">
-                  <div class="widget">
-                    <div class="widget-data-list filter">
-                      <div class="position-relative mb-3">
-                        <input class="filter-search form-control form-control-sm pe-5" type="text"
-                          placeholder="Search the material">
-                        <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                      </div>
-                      <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
-                        data-simplebar-auto-hide="false">
-                        <li class="filter-item" *ngFor="let categoria of categorias">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="material-1">
-                            <label class="form-check-label" for="material-1">
-                              <span class="filter-item-text">{{categoria.cP_categoria}}</span>
-                              <span class="ps-1 text-muted">{{categoria.cP_countProducto}}</span>
-                            </label>
-                          </div>
-                        </li>
 
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary d-block w-100" (click)="agregarCarrito(producto)">
+                                <i class="ci-cart align-middle mt-n1 me-2"></i>
+                                Añadir al carrito
+                            </button>
+                        </div>
 
-                      </ul>
                     </div>
-                  </div>
                 </div>
-              </div>
+
             </div>
-            <!-- Item -->
-            <div class="accordion-item">
-              <h6 class="accordion-header" id="sidebarAccordionHeading-6">
-                <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#sidebarAccordionCollapse-6" aria-expanded="false"
-                  aria-controls="sidebarAccordionCollapse-6">Marca</button>
-              </h6>
-              <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-6"
-                aria-labelledby="sidebarAccordionHeading-6" data-bs-parent="#sidebarAccordion">
-                <div class="accordion-body pt-0">
-                  <div class="widget">
-                    <div class="widget-data-list filter">
-                      <div class="position-relative mb-3">
-                        <input class="filter-search form-control form-control-sm pe-5" type="text"
-                          placeholder="Search the brand">
-                        <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                      </div>
-                      <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
-                        data-simplebar-auto-hide="false">
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="adidas">
-                            <label for="adidas" class="form-check-label">
-                              <span class="filter-item-text">Adidas</span>
-                              <span class="ps-1 text-muted">(425)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="ann-taylor">
-                            <label for="ann-taylor" class="form-check-label">
-                              <span class="filter-item-text">Ann Taylor</span>
-                              <span class="ps-1 text-muted">(15)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="armani">
-                            <label for="armani" class="form-check-label">
-                              <span class="filter-item-text">Armani</span>
-                              <span class="ps-1 text-muted">(18)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="banana">
-                            <label for="banana" class="form-check-label">
-                              <span class="filter-item-text">Banana Republic</span>
-                              <span class="ps-1 text-muted">(103)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="bilabong">
-                            <label for="bilabong" class="form-check-label">
-                              <span class="filter-item-text">Bilabong</span>
-                              <span class="ps-1 text-muted">(27)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="birkenstock">
-                            <label for="birkenstock" class="form-check-label">
-                              <span class="filter-item-text">Birkenstock</span>
-                              <span class="ps-1 text-muted">(10)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="klein">
-                            <label for="klein" class="form-check-label">
-                              <span class="filter-item-text">Calvin Klein</span>
-                              <span class="ps-1 text-muted">(365)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="columbia">
-                            <label for="columbia" class="form-check-label">
-                              <span class="filter-item-text">Columbia</span>
-                              <span class="ps-1 text-muted">(508)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="converse">
-                            <label for="converse" class="form-check-label">
-                              <span class="filter-item-text">Converse</span>
-                              <span class="ps-1 text-muted">(176)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dockers">
-                            <label for="dockers" class="form-check-label">
-                              <span class="filter-item-text">Dockers</span>
-                              <span class="ps-1 text-muted">(54)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="fruit">
-                            <label for="fruit" class="form-check-label">
-                              <span class="filter-item-text">Fruit of the Loom</span>
-                              <span class="ps-1 text-muted">(239)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="hanes">
-                            <label for="hanes" class="form-check-label">
-                              <span class="filter-item-text">Hanes</span>
-                              <span class="ps-1 text-muted">(92)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="choo">
-                            <label for="choo" class="form-check-label">
-                              <span class="filter-item-text">Jimmy Choo</span>
-                              <span class="ps-1 text-muted">(17)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="levis">
-                            <label for="levis" class="form-check-label">
-                              <span class="filter-item-text">Levi's</span>
-                              <span class="ps-1 text-muted">(361)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="new-balance">
-                            <label for="new-balance" class="form-check-label">
-                              <span class="filter-item-text">New Balance</span>
-                              <span class="ps-1 text-muted">(218)</span>
-                            </label>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+
     </div>
-    <!-- Product grid -->
-    <div class="col">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
-        <!-- Item -->
-        <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
-
-          <div class="card card-product mx-auto" (click)="goProductoId(producto.cA_idItem)">
-            <div class="card-product-img">
-              <img src={{producto.p_imagen}} alt="Product image">
-            </div>
-            <div class="card-body pb-2">
-              <h3 class="card-product-title text-truncate mb-2">
-                {{producto.p_nombre}}
-              </h3>
-              <div class="d-flex align-items-center">
-                <span class="h5 d-inline-block mb-0">S/. {{producto.cA_precioVenta}}</span>
-              </div>
-            </div>
-            <div class="card-footer">
-
-              <button type="button" class="btn btn-primary d-block w-100">
-                <i class="ci-cart align-middle mt-n1 me-2"></i>
-                Add to cart
-              </button>
-            </div>
-          </div>
-        </div>
-
-
-
-      </div>
-
-      <!-- Toolbar + Pagination -->
-      <div class="d-flex align-items-center pt-md-4">
-        <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5 pt-1">
-          <label for="sorting-bottom" class="fw-bold text-nowrap me-2 pe-1 d-none d-md-block">Sort by</label>
-          <select id="sorting-bottom" class="form-select">
-            <option>Popularity</option>
-            <option>Low - Hight Price</option>
-            <option>High - Low Price</option>
-            <option>Average Rating</option>
-            <option>A - Z Order</option>
-            <option>Z - A Order</option>
-          </select>
-        </div>
-        <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5 pt-1">
-          <label for="pager-bottom" class="fw-bold text-nowrap me-2 pe-1 d-none d-md-block">Show</label>
-          <select id="pager-bottom" class="form-select">
-            <option>12</option>
-            <option>24</option>
-            <option>48</option>
-            <option>72</option>
-            <option>96</option>
-          </select>
-          <span class="fs-sm text-muted text-nowrap ms-2 d-none d-md-block">products per page</span>
-        </div>
-        <nav class="pt-1 ms-auto" aria-label="Pagination">
-          <ul class="pagination mb-0">
-            <li class="page-item d-sm-none">
-              <span class="page-link page-link-static">1 / 5</span>
-            </li>
-            <li class="page-item active d-none d-sm-block" aria-current="page">
-              <span class="page-link">1
-                <span class="visually-hidden">(current)</span>
-              </span>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <i class="ci-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
-
 </section>
