@@ -42,6 +42,13 @@
 
     <div class="col-md-9">
       <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5">
+          <div class="input-group mb-0 d-block">
+            <input class="form-control w-100 ps-5 rounded-0 border-0" type="text"
+                placeholder="Search for products..." [(ngModel)]="input">
+            <i class="ci-search lead position-absolute start-0 top-50 translate-middle-y ms-3 zindex-5"></i>
+        </div>
+        </div>
         <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5">
           <label for="sorting-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Sort by</label>
           <select id="sorting-top" class="form-select">
@@ -53,45 +60,25 @@
             <option>Z - A Order</option>
           </select>
         </div>
-        <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5">
-          <label for="pager-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Show</label>
-          <select id="pager-top" class="form-select">
-            <option>12</option>
-            <option>24</option>
-            <option>48</option>
-            <option>72</option>
-            <option>96</option>
-          </select>
-          <span class="fs-sm text-muted text-nowrap ms-2 d-none d-lg-block">products per page</span>
-        </div>
+
         <nav class="ms-auto" aria-label="Pagination">
-          <ul class="pagination mb-0">
-            <li class="page-item d-sm-none">
-              <span class="page-link page-link-static">1 / 5</span>
-            </li>
-            <li class="page-item active d-none d-sm-block" aria-current="page">
-              <span class="page-link">1
-                <span class="visually-hidden">(current)</span>
-              </span>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <i class="ci-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </nav>
       </div>
     </div>
@@ -153,12 +140,12 @@
                     <div class="widget-data-list filter">
                       <div class="position-relative mb-3">
                         <input class="filter-search form-control form-control-sm pe-5" type="text"
-                          placeholder="Search the material">
+                          placeholder="Search the material" [(ngModel)]="categoria">
                         <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
                       </div>
                       <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
                         data-simplebar-auto-hide="false">
-                        <li class="filter-item" *ngFor="let categoria of categorias">
+                        <li class="filter-item" *ngFor="let categoria of categorias | categoriaFilter:categoria ">
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="material-1">
                             <label class="form-check-label" for="material-1">
@@ -343,7 +330,7 @@
     <div class="col">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
         <!-- Item -->
-        <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
+        <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | catalogoFilter: input">
 
           <div class="card card-product mx-auto" (click)="goProductoId(producto.cA_idItem)">
             <div class="card-product-img">
@@ -371,60 +358,7 @@
 
       </div>
 
-      <!-- Toolbar + Pagination -->
-      <div class="d-flex align-items-center pt-md-4">
-        <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5 pt-1">
-          <label for="sorting-bottom" class="fw-bold text-nowrap me-2 pe-1 d-none d-md-block">Sort by</label>
-          <select id="sorting-bottom" class="form-select">
-            <option>Popularity</option>
-            <option>Low - Hight Price</option>
-            <option>High - Low Price</option>
-            <option>Average Rating</option>
-            <option>A - Z Order</option>
-            <option>Z - A Order</option>
-          </select>
-        </div>
-        <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5 pt-1">
-          <label for="pager-bottom" class="fw-bold text-nowrap me-2 pe-1 d-none d-md-block">Show</label>
-          <select id="pager-bottom" class="form-select">
-            <option>12</option>
-            <option>24</option>
-            <option>48</option>
-            <option>72</option>
-            <option>96</option>
-          </select>
-          <span class="fs-sm text-muted text-nowrap ms-2 d-none d-md-block">products per page</span>
-        </div>
-        <nav class="pt-1 ms-auto" aria-label="Pagination">
-          <ul class="pagination mb-0">
-            <li class="page-item d-sm-none">
-              <span class="page-link page-link-static">1 / 5</span>
-            </li>
-            <li class="page-item active d-none d-sm-block" aria-current="page">
-              <span class="page-link">1
-                <span class="visually-hidden">(current)</span>
-              </span>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item d-none d-sm-block">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <i class="ci-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
     </div>
   </div>
 
