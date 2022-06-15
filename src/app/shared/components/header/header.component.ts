@@ -31,17 +31,9 @@ export class HeaderComponent implements OnInit {
         this.getCarrito()
     }
 
-    get subTotal() {
-
-        let montoCarrito = 0
-
-        if (this.lCarrito.length > 0) {
-            for (let i of this.lCarrito) {
-                montoCarrito = montoCarrito + i.cA_precioVenta
-            }
-        }
-
-        return montoCarrito
+    getSubTotal() {
+        let subTotal = this._carritoService.getSubTotal(this.lCarrito)
+        return subTotal
     }
 
     home() {

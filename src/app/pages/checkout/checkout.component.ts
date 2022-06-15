@@ -34,4 +34,9 @@ export class CheckoutComponent implements OnInit {
         this.getCarrito()
     }
 
+    getSubTotal() {
+        let subTotal = this._carritoService.getSubTotal(this.lCarrito)
+        return subTotal
+    }
+
 }

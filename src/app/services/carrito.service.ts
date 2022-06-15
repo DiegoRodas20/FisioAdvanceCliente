@@ -59,4 +59,16 @@ export class CarritoService {
 
     }
 
+    getSubTotal(carrito) {
+        
+        let montoCarrito = 0
+
+        if (carrito.length > 0) {
+            for (let i of carrito) {
+                montoCarrito = montoCarrito + i.cA_precioVenta
+            }
+        }
+
+        return montoCarrito
+    }
 }
