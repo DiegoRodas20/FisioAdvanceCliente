@@ -10,6 +10,7 @@ import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { ProductoComponent } from './producto/producto.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -17,7 +18,8 @@ const COMPONENTS = [
     PagesComponent,
     HomeComponent,
     CatalogoComponent,
-    ProductoComponent
+    ProductoComponent,
+    CheckoutComponent
 ]
 
 @NgModule({

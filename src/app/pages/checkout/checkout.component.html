@@ -1,0 +1,196 @@
+<section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
+    <div class="row">
+
+        <!-- Checkout -->
+        <div class="col-lg-8 pe-lg-6">
+            <div class="d-flex align-items-center justify-content-between pb-2 mb-4">
+                <h1 class="mb-0">Pedido</h1>
+            </div>
+
+            <hr class="border-top-0 border-bottom mb-4">
+
+            <!-- Resumen de Pedido -->
+            <h2 class="h4 mb-4">1. Resumen de Pedido</h2>
+            <div class="bg-secondary rounded mb-5">
+                
+                <!-- Item -->
+                <div *ngFor="let carrito of lCarrito" class="d-flex align-items-start px-2 px-sm-4 py-4 border-bottom">
+                    
+                    <a style="min-width: 80px;">
+                        <img [src]="carrito.p_imagen" width="80" alt="Product thumb">
+                    </a>
+
+                    <div class="w-100 ps-3">
+                        <div class="d-sm-flex">
+                            
+                            <div class="pe-sm-3 w-100" style="max-width: 16rem;">
+                                
+                                <h3 class="fs-sm mb-3">
+                                    <a class="nav-link fw-bold">{{carrito.p_nombre}}</a>
+                                </h3>
+
+                                <ul class="list-unstyled fs-xs mt-n2 mb-2">
+                                    <li class="mb-0"><span class="text-muted">Marca:</span> {{carrito.p_marca}}</li>
+                                    <li class="mb-0"><span class="text-muted">Categoría:</span> {{carrito.cP_categoria}}</li>
+                                </ul>
+
+                            </div>
+
+                            <div class="text-end align-items-start pe-sm-3 w-100">
+                                <div class="text-nowrap pt-2">
+                                    <strong class="text-danger">S/.{{carrito.cA_precioVenta | number : '1.2-2'}} </strong> 
+                                    <s class="fs-xs text-muted">S/.{{carrito.p_precio | number : '1.2-2'}}</s>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-3 px-sm-4 py-4 text-end">
+                    <span class="text-muted">Subtotal:
+                        <strong class="text-dark fs-lg ms-2">S/. {{getSubTotal() | number : '1.2-2'}}</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Información del Pedido -->
+            <h2 class="h4 mb-4">2. Información del Pedido</h2>
+            <div class="row pb-3">
+                
+                <div class="col-sm-12 mb-4">
+                    <label for="ch-fn" class="form-label-lg">Dirección de Envio</label>
+                    <input type="text" class="form-control form-control-lg" id="ch-fn" placeholder="Ingresa tu dirección.">
+                </div>
+
+                <div class="col-sm-12 mb-4">
+                    <label for="ch-notes" class="form-label-lg">Referencia de envio</label>
+                    <textarea id="ch-notes" class="form-control form-control-lg" rows="5"
+                        placeholder="Ingresa alguna referencia de tu dirección."></textarea>
+                </div>
+               
+            </div>
+
+            <hr class="mb-4">
+
+            <!-- Metodos de Pago -->
+            <h2 class="h4 pt-2 mb-4">4. Métodos de Pago</h2>
+            <div class="row pb-4">
+                <div class="col-lg-7">
+
+                    <!-- Payment accordion -->
+                    <div class="accordion accordion-alt" id="payment-methods">
+
+                        <!-- Item -->
+                        <div class="accordion-item mb-3 bg-white border rounded shadow-sm">
+                            <h6 class="accordion-header" id="paymentHeading-1">
+                                <button class="accordion-button accordion-button-indicator-0 py-0 px-4 rounded"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#payment-collapse-1"
+                                    aria-expanded="true" aria-controls="payment-collapse-1">
+                                    <div class="form-check w-100 py-4">
+                                        <input type="radio" class="form-check-input" id="cc" name="payment" checked="">
+                                        <label for="cc" class="form-check-label d-flex align-items-center">
+                                            <strong class="d-block me-3 fs-base">Tarjeta de crédito</strong>
+                                            <img src="../../../assets/img/cards.png" width="108"
+                                                alt="Credit cards">
+                                        </label>
+                                    </div>
+                                </button>
+                            </h6>
+                            <div class="accordion-collapse px-4 collapse show" id="payment-collapse-1"
+                                aria-labelledby="paymentHeading-1" data-bs-parent="#payment-methods">
+                                <div class="accordion-body pt-0 pb-3">
+
+                                    <div class="mb-3">
+                                        <label for="cc-number" class="form-label-lg">Nº Tarjeta</label>
+                                        <input type="text" id="cc-number" class="form-control form-control-lg"
+                                            data-format="card" placeholder="0000 0000 0000 0000">
+                                    </div>
+
+                                    <div class="d-flex">
+
+                                        <div class="mb-3 me-3">
+                                            <label for="cc-exp-date" class="form-label-lg">Fecha de Expiración</label>
+                                            <input type="text" id="cc-exp-date" class="form-control form-control-lg"
+                                                data-format="date" placeholder="mm/yy">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="cc-cvc" class="form-label-lg">CVC</label>
+                                            <input type="text" id="cc-cvc" class="form-control form-control-lg"
+                                                data-format="cvc" placeholder="000">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item -->
+                        <div class="accordion-item bg-white border rounded shadow-sm">
+                            <h6 class="accordion-header" id="paymentHeading-3">
+                                <button
+                                    class="accordion-button accordion-button-indicator-0 py-0 px-4 rounded collapsed"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#payment-collapse-3"
+                                    aria-expanded="false" aria-controls="payment-collapse-3">
+                                    <div class="form-check w-100 py-4">
+                                        <input type="radio" class="form-check-input" id="cash" name="payment">
+                                        <label for="cash" class="form-check-label d-block">
+                                            <strong class="d-block me-3 fs-base">Pago Contraentrega</strong>
+                                        </label>
+                                    </div>
+                                </button>
+                            </h6>
+                            <div class="accordion-collapse px-4 collapse" id="payment-collapse-3"
+                                aria-labelledby="paymentHeading-3" data-bs-parent="#payment-methods">
+                                <div class="accordion-body pt-0 pb-3">
+                                    <p class="mb-2 text-muted">Tu pago sera contraentrega.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+        </div>
+
+
+        <!-- Order totals (sticky sidebar) -->
+        <aside class="col-lg-4">
+            <div class="position-sticky">
+                <div class="bg-secondary rounded mb-4">
+
+                    <div class="border-bottom p-4">
+                        <h2 class="h4 mb-0">Orden total</h2>
+                    </div>
+
+                    <ul class="list-unstyled border-bottom mb-0 p-4">
+                        
+                        <li class="d-flex justify-content-between mb-2">
+                            <span class="fw-bold">Subtotal:</span>
+                            <span class="fw-bold">S/. {{getSubTotal() | number : '1.2-2'}}</span>
+                        </li>
+
+                        <li class="d-flex justify-content-between mb-2">
+                            <span>Montos agregados:</span>
+                            <span>—</span>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-flex justify-content-between p-4">
+                        <span class="h5 mb-0">Monto total:</span>
+                        <span class="h5 mb-0">S/. {{getSubTotal() | number : '1.2-2'}}</span>
+                    </div>
+
+                </div>
+                <button type="button" class="btn btn-primary btn-lg d-block w-100">Completar Pedido</button>
+
+            </div>
+        </aside>
+    </div>
+</section>
