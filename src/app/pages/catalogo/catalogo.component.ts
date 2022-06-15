@@ -14,6 +14,10 @@ export class CatalogoComponent implements OnInit {
 
     productos: Producto[]
     categorias: Categoria[]
+    // productos : Producto[]
+    // categorias : Categoria[]
+    input : string
+    categoria:string
 
     constructor(
         private _productoService: ProductoService,

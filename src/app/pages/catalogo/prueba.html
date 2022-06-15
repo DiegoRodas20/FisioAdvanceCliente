@@ -1,0 +1,231 @@
+<section class="container">
+  <div class="row flex-lg-nowrap">
+
+      <!-- Product grid -->
+      <div class="col">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" 
+          data-filters-columns>
+
+              <!-- Item -->
+              <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
+                  <div class="card card-product mx-auto">
+
+  <div class="col-md-9">
+    <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center flex-nowrap d-none d-sm-flex me-3 me-xl-5">
+        <div class="input-group mb-0 d-block">
+          <input class="form-control w-100 ps-5 rounded-0 border-0" type="text"
+              placeholder="Search for products..." [(ngModel)]="input">
+          <i class="ci-search lead position-absolute start-0 top-50 translate-middle-y ms-3 zindex-5"></i>
+      </div>
+      </div>
+      <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5">
+        <label for="sorting-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Sort by</label>
+        <select id="sorting-top" class="form-select">
+          <option>Popularity</option>
+          <option>Low - Hight Price</option>
+          <option>High - Low Price</option>
+          <option>Average Rating</option>
+          <option>A - Z Order</option>
+          <option>Z - A Order</option>
+        </select>
+      </div>
+
+      <nav class="ms-auto" aria-label="Pagination">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="row flex-lg-nowrap">
+  <!-- Filters (sidebar) -->
+  <div id="filtersSidebar" class="col-lg-3 pe-lg-4">
+    <div id="filtersOffcanvas" class="offcanvas offcanvas-collapse offcanvas-start">
+      <div class="offcanvas-header align-items-center border-bottom mb-3">
+        <h2 class="h5 mb-0">Shop filters</h2>
+        <button class="btn-close me-n1" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body pb-4">
+        <!-- Accordion -->
+        <div class="accordion accordion-alt " id="sidebarAccordion">
+          <!-- Item -->
+          <div class="accordion-item">
+            <h6 class="accordion-header" id="sidebarAccordionHeading-2">
+              <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarAccordionCollapse-2" aria-expanded="false"
+                aria-controls="sidebarAccordionCollapse-2">Precio</button>
+            </h6>
+            <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-2"
+              aria-labelledby="sidebarAccordionHeading-2" data-bs-parent="#sidebarAccordion">
+              <div class="accordion-body pt-0">
+                <div class="widget ps-1 pe-3 pb-4 mt-n3">
+                  <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0" data-max="1000"
+                    data-step="1">
+                    <div class="range-slider-ui"></div>
+                    <div class="d-flex align-items-center mt-3">
+                      <div class="w-50">
+                        <div class="form-group position-relative mb-0">
+                          <input type="number" class="form-control form-control-sm range-slider-value-min">
+                        </div>
+                      </div>
+
+                      <div class="card-body pb-2">
+                          <h3 class="card-product-title text-truncate mb-2">
+                              {{producto.p_nombre}}
+                          </h3>
+                          <div class="d-flex align-items-center">
+                              <span class="h5 d-inline-block text-danger mb-0">
+                                  S/.{{producto.cA_precioVenta | number : '1.2-2'}}
+                              </span>
+                              <del class="d-inline-block ms-2 ps-1 text-muted">
+                                  S/.{{(producto.p_precio) | number : '1.2-2'}}
+                              </del>
+                              <span class="ms-4 badge bg-danger fw-bold">
+                                  -{{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%
+                              </span>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Item -->
+          <div class="accordion-item">
+            <h6 class="accordion-header" id="sidebarAccordionHeading-5">
+              <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarAccordionCollapse-5" aria-expanded="false"
+                aria-controls="sidebarAccordionCollapse-5">Categoria</button>
+            </h6>
+            <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-5"
+              aria-labelledby="sidebarAccordionHeading-5" data-bs-parent="#sidebarAccordion">
+              <div class="accordion-body pt-0">
+                <div class="widget">
+                  <div class="widget-data-list filter">
+                    <div class="position-relative mb-3">
+                      <input class="filter-search form-control form-control-sm pe-5" type="text"
+                        placeholder="Search the material" [(ngModel)]="categoria">
+                      <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
+                    </div>
+                    <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
+                      data-simplebar-auto-hide="false">
+                      <li class="filter-item" *ngFor="let categoria of categorias | categoriaFilter:categoria ">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="material-1">
+                          <label class="form-check-label" for="material-1">
+                            <span class="filter-item-text">{{categoria.cP_categoria}}</span>
+                            <span class="ps-1 text-muted">{{categoria.cP_countProducto}}</span>
+                          </label>
+                        </div>
+                      </li>
+
+                      <div class="card-footer">
+                          <button type="button" class="btn btn-primary d-block w-100" (click)="agregarCarrito(producto)">
+                              <i class="ci-cart align-middle mt-n1 me-2"></i>
+                              Añadir al carrito
+                          </button>
+                      </div>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Product grid -->
+  <div class="col">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
+      <!-- Item -->
+      <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | catalogoFilter: input">
+
+        <div class="card card-product mx-auto" (click)="goProductoId(producto.cA_idItem)">
+          <div class="card-product-img">
+            <img src={{producto.p_imagen}} alt="Product image">
+          </div>
+          <div class="card-body pb-2">
+            <h3 class="card-product-title text-truncate mb-2">
+              {{producto.p_nombre}}
+            </h3>
+            <div class="d-flex align-items-center">
+              <span class="h5 d-inline-block mb-0">S/. {{producto.cA_precioVenta}}</span>
+            </div>
+          </div>
+          <div class="card-footer">
+
+          </div>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+</section>
+
+
+
+
+
+        <!-- Product grid -->
+        <div class="col">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
+
+              <!-- Item -->
+              <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
+                  <div class="card card-product mx-auto">
+
+                      <div class="card-product-img text-center" (click)="goProductoId(producto.cA_idItem)">
+                          <img [src]="producto.p_imagen" class="w-50">
+                      </div>
+
+                      <div class="card-body pb-2">
+                          <h3 class="card-product-title text-truncate mb-2">
+                              {{producto.p_nombre}}
+                          </h3>
+                          <div class="d-flex align-items-center">
+                              <span class="h5 d-inline-block text-danger mb-0">
+                                  S/.{{producto.cA_precioVenta | number : '1.2-2'}}
+                              </span>
+                              <del class="d-inline-block ms-2 ps-1 text-muted">
+                                  S/.{{(producto.p_precio) | number : '1.2-2'}}
+                              </del>
+                              <span class="ms-4 badge bg-danger fw-bold">
+                                  -{{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%
+                              </span>
+                          </div>
+                      </div>
+
+                      <div class="card-footer">
+                          <button type="button" class="btn btn-primary d-block w-100" (click)="agregarCarrito(producto)">
+                              <i class="ci-cart align-middle mt-n1 me-2"></i>
+                              Añadir al carrito
+                          </button>
+                      </div>
+
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+  </div>
