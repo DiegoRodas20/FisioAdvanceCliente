@@ -48,7 +48,11 @@ export class HeaderComponent implements OnInit {
         this._router.navigate(['/producto'])
     }
 
-    realizarPedido(){
+    realizarPedido() {
         this._router.navigate(['/checkout'])
+    }
+    calcularTotal(event, carrito) {
+        // carrito.cA_precioVenta / Number(carrito.p_precio - carrito.cA_descuento)
+        carrito.cA_precioVenta = Number(event.target.value) * Number(carrito.p_precio - carrito.cA_descuento);
     }
 }

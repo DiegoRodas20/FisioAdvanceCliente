@@ -90,7 +90,7 @@
                             <li class="mb-0"><span class="text-muted">Categoría: </span>{{carrito.cP_categoria}}</li>
                         </ul>
                         <div class="d-flex align-items-center">
-                            <input type="number" class="form-control form-control-sm bg-light me-3"
+                            <input (input)="calcularTotal($event, carrito)" type="number" class="form-control form-control-sm bg-light me-3"
                                 style="width: 4.5rem;" value="1">
                             <div class="text-nowrap sizeCost">
                                 <strong class="text-danger">S/.{{carrito.cA_precioVenta | number : '1.2-2'}} </strong>
