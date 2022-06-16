@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       crearFormCliente() {
         this.formUser = this._formBuilder.group({
           u_correoElectronico:['', [Validators.required,Validators.maxLength(30),Validators.email]],
-          u_contrasena: ['', [Validators.required,Validators.maxLength(10)]],
+          u_contrasena: ['', [Validators.required,Validators.maxLength(8)]],
           u_nombre: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
           u_apellidoPaterno: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
           u_apellidoMaterno: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
     
      
       registrarCliente() {
+        console.log(this.formUser.value);
         if (this.formUser.status == 'VALID') {
+          console.log("valido");
           this._clienteService
             .RegistrarCliente(this.formUser.value)
             .subscribe((data) => {
@@ -103,7 +105,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['dashboard'])
     }
 
-    registerOpen(opcion:string){
+    OpenModal(opcion:string){
         
       switch(opcion) { 
           case opcion="register": { 

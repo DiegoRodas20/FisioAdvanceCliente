@@ -29,6 +29,7 @@ export class CatalogoComponent implements OnInit {
 
         this._productoService.getProductos().subscribe((res) => {
             this.productos = res
+            console.log(res)
         })
 
         this._productoService.getCategoria().subscribe((res) => {

@@ -4,6 +4,7 @@ import { ProductoService } from '../../services/producto.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { CarritoService } from 'src/app/services/carrito.service';
+import { Carrito } from 'src/app/shared/models/carrito.model';
 declare var tns;
 declare var lightGallery;
 
@@ -15,6 +16,7 @@ declare var lightGallery;
 export class ProductoComponent implements OnInit {
 
   producto: Producto;
+  carrito:Carrito;
   lentgh : any;
 
   constructor(private _productoService: ProductoService, private _route: ActivatedRoute, private _carritoService: CarritoService,) { }
@@ -30,8 +32,25 @@ export class ProductoComponent implements OnInit {
   }
  
   agregarCarrito(producto) {
-    console.log(producto)
-    var estado = this._carritoService.addCarrito(producto)
+    this.carrito = {
+      cA_idItem:producto.cA_idItem,
+      dP_idDetallePedido:'',
+      pE_idPedido: '',
+      p_idProducto:producto.p_idProducto,
+      dP_cantidad: 1,
+      p_nombre: producto.p_nombre,
+      p_precio: producto.p_precio,
+      p_stock: producto.p_stock,
+      mP_marca: producto.p_marca,
+      p_Descripcion: producto.p_Descripcion,
+      cP_categoria: producto.cP_categoria,
+      cA_precioVenta: producto.cA_precioVenta,
+      cA_descuento: producto.cA_descuento,
+      p_imagen: producto.p_imagen,
+      dP_subTotal: 1 * producto.cA_precioVenta,
+      dP_precioUnitario: producto.cA_precioVenta
+    };
+    var estado = this._carritoService.addCarrito(this.carrito)
 
     if (estado == 0) {
         console.log('NO SE PUEDE REPETIR EL PRODUCTO')
