@@ -14,17 +14,21 @@ declare var lightGallery;
 
 export class ProductoComponent implements OnInit {
 
-  producto: Producto
+  producto: Producto;
+  lentgh : any;
 
   constructor(private _productoService: ProductoService, private _route: ActivatedRoute, private _carritoService: CarritoService,) { }
 
   ngOnInit() {
     this.animationSlider();
     this._route.params.subscribe(params => {
-      this._productoService.getProductoxId(params.id).subscribe((res) => { this.producto = res[0]})
+      this._productoService.getProductoxId(params.id).subscribe((res) => { this.producto = res[0];
+        this.lentgh = res.length;
+    })    
     });
 
   }
+ 
   agregarCarrito(producto) {
     console.log(producto)
     var estado = this._carritoService.addCarrito(producto)
@@ -90,82 +94,82 @@ export class ProductoComponent implements OnInit {
       // })
 
       // Look
-      tns({
-        container: '.tns-carousel-inner-four',
-        controlsContainer: "#tns-look-controls",
-        mouseDrag: !0,
-        responsive: {
-          0: {
-            items: 1,
-            gutter: 20
-          },
-          480: {
-            items: 2,
-            gutter: 24
-          },
-          767: {
-            items: 1
-          },
-          991: {
-            items: 2,
-            gutter: 30
-          }
-        },
-      })
+      // tns({
+      //   container: '.tns-carousel-inner-four',
+      //   controlsContainer: "#tns-look-controls",
+      //   mouseDrag: !0,
+      //   responsive: {
+      //     0: {
+      //       items: 1,
+      //       gutter: 20
+      //     },
+      //     480: {
+      //       items: 2,
+      //       gutter: 24
+      //     },
+      //     767: {
+      //       items: 1
+      //     },
+      //     991: {
+      //       items: 2,
+      //       gutter: 30
+      //     }
+      //   },
+      // })
 
       // Related products
-      tns({
-        container: '.tns-carousel-inner-five',
-        nav: false,
-        controlsContainer: "#custom-controls-related",
-        mouseDrag: !0,
-        responsive: {
-          0: {
-            items: 1,
-            gutter: 20
-          },
-          480: {
-            items: 2,
-            gutter: 24
-          },
-          700: {
-            items: 3,
-            gutter: 24
-          },
-          1100: {
-            items: 4,
-            gutter: 30
-          }
-        }
+      // tns({
+      //   container: '.tns-carousel-inner-five',
+      //   nav: false,
+      //   controlsContainer: "#custom-controls-related",
+      //   mouseDrag: !0,
+      //   responsive: {
+      //     0: {
+      //       items: 1,
+      //       gutter: 20
+      //     },
+      //     480: {
+      //       items: 2,
+      //       gutter: 24
+      //     },
+      //     700: {
+      //       items: 3,
+      //       gutter: 24
+      //     },
+      //     1100: {
+      //       items: 4,
+      //       gutter: 30
+      //     }
+      //   }
 
-      });
+      // });
 
       // Recently viewed products
-      tns({
-        container: '.tns-carousel-inner-six',
-        nav: false,
-        mouseDrag: !0,
-        controlsContainer: "#custom-controls-recent",
-        responsive: {
-          0: {
-            items: 1,
-            gutter: 20
-          },
-          480: {
-            items: 2,
-            gutter: 24
-          },
-          700: {
-            items: 3,
-            gutter: 24
-          },
-          1100: {
-            items: 4,
-            gutter: 30
-          }
-        }
+      // tns({
+      //   container: '.tns-carousel-inner-six',
+      //   nav: false,
+      //   mouseDrag: !0,
+      //   controlsContainer: "#custom-controls-recent",
+      //   responsive: {
+      //     0: {
+      //       items: 1,
+      //       gutter: 20
+      //     },
+      //     480: {
+      //       items: 2,
+      //       gutter: 24
+      //     },
+      //     700: {
+      //       items: 3,
+      //       gutter: 24
+      //     },
+      //     1100: {
+      //       items: 4,
+      //       gutter: 30
+      //     }
+      //   }
 
-      });
+      // });
 
     }, 500)
 

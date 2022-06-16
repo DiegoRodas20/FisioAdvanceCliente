@@ -12,8 +12,8 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(URL_LISTAR_PRODUCTOS);
+  getProductos(): Observable<any> {
+    return this.http.get<any>(URL_LISTAR_PRODUCTOS);
   }
 
   getProductosFilter(marca: any, categoria: any): Observable<Producto[]> {

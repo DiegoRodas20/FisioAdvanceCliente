@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { CatalogoComponent } from "./catalogo/catalogo.component";
 import { ProductoComponent } from "./producto/producto.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
+import { MenuPerfilComponent } from "./menu-perfil/menu-perfil.component";
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            // { path: 'home', component: HomeComponent },
+            { path: 'home', component: HomeComponent },
             {
                 path: 'catalogo',
                 component: CatalogoComponent,
@@ -30,7 +31,12 @@ const routes: Routes = [
                 component: CheckoutComponent,
                 data: { titulo: 'Checkout' }
             },
-            { path: '', redirectTo: '/catalogo', pathMatch: 'full' },
+            {
+                path: 'perfil',
+                component: MenuPerfilComponent,
+                data: { titulo: 'Perfil' }
+            },
+            { path: '', redirectTo: '/home', pathMatch: 'full' },
         ]
     },
 ];
