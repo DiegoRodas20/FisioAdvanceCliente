@@ -28,3 +28,4 @@ export const URL_PEDIDO = BASE_URL + 'Pedido/';
 
 /*******DETALLE PEDIDO******* */
 export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';
+export const URL_MARCA = `${BASE_URL}Marca`;

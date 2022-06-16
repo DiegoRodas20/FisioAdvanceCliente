@@ -23,8 +23,7 @@
           <div class="d-none d-lg-block">
               <button type="button" class="btn btn-primary d-block w-100 d-none d-lg-block"
                   data-filters-hide="#filtersSidebar">
-                  <i class="ci-filter-1 me-1"></i>
-                  Hide filters
+                  Limpiar
               </button>
               <button type="button" class="btn btn-primary d-block w-100 mt-0 d-lg-none"
                   data-filters-show="#filtersSidebar">
@@ -155,12 +154,12 @@
                       </div>
                       <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
                         data-simplebar-auto-hide="false">
-                        <li class="filter-item" *ngFor="let categoria of categorias | categoriaFilter:categoria ">
+                        <li class="filter-item" *ngFor="let categoria of categorias " (click)="filtradoPorCategorias(categoria.id)">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="material-1">
+                            <input class="form-check-input" type="checkbox" id="material-1" [checked]="categoria.selected">
                             <label class="form-check-label" for="material-1">
-                              <span class="filter-item-text">{{categoria.cP_categoria}}</span>
-                              <span class="ps-1 text-muted">{{categoria.cP_countProducto}}</span>
+                              <span class="filter-item-text">{{categoria.nombre}}</span>
+                              <span class="ps-1 text-muted">{{categoria.cuenta}}</span>
                             </label>
                           </div>
                         </li>
@@ -190,143 +189,17 @@
                         <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
                       </div>
                       <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
-                        data-simplebar-auto-hide="false">
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="adidas">
-                            <label for="adidas" class="form-check-label">
-                              <span class="filter-item-text">Adidas</span>
-                              <span class="ps-1 text-muted">(425)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="ann-taylor">
-                            <label for="ann-taylor" class="form-check-label">
-                              <span class="filter-item-text">Ann Taylor</span>
-                              <span class="ps-1 text-muted">(15)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="armani">
-                            <label for="armani" class="form-check-label">
-                              <span class="filter-item-text">Armani</span>
-                              <span class="ps-1 text-muted">(18)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="banana">
-                            <label for="banana" class="form-check-label">
-                              <span class="filter-item-text">Banana Republic</span>
-                              <span class="ps-1 text-muted">(103)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="bilabong">
-                            <label for="bilabong" class="form-check-label">
-                              <span class="filter-item-text">Bilabong</span>
-                              <span class="ps-1 text-muted">(27)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="birkenstock">
-                            <label for="birkenstock" class="form-check-label">
-                              <span class="filter-item-text">Birkenstock</span>
-                              <span class="ps-1 text-muted">(10)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="klein">
-                            <label for="klein" class="form-check-label">
-                              <span class="filter-item-text">Calvin Klein</span>
-                              <span class="ps-1 text-muted">(365)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="columbia">
-                            <label for="columbia" class="form-check-label">
-                              <span class="filter-item-text">Columbia</span>
-                              <span class="ps-1 text-muted">(508)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="converse">
-                            <label for="converse" class="form-check-label">
-                              <span class="filter-item-text">Converse</span>
-                              <span class="ps-1 text-muted">(176)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dockers">
-                            <label for="dockers" class="form-check-label">
-                              <span class="filter-item-text">Dockers</span>
-                              <span class="ps-1 text-muted">(54)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="fruit">
-                            <label for="fruit" class="form-check-label">
-                              <span class="filter-item-text">Fruit of the Loom</span>
-                              <span class="ps-1 text-muted">(239)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="hanes">
-                            <label for="hanes" class="form-check-label">
-                              <span class="filter-item-text">Hanes</span>
-                              <span class="ps-1 text-muted">(92)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="choo">
-                            <label for="choo" class="form-check-label">
-                              <span class="filter-item-text">Jimmy Choo</span>
-                              <span class="ps-1 text-muted">(17)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="levis">
-                            <label for="levis" class="form-check-label">
-                              <span class="filter-item-text">Levi's</span>
-                              <span class="ps-1 text-muted">(361)</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li class="filter-item">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="new-balance">
-                            <label for="new-balance" class="form-check-label">
-                              <span class="filter-item-text">New Balance</span>
-                              <span class="ps-1 text-muted">(218)</span>
-                            </label>
-                          </div>
-                        </li>
-                      </ul>
+                      data-simplebar-auto-hide="false">
+                      <li class="filter-item" *ngFor="let marca of marcas" (click)="selectMarcas(marca.id)">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="material-1" [checked]="marca.selected">
+                          <label class="form-check-label" for="material-1">
+                            <span class="filter-item-text">{{marca.nombre}}</span>
+                            <span class="ps-1 text-muted">{{marca.cuenta}}</span>
+                          </label>
+                        </div>
+                      </li>
+                    </ul>
                     </div>
                   </div>
                 </div>
