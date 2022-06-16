@@ -13,6 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { ProductoComponent } from './producto/producto.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { MenuPerfilComponent } from './menu-perfil/menu-perfil.component';
+import { PerfilComponent } from './menu-perfil/perfil/perfil.component';
+import { ComprasComponent } from './menu-perfil/compras/compras.component';
+import { SeguimientoComponent } from './menu-perfil/seguimiento/seguimiento.component';
 
 
 
@@ -22,7 +26,11 @@ const COMPONENTS = [
     HomeComponent,
     CatalogoComponent,
     ProductoComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    MenuPerfilComponent,
+    PerfilComponent,
+    ComprasComponent,
+    SeguimientoComponent
 ]
 
 @NgModule({

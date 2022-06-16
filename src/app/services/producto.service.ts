@@ -12,16 +12,16 @@ export class ProductoService {
 
   constructor(private http: HttpClient) {}
 
-  getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(URL_LISTAR_PRODUCTOS);
+  getProductos(): Observable<any> {
+    return this.http.get<any>(URL_LISTAR_PRODUCTOS);
   }
 
-  getProductoxId(id: string): Observable<Producto> {
-    return this.http.get<Producto>(URL_PRODUCTO_ID+ id);
+  getProductoxId(id: string): Observable<any> {
+    return this.http.get<any>(URL_PRODUCTO_ID+ id);
   }
 
-  getCategoria():Observable<Categoria[]>{
-    return this.http.get<Categoria[]>(URL_CATEGORIA);
+  getCategoria():Observable<any>{
+    return this.http.get<any>(URL_CATEGORIA);
   }
 
 }
