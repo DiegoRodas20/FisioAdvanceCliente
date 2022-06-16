@@ -8,16 +8,16 @@
 <!-- <section class="container mb-lg-3">
     <div class="tab-content border-top pt-4">
 
-     
+
         <div class="tab-pane fade show active pt-3 pb-6" id="details" role="tabpanel">
             <div class="row">
 
                 <div class="col-md-4 offset-lg-1">
 
-                    
+
                     <div class="card card-product">
 
-                       
+
                         <div class="card-product-img">
                             <div class="tns-carousel-wrapper tns-controls-onhover">
                                 <a class="tns-carousel-inner-two" href="#" data-carousel-options=''>
@@ -70,7 +70,7 @@
     </div>
 </section> -->
 
-<!-- 
+<!--
 <div class="modal fade" id="modal-sizing" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
       <div class="modal-content border-0">
@@ -209,9 +209,9 @@
       </div>
     </div>
   </div> -->
-  <div *ngIf="lentgh > 0">
+<div *ngIf="lentgh > 0">
 
-  
+
   <!-- Breadcrumb -->
   <nav class="bg-secondary mb-3" aria-label="breadcrumb">
     <div class="container">
@@ -226,30 +226,30 @@
       </ol>
     </div>
   </nav>
-  
+
   <!-- Page title -->
   <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
     <h1 class="mb-2 mb-md-0">{{producto.p_nombre}}</h1>
     <span class="text-muted"><strong>Art. No.</strong> {{producto.cA_idItem}}</span>
   </section>
-  
+
   <!-- Single product -->
   <section class="container mb-lg-3">
-  
-  
+
+
     <div class="tab-content border-top pt-4">
-  
+
       <!-- General info -->
       <div class="tab-pane fade show active pt-3" id="info" role="tabpanel">
         <div class="row">
-  
+
           <div class="col-md-6 mb-md-0 mb-4">
-  
+
             <!-- Product gallery -->
             <div class="tns-carousel-wrapper gallery product-gallery mx-auto" style="max-width: 570px;">
-  
+
               <div class="tns-carousel-inner" data-carousel-options=''>
-  
+
                 <!-- Product gallery item -->
                 <a class="gallery-item" href={{producto.p_imagen}}>
                   <img class="rounded" src={{producto.p_imagen}} alt="Carousel image">
@@ -271,13 +271,13 @@
                 </button>
               </div>
             </div>
-  
+
           </div>
-  
+
           <div class="col-md-6 ps-xl-5">
-  
+
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  
+
               <!-- Price -->
               <div class="d-flex align-items-center mb-sm-0 mb-4">
                 <span class="h3 d-inline-block mb-0 text-danger">S/.{{producto.p_precio}}</span>
@@ -286,10 +286,10 @@
                 <span class="ms-4 p-2 badge bg-danger fs-base fw-bold">-
                   {{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%</span>
               </div>
-  
-  
+
+
             </div>
-  
+
             <!-- Ordering form -->
             <form class="row">
               <div class="col-sm-8 order-sm-1 order-2">
@@ -303,7 +303,7 @@
                   </select>
                 </div>
               </div>
-  
+
               <div
                 class="col-lg-2 col-4 order-lg-3 order-3 d-flex align-content-center justify-content-center align-items-center">
                 <div class="">
@@ -316,24 +316,24 @@
                 </div>
               </div>
               <div class="col-lg-6 order-lg-4 order-4">
-                <button class="btn d-block w-100 btn-primary"(click)="agregarCarrito(producto)">
-                        <i class="ci-cart align-middle mt-n1 me-2"></i>
-                        Añadir al carrito
-                    </button>
+                <button class="btn d-block w-100 btn-primary" (click)="agregarCarrito(producto)">
+                  <i class="ci-cart align-middle mt-n1 me-2"></i>
+                  Añadir al carrito
+                </button>
 
               </div>
             </form>
-  
-  
+
+
             <div class="text-danger">
               Stock Disponible {{producto.p_stock}}
             </div>
-  
+
             <!-- Terms -->
-  
+
             <!-- Accordion -->
             <div class="accordion accordion-alt mb-4" id="accordion">
-  
+
               <!-- Item -->
               <div class="accordion-item">
                 <h6 class="accordion-header" id="accordionHeading-1">
@@ -348,7 +348,7 @@
                       Free standard shipping on orders <strong>over $35</strong> before tax, plus free
                       returns.
                     </p>
-  
+
                     <!-- Delivery table -->
                     <div class="table-responsive px-md-3">
                       <table class="table mb-0" style="min-width: 450px;">
@@ -381,7 +381,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- Item -->
               <div class="accordion-item">
                 <h6 class="accordion-header" id="accordionHeading-2">
@@ -403,7 +403,7 @@
                 </div>
               </div>
             </div>
-  
+
             <!-- Share -->
             <div class="mb-5 text-nowrap">
               <h6 class="d-inline-block align-middle me-2 mb-0">Share:</h6>
@@ -417,28 +417,28 @@
                 <i class="ci-pinterest"></i>
               </a>
             </div>
-  
+
             <!-- Payment -->
             <div class="pb-3 text-nowrap" data-simplebar data-simplebar-auto-hide="false">
-              <a  class="d-inline-block mb-3 me-xl-4 me-3">
+              <a class="d-inline-block mb-3 me-xl-4 me-3">
                 <img src="../assets/img/ecommerce/shop/single/cards/visa.jpg" alt="Visa" class="border rounded">
               </a>
-              <a  class="d-inline-block mb-3 me-xl-4 me-3">
+              <a class="d-inline-block mb-3 me-xl-4 me-3">
                 <img src="../assets/img/ecommerce/shop/single/cards/master-card.jpg" alt="Mastercard"
                   class="border rounded">
               </a>
-              <a  class="d-inline-block mb-3">
+              <a class="d-inline-block mb-3">
                 <img src="../assets/img/ecommerce/shop/single/cards/pay-pal.jpg" alt="PayPal" class="border rounded">
               </a>
             </div>
-  
+
           </div>
-  
+
         </div>
       </div>
-  
+
     </div>
-  
+
   </section>
 
 </div>

@@ -32,8 +32,8 @@ export class ProductoService {
     return this.http.get<Marca[]>(URL_MARCA);
   }
 
-  getProductoxId(id: string): Observable<Producto> {
-    return this.http.get<Producto>(URL_PRODUCTO_ID + id);
+  getProductoxId(id: string): Observable<any> {
+    return this.http.get<any>(URL_PRODUCTO_ID + id);
   }
 
   getCategoria(): Observable<Categoria[]> {
