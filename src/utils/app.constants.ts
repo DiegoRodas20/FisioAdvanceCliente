@@ -22,4 +22,10 @@ export const URL_TIPO_DOCUMENTO2= URL_USUARIO+ 'TipoDocumento';
 export const URL_LISTAR_PRODUCTOS = `${BASE_URL}Catalogo`;
 export const URL_PRODUCTO_ID = `${BASE_URL}Catalogo/GetbyID/`;
 export const URL_CATEGORIA = `${BASE_URL}Categoria`;
+
+/*******PEDIDO******* */
+export const URL_PEDIDO = BASE_URL + 'Pedido/';
+
+/*******DETALLE PEDIDO******* */
+export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';
 export const URL_MARCA = `${BASE_URL}Marca`;
