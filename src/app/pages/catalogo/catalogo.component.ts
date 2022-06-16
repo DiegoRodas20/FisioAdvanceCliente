@@ -35,6 +35,7 @@ export class CatalogoComponent implements OnInit {
   categoria: string
   categoriaSeleccionada: string = null
   marcaSeleccionada: string = null
+  filterValue: string = '1'
 
 
   constructor(
@@ -127,5 +128,72 @@ export class CatalogoComponent implements OnInit {
   filtradoPorCategorias(categoria: string) {
     this.selectCategoria(categoria).then(() => this.filterProductos())
   }
+
+  clearFilters(){
+    this.marcaSeleccionada = null
+    this.categoriaSeleccionada = null
+    this.marcas.map((marca)=>{
+      marca.selected = false
+    })
+    this.categorias.map((marca)=>{
+      marca.selected = false
+    })
+    this._productoService.getProductos().subscribe((res) => {
+      this.productos = res
+    })
+  }
+
+  sort() {
+    switch(this.filterValue){
+      case '1':
+        this.productos.sort((a, b) => {
+          if (a.p_precio < b.p_precio) {
+            return -1;
+          }
+          if (a.p_precio > b.p_precio) {
+            return 1;
+          }
+          return 0;
+        })
+      break;
+
+      case '2':
+        this.productos.sort((a, b) => {
+          if (a.p_precio < b.p_precio) {
+            return 1;
+          }
+          if (a.p_precio > b.p_precio) {
+            return -1;
+          }
+          return 0;
+        })
+      break;
+
+      case '3':
+        this.productos.sort((a, b) => {
+          if (a.p_nombre < b.p_nombre) {
+            return -1;
+          }
+          if (a.p_nombre > b.p_nombre) {
+            return 1;
+          }
+          return 0;
+        })
+      break;
+
+      case '4':
+        this.productos.sort((a, b) => {
+          if (a.p_nombre < b.p_nombre) {
+            return 1;
+          }
+          if (a.p_nombre > b.p_nombre) {
+            return -1;
+          }
+          return 0;
+        })
+      break;
+    }
+  }
+
 
 }

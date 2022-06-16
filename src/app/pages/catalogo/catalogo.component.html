@@ -21,7 +21,7 @@
 
           <!-- Show / hide filters on Desktop -->
           <div class="d-none d-lg-block">
-              <button type="button" class="btn btn-primary d-block w-100 d-none d-lg-block"
+              <button type="button" class="btn btn-primary d-block w-100 d-none d-lg-block" (click)="clearFilters()"
                   data-filters-hide="#filtersSidebar">
                   Limpiar
               </button>
@@ -51,13 +51,11 @@
               </div>
               <div class="d-flex align-items-center flex-nowrap me-3 me-xl-5">
                   <label for="sorting-top" class="fw-bold text-nowrap me-2 pe-1 d-none d-lg-block">Sort by</label>
-                  <select id="sorting-top" class="form-select">
-                      <option>Popularity</option>
-                      <option>Low - Hight Price</option>
-                      <option>High - Low Price</option>
-                      <option>Average Rating</option>
-                      <option>A - Z Order</option>
-                      <option>Z - A Order</option>
+                  <select id="sorting-top" class="form-select" (change)="sort()" [(ngModel)]="filterValue">
+                      <option value="1">Precio de menor a mayor</option>
+                      <option value="2">Precio de mayor a menor </option>
+                      <option value="3">A - Z </option>
+                      <option value="4">Z - A</option>
                   </select>
               </div>
               <nav class="ms-auto" aria-label="Pagination">
@@ -70,23 +68,11 @@
                               <span class="visually-hidden">(current)</span>
                           </span>
                       </li>
-                      <li class="page-item d-none d-sm-block">
-                          <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item d-none d-sm-block">
-                          <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item d-none d-sm-block">
-                          <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item d-none d-sm-block">
-                          <a class="page-link" href="#">5</a>
-                      </li>
                       <li class="page-item">
-                          <a class="page-link" href="#">
-                              <i class="ci-arrow-right"></i>
-                          </a>
-                      </li>
+                        <a class="page-link" href="#">
+                            <i class="ci-arrow-right"></i>
+                        </a>
+                    </li>
                   </ul>
               </nav>
           </div>
@@ -105,38 +91,6 @@
           <div class="accordion accordion-alt " id="sidebarAccordion">
             <!-- Item -->
             <div class="accordion-item">
-              <h6 class="accordion-header" id="sidebarAccordionHeading-2">
-                <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#sidebarAccordionCollapse-2" aria-expanded="false"
-                  aria-controls="sidebarAccordionCollapse-2">Precio</button>
-              </h6>
-              <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-2"
-                aria-labelledby="sidebarAccordionHeading-2" data-bs-parent="#sidebarAccordion">
-                <div class="accordion-body pt-0">
-                  <div class="widget ps-1 pe-3 pb-4 mt-n3">
-                    <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0" data-max="1000"
-                      data-step="1">
-                      <div class="range-slider-ui"></div>
-                      <div class="d-flex align-items-center mt-3">
-                        <div class="w-50">
-                          <div class="form-group position-relative mb-0">
-                            <input type="number" class="form-control form-control-sm range-slider-value-min">
-                          </div>
-                        </div>
-                        <div class="mx-1 px-2 fs-xs">—</div>
-                        <div class="w-50">
-                          <div class="form-group position-relative mb-0">
-                            <input type="number" class="form-control form-control-sm range-slider-value-max">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Item -->
-            <div class="accordion-item">
               <h6 class="accordion-header" id="sidebarAccordionHeading-5">
                 <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#sidebarAccordionCollapse-5" aria-expanded="false"
@@ -147,19 +101,19 @@
                 <div class="accordion-body pt-0">
                   <div class="widget">
                     <div class="widget-data-list filter">
-                      <div class="position-relative mb-3">
+                      <!-- <div class="position-relative mb-3">
                         <input class="filter-search form-control form-control-sm pe-5" type="text"
                           placeholder="Search the material" [(ngModel)]="categoria">
                         <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                      </div>
+                      </div> -->
                       <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
                         data-simplebar-auto-hide="false">
-                        <li class="filter-item" *ngFor="let categoria of categorias " (click)="filtradoPorCategorias(categoria.id)">
+                        <li class="filter-item" *ngFor="let categoria of categorias " (click)="selectCategoria(categoria.id);filterProductos()">
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="material-1" [checked]="categoria.selected">
                             <label class="form-check-label" for="material-1">
                               <span class="filter-item-text">{{categoria.nombre}}</span>
-                              <span class="ps-1 text-muted">{{categoria.cuenta}}</span>
+                              <!-- <span class="ps-1 text-muted">{{categoria.cuenta}}</span> -->
                             </label>
                           </div>
                         </li>
@@ -183,19 +137,19 @@
                 <div class="accordion-body pt-0">
                   <div class="widget">
                     <div class="widget-data-list filter">
-                      <div class="position-relative mb-3">
+                      <!-- <div class="position-relative mb-3">
                         <input class="filter-search form-control form-control-sm pe-5" type="text"
                           placeholder="Search the brand">
                         <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                      </div>
+                      </div> -->
                       <ul class="filter-list list-unstyled pe-3" style="height: 12rem;" data-simplebar
                       data-simplebar-auto-hide="false">
-                      <li class="filter-item" *ngFor="let marca of marcas" (click)="selectMarcas(marca.id)">
+                      <li class="filter-item" *ngFor="let marca of marcas" (click)="selectMarcas(marca.id);filterProductos()">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="material-1" [checked]="marca.selected">
                           <label class="form-check-label" for="material-1">
                             <span class="filter-item-text">{{marca.nombre}}</span>
-                            <span class="ps-1 text-muted">{{marca.cuenta}}</span>
+                            <!-- <span class="ps-1 text-muted">{{marca.cuenta}}</span> -->
                           </label>
                         </div>
                       </li>
@@ -205,6 +159,7 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -228,10 +183,10 @@
                   <span class="h5 d-inline-block text-danger mb-0">
                       S/.{{producto.cA_precioVenta | number : '1.2-2'}}
                   </span>
-                  <del class="d-inline-block ms-2 ps-1 text-muted">
+                  <del class="d-inline-block ms-2 ps-1 text-muted" *ngIf="producto.cA_precioVenta!=producto.p_precio">
                       S/.{{(producto.p_precio) | number : '1.2-2'}}
                   </del>
-                  <span class="ms-4 badge bg-danger fw-bold">
+                  <span class="ms-4 badge bg-danger fw-bold" *ngIf="producto.cA_precioVenta!=producto.p_precio">
                       -{{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%
                   </span>
               </div>
@@ -244,12 +199,7 @@
           </div>
           </div>
         </div>
-
-
-
       </div>
-
-
     </div>
   </div>
 

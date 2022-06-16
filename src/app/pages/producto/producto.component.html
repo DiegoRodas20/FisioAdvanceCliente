@@ -281,9 +281,9 @@
               <!-- Price -->
               <div class="d-flex align-items-center mb-sm-0 mb-4">
                 <span class="h3 d-inline-block mb-0 text-danger">S/.{{producto.p_precio}}</span>
-                <del class="d-inline-block ms-2 ps-1 fs-lg text-muted">S/.{{
+                <del class="d-inline-block ms-2 ps-1 fs-lg text-muted" *ngIf="producto.cA_precioVenta!=producto.p_precio">S/.{{
                   producto.p_precio+producto.cA_descuento}}</del>
-                <span class="ms-4 p-2 badge bg-danger fs-base fw-bold">-
+                <span class="ms-4 p-2 badge bg-danger fs-base fw-bold" *ngIf="producto.cA_precioVenta!=producto.p_precio">-
                   {{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%</span>
               </div>
 
@@ -292,20 +292,10 @@
 
             <!-- Ordering form -->
             <form class="row">
-              <div class="col-sm-8 order-sm-1 order-2">
-                <div class="mb-4">
-                  <label for="size" class="form-label-lg">Size</label>
-                  <select class="form-control form-select" id="size">
-                    <option>Please select</option>
-                    <option>Option item 1</option>
-                    <option>Option item 2</option>
-                    <option>Option item 3</option>
-                  </select>
-                </div>
-              </div>
+
 
               <div
-                class="col-lg-2 col-4 order-lg-3 order-3 d-flex align-content-center justify-content-center align-items-center">
+                class="col-lg-2 col-4 order-lg-3 order-1">
                 <div class="">
                   <select class="form-control form-select pe-3" id="select-input">
                     <option>1</option>
