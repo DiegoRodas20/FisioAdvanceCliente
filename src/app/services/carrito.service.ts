@@ -22,12 +22,13 @@ export class CarritoService {
         }
     }
 
-    addCarrito(carrito: Carrito) {
+    addCarrito(productoCarrito: Carrito) {
+
         let carritos: Carrito[] = []
 
         if (localStorage.getItem('Carrito') === null) {
-            this.lCarrito.push(carrito)
-            carritos.push(carrito)
+            this.lCarrito.push(productoCarrito)
+            carritos.push(productoCarrito)
             localStorage.setItem('Carrito', JSON.stringify(carritos))
             return 1
         }
@@ -35,13 +36,13 @@ export class CarritoService {
             carritos = JSON.parse(localStorage.getItem('Carrito'))
 
             for (let element of carritos) {
-                if (element.cA_idItem == carrito.cA_idItem) {
+                if (element.cA_idItem == productoCarrito.cA_idItem) {
                     return 0
                 }
             }
 
-            this.lCarrito.push(carrito)
-            carritos.push(carrito)
+            this.lCarrito.push(productoCarrito)
+            carritos.push(productoCarrito)
             localStorage.setItem('Carrito', JSON.stringify(carritos))
             return 1
         }
@@ -60,7 +61,7 @@ export class CarritoService {
     }
 
     getSubTotal(carrito) {
-        
+
         let montoCarrito = 0
 
         if (carrito.length > 0) {

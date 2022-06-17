@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
     getCarrito() {
         this.lCarrito = this._carritoService.getCarrito()
+        console.log(this.lCarrito)
     }
 
     deleteCarrito(carrito) {
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit {
     realizarPedido() {
         this._router.navigate(['/checkout'])
     }
+    
     calcularTotal(event, carrito) {
         // carrito.cA_precioVenta / Number(carrito.p_precio - carrito.cA_descuento)
         carrito.cA_precioVenta = Number(event.target.value) * Number(carrito.p_precio - carrito.cA_descuento);
