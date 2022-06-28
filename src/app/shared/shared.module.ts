@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login.component';
+import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
 
 const COMPONENTS = [
     FooterComponent,
@@ -15,7 +16,8 @@ const COMPONENTS = [
 
 @NgModule({
     declarations: [
-        COMPONENTS
+        COMPONENTS,
+        CambiarContrasenaComponent
     ],
     exports: [
         COMPONENTS
