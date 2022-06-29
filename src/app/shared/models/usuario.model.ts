@@ -37,6 +37,18 @@ export class Usuario {
       public Username: string,
       public Password: string
 
-    ) {
-    }
+    ) {}
+}
+
+export class UsuarioCliente{
+
+  constructor(
+    public cod: string,
+    public mensaje: string,
+    public pU_idPerfil: string,
+    public pU_nombrePerfil: string,
+    public u_correoElectronico: string,
+    public u_idUsuario: string,
+    public u_nombre: string,
+  ) { }
 }

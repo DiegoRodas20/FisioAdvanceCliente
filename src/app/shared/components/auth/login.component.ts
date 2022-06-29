@@ -4,6 +4,8 @@ import { Usuario,TipoDocumento,Perfil } from 'src/app/shared/models/cliente.mode
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { LoginService } from 'src/app/services/login.service';
+import { UsuarioCliente } from '../../models/usuario.model';
 
 @Component({
     selector: 'app-login',
@@ -19,20 +21,28 @@ export class LoginComponent implements OnInit {
     errorCaracteres : number;
     register = false;
     login = false;
-    
+    formLogin: FormGroup;
     
     constructor(
       private _clienteService: ClienteService,
       private _router: Router,
-      private _formBuilder: FormBuilder
+      private _formBuilder: FormBuilder,
+      private _loginService: LoginService
     ) {}
 
     ngOnInit() {
         this._clienteService.ListarTipoDocumento().subscribe((data) => this.tipoDocumentos = data);
         this.crearFormCliente();
         this.login=true;
+        this.crearFormLogin();
       }
   
+      crearFormLogin() {
+        this.formLogin = this._formBuilder.group({
+          u_correoElectronico:['', [Validators.required,Validators.maxLength(30),Validators.email]],
+          u_contrasena: ['', [Validators.required,Validators.maxLength(10)]]
+        });
+      }
       crearFormCliente() {
         this.formUser = this._formBuilder.group({
           u_correoElectronico:['', [Validators.required,Validators.maxLength(30),Validators.email]],
@@ -49,6 +59,37 @@ export class LoginComponent implements OnInit {
         });
       }
     
+      LogIn(formLogin: FormGroup) {
+        console.log(formLogin.value);
+        this._loginService.login(formLogin.value).subscribe((res) => {
+          console.log(res);
+            if (res[0].cod == "200") {
+                let user = res[0] as UsuarioCliente;
+               console.log(user);
+                localStorage.setItem('user', JSON.stringify(user));
+                
+                if (res[0].pU_nombrePerfil=="Cliente") {
+                    var nav = ["/home"]
+                    this._router.navigate(nav);                
+                }else{console.log(user);}
+            }
+            else {
+                // this.btn = 0;
+                
+                Swal.fire({
+                    text: res[0].mensaje,
+                    icon: 'warning',
+                    showCancelButton: false,
+                    customClass: {
+                        confirmButton: 'btn btn-warning',
+                        cancelButton: 'btn btn-danger',
+                    },
+                    buttonsStyling: false
+                });
+                return;
+            }
+        });
+    }
      
       registrarCliente() {
         console.log(this.formUser.value);
@@ -99,17 +140,11 @@ export class LoginComponent implements OnInit {
       cerrarVentana() {
         this._router.navigate(['gestionarcliente']);
       }
-  
-
-    iniciarSesion() {
-        this._router.navigate(['dashboard'])
-    }
 
     OpenModal(opcion:string){
         
       switch(opcion) { 
           case opcion="register": { 
-            console.log("AQUIIIII");
               this.register = true;
               this.login = false;
              break; 

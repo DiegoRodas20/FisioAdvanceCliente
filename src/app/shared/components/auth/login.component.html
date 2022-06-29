@@ -6,15 +6,17 @@
         </div>
         <div class="modal-body px-md-5 px-4">
           <p class="fs-sm text-muted text-center">Inicie sesión en su cuenta utilizando el correo electrónico y la contraseña proporcionados durante el registro.</p>
-          <form class="needs-validation"  *ngIf="login">
+          <form class="needs-validation"  *ngIf="login" [formGroup]="formLogin">
             <div class="mb-4">
-              <label for="signin-email" class="form-label-lg">Email</label>
-              <input type="email" class="form-control" id="signin-email" placeholder="Your email address" required="">
+              <label  for="signin-email" class="form-label-lg">Email</label>
+              <input type="email" class="form-control" id="signin-email"  formControlName="u_correoElectronico"
+              placeholder="Email">
             </div>
             <div class="mb-4">
               <label class="form-label-lg" for="signin-password">Password</label>
               <div class="password-toggle">
-                <input class="form-control" type="password" id="signin-password" value="hidden@password">
+                <input class="form-control" type="password" id="signin-password" formControlName="u_contrasena"
+                placeholder="Contraseña">
                 <label class="password-toggle-btn" aria-label="Show/hide password">
                   <input class="password-toggle-check" type="checkbox">
                   <span class="password-toggle-indicator"></span>
@@ -28,12 +30,42 @@
               </div>
               <a href="#" class="fs-sm text-decoration-none">¿Se te olvidó tu contraseña?</a>
             </div>
-            <button type="submit" class="btn btn-primary d-block w-100">Iniciar sesión</button>
+            <button (click)="LogIn(formLogin)" class="btn btn-primary d-block w-100" data-bs-dismiss="modal" data-tw-target="#login" >Iniciar sesión</button>
             <p class="fs-sm pt-4 mb-0">
               ¿No tienes una cuenta?
-              <a  class="fw-bold text-decoration-none" type="button" (click)="OpenModal('register')">  Regístrate ahora</a>
+              <a  class="fw-bold text-decoration-none" type="button" (click)="OpenModal('register')" >  Regístrate ahora</a>
             </p>
           </form>
+
+
+          <!-- <form [formGroup]="formLogin">
+
+            <div class="intro-x mt-8">
+                <input type="text" class="intro-x login__input form-control py-3 px-4 block" formControlName="u_correoElectronico"
+                    placeholder="Email">
+                <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4" formControlName="u_contrasena"
+                    placeholder="Contraseña">
+            </div>
+
+            <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
+
+                <div class="flex items-center mr-auto">
+                    <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
+                    <label class="cursor-pointer select-none" for="remember-me">Recuerdame</label>
+                </div>
+
+                <a href="">¿Olvidaste tu Contraseña?</a>
+            </div>
+
+            <div class="intro-x mt-5 xl:mt-8 text-right xl:text-right">
+                <button class="btn btn-primary w-24" (click)="LogIn(formLogin)">
+                    Ingresar
+                </button>
+            </div>
+
+        </form> -->
+
+
             <form [formGroup]="formUser" *ngIf="register">
               <div class="mb-4">
                 <label for="signup-name" class="form-label-lg">Nombres</label>
@@ -87,7 +119,7 @@
                   </label>
                 </div>
               </div> -->
-              <button class="btn btn-primary d-block w-100" type="button" (click)="registrarCliente()">Registrar</button>
+              <button class="btn btn-primary d-block w-100" type="button" (click)="registrarCliente()" data-bs-dismiss="modal" aria-label="Close">Registrar</button>
               <p class="fs-sm pt-4 mb-0">¿Ya tienes una cuenta?
                 <a  class="fw-bold text-decoration-none" (click)="OpenModal('login')">Iniciar sesión</a>
               </p>

@@ -3,7 +3,7 @@ import { environment } from "src/environments/environment";
 const BASE_URL = environment.BASE_URL;
 
 /*******LOGIN******* */
-export const URL_AUTH_BASE = BASE_URL + 'login/authenticate';
+export const URL_AUTH_BASE = BASE_URL + 'Usuario/Cliente/Login';
 
 /*******CLIENTE******* */
 export const URL_CLIENTE = BASE_URL + 'Usuario/Cliente/';
