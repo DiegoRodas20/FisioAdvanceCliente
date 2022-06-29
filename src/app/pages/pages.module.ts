@@ -16,7 +16,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { MenuPerfilComponent } from './menu-perfil/menu-perfil.component';
 import { PerfilComponent } from './menu-perfil/perfil/perfil.component';
 import { ComprasComponent } from './menu-perfil/compras/compras.component';
-import { SeguimientoComponent } from './menu-perfil/seguimiento/seguimiento.component';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 
 
 

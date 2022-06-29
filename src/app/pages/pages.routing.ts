@@ -8,6 +8,7 @@ import { CatalogoComponent } from "./catalogo/catalogo.component";
 import { ProductoComponent } from "./producto/producto.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { MenuPerfilComponent } from "./menu-perfil/menu-perfil.component";
+import { SeguimientoComponent } from "./seguimiento/seguimiento.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,11 @@ const routes: Routes = [
                 path: 'perfil',
                 component: MenuPerfilComponent,
                 data: { titulo: 'Perfil' }
+            },
+            {
+                path: 'seguimiento',
+                component: SeguimientoComponent,
+                data: { titulo: 'Seguimiento' }
             },
             { path: '', redirectTo: '/home', pathMatch: 'full' },
         ]
