@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
     errorCaracteres : number;
     register = false;
     login = false;
+    contrasena = false;
     formLogin: FormGroup;
+    nomComponent: string;
     
     constructor(
       private _clienteService: ClienteService,
@@ -35,6 +37,8 @@ export class LoginComponent implements OnInit {
         this.crearFormCliente();
         this.login=true;
         this.crearFormLogin();
+        
+        this.nomComponent = "Iniciar sesión";
       }
   
       crearFormLogin() {
@@ -69,13 +73,12 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('user', JSON.stringify(user));
                 
                 if (res[0].pU_nombrePerfil=="Cliente") {
-                    var nav = ["/home"]
-                    this._router.navigate(nav);                
+                    // var nav = ["/"]
+                    // this._router.navigate(nav);
+                    window.location.reload();                
                 }else{console.log(user);}
             }
             else {
-                // this.btn = 0;
-                
                 Swal.fire({
                     text: res[0].mensaje,
                     icon: 'warning',
@@ -131,29 +134,38 @@ export class LoginComponent implements OnInit {
           this.errorCaracteres = 9;
           this.formUser.controls['u_documentoIdentidad'].setValidators([
             Validators.required, Validators.maxLength(9),Validators.minLength(9),Validators.pattern('[0-9]*')
-          ])
+          ])}
       }
-     
-      }
-    
-    
+        
       cerrarVentana() {
         this._router.navigate(['gestionarcliente']);
       }
 
     OpenModal(opcion:string){
-        
+      console.log(opcion)
       switch(opcion) { 
           case opcion="register": { 
               this.register = true;
               this.login = false;
+              this.contrasena = false;
+              this.nomComponent = "Regístrate";
              break; 
           } 
           case opcion="login": { 
               this.login = true;
-              this.register = false; 
+              this.register = false;
+              this.contrasena = false;
+              this.nomComponent = "Iniciar sesión";
               break; 
-           }
+          }
+          case opcion="contrasena": { 
+            this.login = false;
+            this.register = false;
+            this.contrasena = true;
+            this.nomComponent = "Recupera tu contraseña";
+            break; 
+        }
+        ;
        }
     }
 }

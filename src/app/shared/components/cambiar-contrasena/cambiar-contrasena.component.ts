@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cambiar-contrasena',
@@ -7,10 +7,19 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./cambiar-contrasena.component.scss']
 })
 export class CambiarContrasenaComponent implements OnInit {
-  u_correoElectronico = new FormControl();
-  constructor() { }
+  formContrasena: FormGroup;
+  constructor(
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.crearFormContrasena();
+    console.log("siestamoooos");
+  }
+
+  crearFormContrasena() {
+    this.formContrasena = this._formBuilder.group({
+      u_correoElectronico:['']
+    });
   }
   cambiarContrasena(){}
 }

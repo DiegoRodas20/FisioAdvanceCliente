@@ -16,7 +16,8 @@ const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            { path: 'home', component: HomeComponent },
+            { path: '', component: HomeComponent,
+            data: { titulo: 'Inicio' } },
             {
                 path: 'catalogo',
                 component: CatalogoComponent,
@@ -25,12 +26,12 @@ const routes: Routes = [
             {
                 path: 'producto/:id',
                 component: ProductoComponent,
-                data: { titulo: 'Producto' }
+                data: { titulo: 'Detalle de producto' }
             },
             {
                 path: 'checkout',
                 component: CheckoutComponent,
-                data: { titulo: 'Checkout' }
+                data: { titulo: 'Pedido' }
             },
             {
                 path: 'perfil',
@@ -42,7 +43,7 @@ const routes: Routes = [
                 component: SeguimientoComponent,
                 data: { titulo: 'Seguimiento' }
             },
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
+            { path: '', redirectTo: '/', pathMatch: 'full' },
         ]
     },
 ];

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { UserService } from 'src/app/services/user.service';
+import { UsuarioCliente } from '../../models/usuario.model';
 
 
 @Component({
@@ -11,15 +13,39 @@ import { CarritoService } from 'src/app/services/carrito.service';
 
 export class HeaderComponent implements OnInit {
 
-    lCarrito: any[] = []
+    lCarrito: any[] = [];
+    user: UsuarioCliente;
+    nombreUsuario: string;
+    cod:string;
 
     constructor(
         private _router: Router,
         private _carritoService: CarritoService,
+        private _userService:UserService
     ) { }
 
     ngOnInit() {
-        this.getCarrito()
+        this.getCarrito();
+        this.perfilLogueado();
+    }
+
+    perfilLogueado(){
+        if (localStorage.getItem("user") != null) {
+            this.user = JSON.parse(localStorage.getItem("user")) as UsuarioCliente;
+            if (this.user.cod=='200') {
+                this.nombreUsuario = this.user.u_nombre;
+                this.cod='200'
+            }
+            else {
+                this.cod='000';
+            }
+        }else{
+        this.cod='000';
+        }        
+    }
+
+    CerrarSesion(){
+        this._userService.logout();
     }
 
     getCarrito() {
@@ -38,7 +64,7 @@ export class HeaderComponent implements OnInit {
     }
 
     home() {
-        this._router.navigate(['/home'])
+        this._router.navigate(['/'])
     }
 
     showCatalogo() {
