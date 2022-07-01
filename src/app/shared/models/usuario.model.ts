@@ -17,7 +17,6 @@ export class Usuario {
   constructor(
     public u_idUsuario: string,
     public u_correoElectronico: string,
-    public u_contrasena: string,
     public u_nombre: string,
     public u_apellidoPaterno: string,
     public u_apellidoMaterno: string,

@@ -5,9 +5,9 @@
       <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title mb-1">Annette Black</h5>
-            <p class="card-text text-muted mb-lg-0">ann.black@example.com</p>
-            <a class="btn btn-primary d-block w-100 d-lg-none" data-bs-toggle="collapse">Account Menu</a>
+            <h5 class="card-title mb-1">{{nombreP}}</h5>
+            <p class="card-text text-muted mb-lg-0">{{emailP}}</p>
+            <a class="btn btn-primary d-block w-100 d-lg-none" data-bs-toggle="collapse">Menú de Cuenta</a>
           </div>
           <div id="account-menu" class="collapse d-lg-block">
             <div class="list-group list-group-flush border-top">
@@ -38,7 +38,6 @@
 
       <!-- Content -->
       <div class="col-lg-8 ms-auto">
-        
 
 <app-perfil *ngIf="perfil"></app-perfil>
 <app-compras *ngIf="orden"></app-compras>

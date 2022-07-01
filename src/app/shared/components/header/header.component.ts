@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { UserService } from 'src/app/services/user.service';
-import { UsuarioCliente } from '../../models/usuario.model';
+import { Login, UsuarioCliente } from '../../models/usuario.model';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     user: UsuarioCliente;
     nombreUsuario: string;
     cod:string;
+    contra: Login;
 
     constructor(
         private _router: Router,
@@ -34,6 +35,7 @@ export class HeaderComponent implements OnInit {
             this.user = JSON.parse(localStorage.getItem("user")) as UsuarioCliente;
             if (this.user.cod=='200') {
                 this.nombreUsuario = this.user.u_nombre;
+                //this.nombreUsuario = this.user.ID;
                 this.cod='200'
             }
             else {
@@ -41,7 +43,7 @@ export class HeaderComponent implements OnInit {
             }
         }else{
         this.cod='000';
-        }        
+        }
     }
 
     CerrarSesion(){
@@ -78,7 +80,7 @@ export class HeaderComponent implements OnInit {
     realizarPedido() {
         this._router.navigate(['/checkout'])
     }
-    
+
     calcularTotal(event, carrito) {
         // carrito.cA_precioVenta / Number(carrito.p_precio - carrito.cA_descuento)
         carrito.cA_precioVenta = Number(event.target.value) * Number(carrito.p_precio - carrito.cA_descuento);

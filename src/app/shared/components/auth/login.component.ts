@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     contrasena = false;
     formLogin: FormGroup;
     nomComponent: string;
-    
+
     constructor(
       private _clienteService: ClienteService,
       private _router: Router,
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
         this.crearFormCliente();
         this.login=true;
         this.crearFormLogin();
-        
+
         this.nomComponent = "Iniciar sesión";
       }
-  
+
       crearFormLogin() {
         this.formLogin = this._formBuilder.group({
           u_correoElectronico:['', [Validators.required,Validators.maxLength(30),Validators.email]],
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           eU_idEstadoUsuario: ['6268339afa3714a01d9ea2d7', [Validators.required]],
         });
       }
-    
+
       LogIn(formLogin: FormGroup) {
         console.log(formLogin.value);
         this._loginService.login(formLogin.value).subscribe((res) => {
@@ -71,11 +71,11 @@ export class LoginComponent implements OnInit {
                 let user = res[0] as UsuarioCliente;
                console.log(user);
                 localStorage.setItem('user', JSON.stringify(user));
-                
+
                 if (res[0].pU_nombrePerfil=="Cliente") {
                     // var nav = ["/"]
                     // this._router.navigate(nav);
-                    window.location.reload();                
+                    window.location.reload();
                 }else{console.log(user);}
             }
             else {
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
             }
         });
     }
-     
+
       registrarCliente() {
         console.log(this.formUser.value);
         if (this.formUser.status == 'VALID') {
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
           });
         }
       }
-  
+
       validacionTipoDocumento(){
         const inputValue = this.formUser.controls['tD_idTipoDocumento'].value;
         if(inputValue == '626b55fe1b529d8148b615e3'){
@@ -136,34 +136,34 @@ export class LoginComponent implements OnInit {
             Validators.required, Validators.maxLength(9),Validators.minLength(9),Validators.pattern('[0-9]*')
           ])}
       }
-        
+
       cerrarVentana() {
         this._router.navigate(['gestionarcliente']);
       }
 
     OpenModal(opcion:string){
       console.log(opcion)
-      switch(opcion) { 
-          case opcion="register": { 
+      switch(opcion) {
+          case opcion="register": {
               this.register = true;
               this.login = false;
               this.contrasena = false;
               this.nomComponent = "Regístrate";
-             break; 
-          } 
-          case opcion="login": { 
+             break;
+          }
+          case opcion="login": {
               this.login = true;
               this.register = false;
               this.contrasena = false;
               this.nomComponent = "Iniciar sesión";
-              break; 
+              break;
           }
-          case opcion="contrasena": { 
+          case opcion="contrasena": {
             this.login = false;
             this.register = false;
             this.contrasena = true;
             this.nomComponent = "Recupera tu contraseña";
-            break; 
+            break;
         }
         ;
        }
