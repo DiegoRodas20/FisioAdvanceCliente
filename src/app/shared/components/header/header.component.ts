@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     user: UsuarioCliente;
     nombreUsuario: string;
     cod:string;
+    modal:boolean = false;
 
     constructor(
         private _router: Router,
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.getCarrito();
+        
         this.perfilLogueado();
     }
 
@@ -49,8 +51,7 @@ export class HeaderComponent implements OnInit {
     }
 
     getCarrito() {
-        this.lCarrito = this._carritoService.getCarrito()
-        console.log(this.lCarrito)
+        this.lCarrito = this._carritoService.getCarrito();
     }
 
     deleteCarrito(carrito) {
@@ -76,7 +77,7 @@ export class HeaderComponent implements OnInit {
     }
 
     realizarPedido() {
-        this._router.navigate(['/checkout'])
+        this._router.navigate(['/checkout']);
     }
     
     calcularTotal(event, carrito) {

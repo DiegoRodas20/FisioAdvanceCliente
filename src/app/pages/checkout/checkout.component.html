@@ -1,7 +1,7 @@
 <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
     <div class="row">
 
-        <div class="col-lg-7 pe-lg-6">
+        <div class="col-lg-7">
             <div class="d-flex align-items-center justify-content-between pb-2 mb-4">
                 <h1 class="mb-0">Pedido</h1>
             </div>
@@ -11,7 +11,7 @@
             <form [formGroup]="formPedido">
 
                 <!-- Información del Pedido -->
-                <h2 class="h4 mb-4">Detalle de envio</h2>
+                <!-- <h2 class="h4 mb-4">Detalle de envio</h2>
                 <div class="row pb-3">
 
                     <div class="col-sm-12 mb-4">
@@ -42,15 +42,165 @@
                             class="text-danger mt-2">*Campo requerido</div>
                     </div>
                 </div>
-                <hr class="mb-4">
+                <hr class="mb-4"> -->
+                <div class="accordion accordion-alt mb-4" id="accordion">
 
+                    <!-- Item -->
+                    <div class="accordion-item">
+                      <h6 class="accordion-header" id="accordionHeading-1">
+                        <button class="accordion-button border-bottom-0" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#accordionCollapse-1" aria-expanded="true"
+                          aria-controls="accordionCollapse-1">Entrega</button>
+                      </h6>
+                      <div class="accordion-collapse collapse show" id="accordionCollapse-1"
+                        aria-labelledby="accordionHeading-1" data-bs-parent="#accordion">
+                        <div class="accordion-body pt-0">
+                          <p class="fs-sm">
+                            Free standard shipping on orders <strong>over S/.35</strong> before tax, plus free
+                            returns.
+                          </p>
+                          <div class="row pb-3" *ngIf="direccioningreso==true">
 
+                            <div class="col-sm-12 mb-4">
+                                <label for="ch-fn" class="form-label-lg">Dirección de envio</label>
+                                <input type="text" class="form-control form-control-lg" id="ch-fn"
+                                    placeholder="Ingresa tu dirección." formControlName="direccionEnvio">
+                                <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
+                                    class="text-danger mt-2">*Campo requerido</div>
+                            </div>
+
+                            <div class="col-sm-12 mb-4">
+                              <label for="ch-fn" class="form-label-lg">Departamento</label>
+                              <!-- <select id="sorting-top" class="form-select" >
+                                <option value="1">Precio de menor a mayor</option>
+                              </select> -->
+
+                              <select class="form-select"  formControlName="dep" (ngModelChange)="getProvincia()" placeholder="---seleccione departamento---">
+                                <option [value]="d.path" *ngFor="let d of departamento">{{d.name}}</option>
+                            </select>
+                              <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
+                                  class="text-danger mt-2">*Campo requerido</div> -->
+                          </div>
+
+                          <div class="col-sm-12 mb-4">
+                            <label for="ch-fn" class="form-label-lg">Provincia</label>
+                            <select class="form-select"  formControlName="prov" (ngModelChange)="getDistrito()" placeholder="---seleccione provincia---">
+                              <option [value]="p.path" *ngFor="let p of provincia">{{p.name}}</option>
+                          </select>
+                            <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
+                                class="text-danger mt-2">*Campo requerido</div> -->
+                        </div>
+
+                        <div class="col-sm-12 mb-4">
+                          <label for="ch-fn" class="form-label-lg">Distrito</label> 
+                          <select class="form-select"  formControlName="dist" placeholder="---seleccione distrito---" >
+                            <option [value]="d.path" *ngFor="let d of distrito">{{d.name}}</option>
+                        </select>
+                          <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
+                              class="text-danger mt-2">*Campo requerido</div> -->
+                      </div>
+        
+                            <div class="col-sm-12 mb-4">
+                                <label for="ch-notes" class="form-label-lg">Referencia de envio</label>
+                                <textarea id="ch-notes" class="form-control form-control-lg" rows="5"
+                                    placeholder="Ingresa alguna referencia de tu dirección."
+                                    formControlName="referenciaEnvio"></textarea>
+                                <div *ngIf="formPedido.controls['referenciaEnvio'].hasError('required')"
+                                    class="text-danger mt-2">*Campo requerido</div>
+                            </div>
+                        </div>
+                        
+                        <!-- <h2 class="h4 mb-4">3. Shipping Method</h2> -->
+                        <label class="mb-4" for="ch-notes" class="form-label-lg">Metodo de envio</label>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="courier" name="shipping" checked="">
+                          <label for="courier" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base">Courier to your address</strong>
+                              <span class="text-muted fs-sm">Estimated date: November 9</span>
+                            </span>
+                            <span class="ms-auto fs-base">$25.00</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="store-pickup" name="shipping">
+                          <label for="store-pickup" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base">Pick up from store</strong>
+                              <span class="text-muted fs-sm">Pick up on November 8 from 12:00pm</span>
+                            </span>
+                            <span class="ms-auto fs-base">Free</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="ups" name="shipping">
+                          <label for="ups" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base">UPS Ground Shipping</strong>
+                              <span class="text-muted fs-sm">Up to one week</span>
+                            </span>
+                            <span class="ms-auto fs-base">$10.00</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="locker-pickup" name="shipping">
+                          <label for="locker-pickup" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base">Pick up at Createx Locker</strong>
+                              <span class="text-muted fs-sm">Pick up on November 8 from 12:00pm</span>
+                            </span>
+                            <span class="ms-auto fs-base">$8.50</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="global-export" name="shipping">
+                          <label for="global-export" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base">Createx Global Export</strong>
+                              <span class="text-muted fs-sm">3-4 days</span>
+                            </span>
+                            <span class="ms-auto fs-base">$15.00</span>
+                          </label>
+                        </div>
+            
+                        <hr class="border-top-0 border-bottom my-4">
+            
+                      </div>
+                    </div>
+                
+                    <!-- Item -->
+                    <div class="accordion-item">
+                      <h6 class="accordion-header" id="accordionHeading-2">
+                        <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#accordionCollapse-2" aria-expanded="false"
+                          aria-controls="accordionCollapse-2">Pago</button>
+                      </h6>
+                      <div class="accordion-collapse border-bottom-0 collapse" id="accordionCollapse-2"
+                        aria-labelledby="accordionHeading-2" data-bs-parent="#accordion">
+                        <div class="accordion-body pt-0">
+                          <p class="fs-sm">
+                            x
+                          </p>
+                          <div class="col-sm-12 mb-4">
+                            <label class="form-label-lg">Métodos de Pago</label>
+                            <select class="form-select form-select-lg" formControlName="metodoPago">
+                                <option *ngFor="let metodoPago of lMetodoPago">
+                                    {{metodoPago.value}}
+                                </option>
+                            </select>
+                            <div *ngIf="formPedido.controls['metodoPago'].hasError('required')"
+                                class="text-danger mt-2">*Campo requerido</div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </form>
         </div>
 
         <!-- </form> -->
         <!-- Checkout -->
-
 
 
         <!-- Order totals (sticky sidebar) -->
@@ -117,7 +267,6 @@
                         <span class="h5 mb-0">Monto total:</span>
                         <span class="h5 mb-0">S/. {{getSubTotal() | number : '1.2-2'}}</span>
                     </div>
-
                 </div>
 
                 <button type="button" class="btn btn-primary btn-lg d-block w-100" (click)="registrarPedido()">Completar
@@ -127,3 +276,5 @@
         </aside>
     </div>
 </section>
+
+<!-- Accordion -->

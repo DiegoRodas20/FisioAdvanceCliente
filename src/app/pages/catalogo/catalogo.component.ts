@@ -64,6 +64,7 @@ export class CatalogoComponent implements OnInit {
     agregarProductoCarrito(producto) {
 
         let productoCarrito: Carrito = {
+            p_idProducto:producto.p_idProducto,
             cA_idItem: producto.cA_idItem,
             p_nombre: producto.p_nombre,
             p_precio: producto.p_precio,
@@ -105,6 +106,7 @@ export class CatalogoComponent implements OnInit {
     calcularPrecioCantidad(event, producto) {
         producto.cA_precioVenta = Number(event.target.value) * Number(producto.p_precio - producto.cA_descuento);
         producto.cantidad = Number(event.target.value)
+        console.log(producto.cantidad)
     }
 
     async selectCategoria(categoria: string) {

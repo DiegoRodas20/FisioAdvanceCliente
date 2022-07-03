@@ -36,7 +36,6 @@ export class ProductoComponent implements OnInit {
     var estado = this._carritoService.addCarrito(producto)
 
     if (estado == 0) {
-        console.log('NO SE PUEDE REPETIR EL PRODUCTO')
         Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -51,8 +50,6 @@ export class ProductoComponent implements OnInit {
             timer: 3000,
             timerProgressBar: true,
         })
-
-        console.log('REGISTRADO EN EL CARRITO')
     }
 }
   animationSlider() {

@@ -50,5 +50,7 @@ export class UsuarioCliente{
     public u_correoElectronico: string,
     public u_idUsuario: string,
     public u_nombre: string,
+    public u_direccion: string,
+    
   ) { }
 }

@@ -13,6 +13,7 @@ export interface Producto {
   eP_idEstadoProducto: string,
   p_Descripcion: string,
   p_imagen: string,
+  cantidad:number
 }
 
 export interface Categoria {

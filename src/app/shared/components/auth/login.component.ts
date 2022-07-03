@@ -64,19 +64,19 @@ export class LoginComponent implements OnInit {
       }
     
       LogIn(formLogin: FormGroup) {
-        console.log(formLogin.value);
+        (formLogin.value);
         this._loginService.login(formLogin.value).subscribe((res) => {
-          console.log(res);
+          (res);
             if (res[0].cod == "200") {
                 let user = res[0] as UsuarioCliente;
-               console.log(user);
+               (user);
                 localStorage.setItem('user', JSON.stringify(user));
                 
                 if (res[0].pU_nombrePerfil=="Cliente") {
                     // var nav = ["/"]
                     // this._router.navigate(nav);
                     window.location.reload();                
-                }else{console.log(user);}
+                }else{(user);}
             }
             else {
                 Swal.fire({
@@ -95,13 +95,13 @@ export class LoginComponent implements OnInit {
     }
      
       registrarCliente() {
-        console.log(this.formUser.value);
+        (this.formUser.value);
         if (this.formUser.status == 'VALID') {
-          console.log("valido");
+          ("valido");
           this._clienteService
             .RegistrarCliente(this.formUser.value)
             .subscribe((data) => {
-              console.log(data);
+              (data);
               Swal.fire({
                 title: 'Usuario Registrado !',
                 icon: 'success',
@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
       }
 
     OpenModal(opcion:string){
-      console.log(opcion)
+      (opcion)
       switch(opcion) { 
           case opcion="register": { 
               this.register = true;

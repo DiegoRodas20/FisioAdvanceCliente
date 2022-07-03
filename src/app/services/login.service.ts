@@ -18,7 +18,7 @@ export class LoginService {
             // var oJSON = JSON.stringify(user);
             let items$ = this.http
                 .post(URL_AUTH_BASE, user);
-                // console.log(items$);
+                // (items$);
             return items$;            
     }
 

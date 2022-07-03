@@ -9,5 +9,6 @@ export interface Carrito {
     cA_precioVenta: number,
     cA_descuento: number,
     p_imagen: string,
-    cantidad: number
+    cantidad: number,
+    p_idProducto:string
 }

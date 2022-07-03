@@ -13,7 +13,7 @@ export class CambiarContrasenaComponent implements OnInit {
 
   ngOnInit(): void {
     this.crearFormContrasena();
-    console.log("siestamoooos");
+    ("siestamoooos");
   }
 
   crearFormContrasena() {
