@@ -3,12 +3,15 @@ import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { UserService } from 'src/app/services/user.service';
 import { UsuarioCliente } from '../../models/usuario.model';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
+    providers:[AuthGuardService]
 })
 
 export class HeaderComponent implements OnInit {
@@ -22,7 +25,8 @@ export class HeaderComponent implements OnInit {
     constructor(
         private _router: Router,
         private _carritoService: CarritoService,
-        private _userService:UserService
+        private _userService:UserService,
+        private _auth: AuthGuardService
     ) { }
 
     ngOnInit() {
@@ -77,7 +81,22 @@ export class HeaderComponent implements OnInit {
     }
 
     realizarPedido() {
-        this._router.navigate(['/checkout']);
+        let verificar = this._auth.verificarLogeo()
+        if(verificar==true){
+            this._router.navigate(['/checkout']);
+        }
+        else{
+            Swal.fire({
+                title: '',
+                text: "Debe iniciar sesion para continuar",
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText:
+                '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+              })
+        }
+        
     }
     
     calcularTotal(event, carrito) {

@@ -241,7 +241,7 @@
             <span class="text-muted me-2">Subtotal:</span>
             <span class="h5 mb-0">S/. {{ getSubTotal() | number : '1.2-2'}}</span>
         </div>
-        <a class="btn btn-primary btn-lg d-block w-100" (click)="realizarPedido()">
+        <a *ngIf="lCarrito.length != 0" data-bs-dismiss="offcanvas" class="btn btn-primary btn-lg d-block w-100" (click)="realizarPedido()">
             <i class="ci-credit-card fs-lg mt-n1 me-1"></i>
             Realizar Pedido
         </a>

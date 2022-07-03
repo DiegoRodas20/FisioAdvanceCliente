@@ -50,17 +50,15 @@ export class CheckoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        
+        this.crearFormPedido();
         if (localStorage.getItem("user") != null) {
             this.user = JSON.parse(localStorage.getItem("user")) as UsuarioCliente;
             this.idCliente = this.user.u_idUsuario;
-            (this.idCliente);
             this.perfilLogueado();
+            this.updatevalidartors()
         }
         this.getCarrito();
-        this.crearFormPedido();
         this.getDepartamento();
-        // this.getUbigeo('PUNO','');
     }
 
     getCarrito() {
@@ -143,8 +141,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     async registrarDetallePedido(data: any) {
-        console.log(data.idPedido)
-        console.log(this.lCarrito)
         try {
             for (let element of this.lCarrito) {
 
@@ -192,11 +188,12 @@ export class CheckoutComponent implements OnInit {
         this._router.navigate(['/catalogo'])
     }
 
+
+
     perfilLogueado():Boolean{
         
             if (this.user.cod=='200') {
                 if(this.user.u_direccion == ''){
-                    ("MOSTRAR");
                     return this.direccioningreso = true;
                 }else {return this.direccioningreso = false;}
 
@@ -207,6 +204,14 @@ export class CheckoutComponent implements OnInit {
         // }else{
         // return this.direccioningreso = false;
                
+    }
+
+    updatevalidartors(){
+        if(this.direccioningreso==true){
+            this.formPedido.controls['dep'].setValidators([Validators.required]);
+            this.formPedido.controls['prov'].setValidators([Validators.required]);
+            this.formPedido.controls['dist'].setValidators([Validators.required]);
+        }
     }
 
     getDepartamento(){

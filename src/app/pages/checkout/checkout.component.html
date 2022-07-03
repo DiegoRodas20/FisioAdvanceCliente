@@ -78,8 +78,8 @@
                               <select class="form-select"  formControlName="dep" (ngModelChange)="getProvincia()" placeholder="---seleccione departamento---">
                                 <option [value]="d.path" *ngFor="let d of departamento">{{d.name}}</option>
                             </select>
-                              <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
-                                  class="text-danger mt-2">*Campo requerido</div> -->
+                              <div *ngIf="formPedido.controls['dep'].hasError('required')"
+                                  class="text-danger mt-2">*Campo requerido</div>
                           </div>
 
                           <div class="col-sm-12 mb-4">
@@ -87,8 +87,8 @@
                             <select class="form-select"  formControlName="prov" (ngModelChange)="getDistrito()" placeholder="---seleccione provincia---">
                               <option [value]="p.path" *ngFor="let p of provincia">{{p.name}}</option>
                           </select>
-                            <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
-                                class="text-danger mt-2">*Campo requerido</div> -->
+                            <div *ngIf="formPedido.controls['prov'].hasError('required')"
+                                class="text-danger mt-2">*Campo requerido</div>
                         </div>
 
                         <div class="col-sm-12 mb-4">
@@ -96,8 +96,8 @@
                           <select class="form-select"  formControlName="dist" placeholder="---seleccione distrito---" >
                             <option [value]="d.path" *ngFor="let d of distrito">{{d.name}}</option>
                         </select>
-                          <!-- <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
-                              class="text-danger mt-2">*Campo requerido</div> -->
+                          <div *ngIf="formPedido.controls['dist'].hasError('required')"
+                              class="text-danger mt-2">*Campo requerido</div>
                       </div>
         
                             <div class="col-sm-12 mb-4">
