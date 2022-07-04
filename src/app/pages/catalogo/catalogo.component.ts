@@ -57,8 +57,9 @@ export class CatalogoComponent implements OnInit {
         })
     }
 
-    goProductoId(id: string) {
-        this._router.navigate(['/producto', id])
+    goProductoId(categoria: string,marca: string,id: string) {
+        console.log(categoria,marca,id)
+        this._router.navigate(['/producto',categoria,marca, id])
     }
 
     agregarProductoCarrito(producto) {
@@ -69,7 +70,7 @@ export class CatalogoComponent implements OnInit {
             p_nombre: producto.p_nombre,
             p_precio: producto.p_precio,
             p_stock: producto.p_stock,
-            p_marca: producto.p_marca,
+            p_marca: producto.mP_marca,
             p_Descripcion: producto.p_Descripcion,
             cP_categoria: producto.cP_categoria,
             cA_precioVenta: producto.cA_precioVenta,

@@ -31,7 +31,6 @@ export class CheckoutComponent implements OnInit {
     provincia:Ubigeo[]=[];
     distrito:Ubigeo[]=[];
 
-    // Lista Metodo Pago
     lMetodoPago: any[] = [
         { value: 'Seleccionar una opción' },
         { value: 'Transferencia Bancaria' },
@@ -181,14 +180,11 @@ export class CheckoutComponent implements OnInit {
                 showConfirmButton: false
             });
         }
-
     }
 
     goCatalogo() {
         this._router.navigate(['/catalogo'])
     }
-
-
 
     perfilLogueado():Boolean{
         
@@ -200,10 +196,7 @@ export class CheckoutComponent implements OnInit {
             }
             else {
                 return this.direccioningreso = false;
-            }
-        // }else{
-        // return this.direccioningreso = false;
-               
+            }   
     }
 
     updatevalidartors(){
@@ -233,5 +226,4 @@ export class CheckoutComponent implements OnInit {
             this.distrito=res.facet_groups[2].facets;
         }) ; 
     }
-
 }

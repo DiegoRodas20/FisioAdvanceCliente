@@ -1,28 +1,38 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { ActivatedRoute, ActivationEnd, ParamMap, Router } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-breadcrumb',
-    templateUrl: 'breadcrumb.component.html'
+    templateUrl: 'breadcrumb.component.html',
 })
 
 export class BreadcrumbComponent implements OnDestroy {
 
     titulo: string
     tituloSubscripcion: Subscription
+    subTitulo: string;
+    sub2titulo:string;
+    sub3titulo:string;
+    ruta:string[]=[]
 
-    constructor(
+    constructor(private _route: ActivatedRoute,
         private router: Router
     ) {
         this.tituloSubscripcion = this.getArgumentosRuta().subscribe(({ titulo }) => {
             this.titulo = titulo
-        })
+            let url = this.router.url;
+            this.ruta = url.split('/');
+            this.subTitulo= this.ruta[2];
+            this.sub2titulo= this.ruta[3];
+            this.sub3titulo=this.ruta[4];
+        });
+        
     }
 
     ngOnDestroy() {
-        this.tituloSubscripcion.unsubscribe()
+        this.tituloSubscripcion.unsubscribe();
     }
 
     getArgumentosRuta() {

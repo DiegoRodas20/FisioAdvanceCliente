@@ -1,17 +1,17 @@
-<!-- Breadcrumb -->
-<nav class="bg-secondary" aria-label="breadcrumb">
-    <div class="container d-sm-flex align-items-center">
-
-        <ol class="breadcrumb breadcrumb-alt mb-0">
-            <li class="breadcrumb-item">
-                <a><i class="ci-home"></i></a>
-            </li>
-
-            <li class="breadcrumb-item active" aria-current="page">
-                {{titulo}}
-            </li>
-        </ol>
-
-        <hr class="d-sm-none">
+  <!-- Breadcrumb -->
+  <nav class="bg-secondary" aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a href=""><i class="ci-home me-sm-2"></i>  Inicio</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {{titulo}}
+        </li>
+        <li class="breadcrumb-item" *ngIf="ruta.length>2" >
+          <a href="">{{subTitulo}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page" *ngIf="ruta.length>3" >{{sub2titulo}}</li>
+      </ol>
     </div>
-</nav>
+  </nav>

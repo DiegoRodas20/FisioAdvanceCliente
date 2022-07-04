@@ -16,17 +16,16 @@ const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            { path: '', component: HomeComponent,
-            data: { titulo: 'Inicio' } },
+            { path: '', component: HomeComponent},
             {
                 path: 'catalogo',
                 component: CatalogoComponent,
                 data: { titulo: 'Catálogo' }
             },
             {
-                path: 'producto/:id',
+                path: 'producto/:categoria/:marca/:id',
                 component: ProductoComponent,
-                data: { titulo: 'Detalle de producto' }
+                data: { titulo: 'Catálogo' }
             },
             {
                 path: 'checkout',

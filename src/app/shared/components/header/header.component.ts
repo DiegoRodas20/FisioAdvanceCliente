@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UsuarioCliente } from '../../models/usuario.model';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import Swal from 'sweetalert2';
+import { swalWithBootstrapButtons } from 'src/app/services/swal.service';
 
 
 @Component({
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit {
     }
 
     CerrarSesion(){
+        this._router.navigate(['/catalogo']);
         this._userService.logout();
     }
 
@@ -86,15 +88,28 @@ export class HeaderComponent implements OnInit {
             this._router.navigate(['/checkout']);
         }
         else{
-            Swal.fire({
-                title: '',
+            // Swal.fire({
+            //     title: '',
+            //     text: "Debe iniciar sesion para continuar",
+            //     icon: 'warning',
+            //     // confirmButtonColor: '#3085d6',
+            //     confirmButtonText:
+            //     '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
+            //     confirmButtonAriaLabel: 'Thumbs up, great!',
+            //   })
+
+              swalWithBootstrapButtons.fire({
+                // title: '¿Está seguro de eliminar el producto?',
                 text: "Debe iniciar sesion para continuar",
-                icon: 'warning',
-                // confirmButtonColor: '#3085d6',
+                icon: 'info',
+                // showCancelButton: true,
                 confirmButtonText:
-                '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
-                confirmButtonAriaLabel: 'Thumbs up, great!',
+                '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="d-lg-inline-block d-none text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
+                // cancelButtonText: '¡No, cancelar!',
+                // reverseButtons: true
               })
+
+
         }
         
     }
