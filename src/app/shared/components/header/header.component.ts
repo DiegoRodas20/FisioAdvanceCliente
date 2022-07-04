@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit {
                 title: '',
                 text: "Debe iniciar sesion para continuar",
                 icon: 'warning',
-                confirmButtonColor: '#3085d6',
+                // confirmButtonColor: '#3085d6',
                 confirmButtonText:
                 '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
                 confirmButtonAriaLabel: 'Thumbs up, great!',
