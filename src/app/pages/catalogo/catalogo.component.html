@@ -200,7 +200,7 @@
                                 </del>
                             </div>
 
-                            <div class="col-md-12 pb-4">
+                            <div class="col-md-12 pb-4" *ngIf="producto.cA_descuento!=0">
                                 Descuento -
                                 <span class="badge bg-danger fw-bold">
                                     {{(100-(producto.p_precio*100)/(producto.cA_descuento+producto.p_precio)).toFixed(2)}}%
