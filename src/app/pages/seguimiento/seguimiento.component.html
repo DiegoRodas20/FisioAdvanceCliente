@@ -1,50 +1,53 @@
 <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
   <div class="row">
     <div class="col-lg-4 col-md-5 pb-3 pb-md-0 mb-4">
-      <h1>Track your order</h1>
-      <p class="fs-lg text-muted pb-md-3">This form allows you to search for tracking details from anywhere within Createx Tracking Service.</p>
+      <h1>Rastrea tu Orden de Compra</h1>
+      <p class="fs-lg text-muted pb-md-3">Este formulario le permite buscar detalles desde cualquier lugar dentro del Servicio Disponible.</p>
       <form class="mb-4 pb-lg-2 needs-validation" novalidate="">
-        <label for="track-order" class="form-label-lg">Order No</label>
+        <label for="track-order" class="form-label-lg">N° OC</label>
         <div class="input-group input-group-lg">
-          <input type="text" id="track-order" class="form-control" value="# 34BV66580K92" required="">
-          <button type="submit" class="btn btn-primary px-4">&nbsp;Search&nbsp;</button>
+          <input #oc type="text" id="idOC" class="form-control" name="oc" placeholder="Ingrese Orden de Compra" required="">
+          <button type="submit" (click)="ordenID() && ordenDetalleID()" class="btn btn-primary px-4">&nbsp;Buscar&nbsp;</button>
         </div>
       </form>
       <div class="card card-body py-3 shadow mb-4">
         <table class="table mb-0">
-          <tbody>
+          <tbody *ngFor="let oc of lOC">
             <tr>
-              <th class="border-0 py-2 ps-0">Order No:</th>
-              <td class="border-0 py-2 px-0 text-muted">34BV66580K92</td>
+              <th class="border-0 py-2 ps-0">N° Orden:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_idOC}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Shiped via:</th>
-              <td class="border-0 py-2 px-0 text-muted">UPS Ground</td>
+              <th class="border-0 py-2 ps-0">Proveedor:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{oc.pV_razonSocial}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Shipped on:</th>
-              <td class="border-0 py-2 px-0 text-muted">August 29, 2020, 6:00pm</td>
+              <th class="border-0 py-2 ps-0">Nombre:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{oc.pV_nombre}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Destination:</th>
-              <td class="border-0 py-2 px-0 text-muted">London, United Kingdom</td>
+              <th class="border-0 py-2 ps-0">Fecha de Creación:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_fechaCreacion}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Expected date:</th>
-              <td class="border-0 py-2 px-0 text-muted">September 4, 2020</td>
+              <th class="border-0 py-2 ps-0">Total:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_total}}</td>
             </tr>
-            <tr>
-              <th class="border-0 py-2 ps-0">Status:</th>
-              <td class="border-0 py-2 px-0 text-muted">In Transit</td>
+            <tr >
+              <th class="border-0 py-2 ps-0">Estado:</th>
+              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266322f9231c646f0834446'"><i class="bi bi-send-plus">Creado</i>
+              </td>
+              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266326c9231c646f0834447'"><i class="bi bi-send">Enviado</i>
+              </td>
+              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266327f9231c646f0834448'"><i class="bi bi-send-check">Confirmado</i>
+              </td>
+              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '626632869231c646f0834449'"><i class="bi bi-send-x">Anulado</i>
+              </td>
+              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6281fcc8f155b216a141e370'"><i class="bi bi-send-check-fill">Recibido</i>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="pt-3">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="notify" checked="">
-          <label for="notify" class="form-check-label fs-base">Notify me when order is delivered</label>
-        </div>
       </div>
     </div>
     <div class="col-md-7 ms-auto mb-4">
@@ -53,84 +56,21 @@
           <thead class="fs-lg">
             <tr>
               <th class="border-0"></th>
-              <th class="border-0">Status</th>
-              <th class="border-0">Location</th>
-              <th class="border-0">Date</th>
-              <th class="border-0">Time</th>
+              <th class="border-0">Producto</th>
+              <th class="border-0">Cantidad</th>
+              <th class="border-0">Precio</th>
+              <th class="border-0">Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="step-vertical active">
+            <tr class="step-vertical active" *ngFor="let doc of lDOC">
               <th class="pe-3 position-relative border-0" scope="row">
                 <div class="step-line"></div>
               </th>
-              <td class="py-3">Order Placed</td>
-              <td class="py-3">New York, USA</td>
-              <td class="py-3">August 29, 2020</td>
-              <td class="py-3">2:00 pm</td>
-            </tr>
-            <tr class="step-vertical active">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Documentation Prepared</td>
-              <td class="py-3">New York, USA</td>
-              <td class="py-3">August 29, 2020</td>
-              <td class="py-3">3:30 pm</td>
-            </tr>
-            <tr class="step-vertical active">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Booking Arranged</td>
-              <td class="py-3">New York, USA</td>
-              <td class="py-3">August 29, 2020</td>
-              <td class="py-3">3:35 pm</td>
-            </tr>
-            <tr class="step-vertical active">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Collected</td>
-              <td class="py-3">New York, USA</td>
-              <td class="py-3">August 29, 2020</td>
-              <td class="py-3">4:00 pm</td>
-            </tr>
-            <tr class="step-vertical active">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">In Transit to Destination</td>
-              <td class="py-3">New York, USA</td>
-              <td class="py-3">August 29, 2020</td>
-              <td class="py-3">6:00 pm</td>
-            </tr>
-            <tr class="step-vertical">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Arrived at Destination</td>
-              <td class="py-3">London, United Kingdom</td>
-              <td class="py-3"></td>
-              <td class="py-3"></td>
-            </tr>
-            <tr class="step-vertical">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Out for Delivery</td>
-              <td class="py-3">London, United Kingdom</td>
-              <td class="py-3"></td>
-              <td class="py-3"></td>
-            </tr>
-            <tr class="step-vertical">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">Delivered</td>
-              <td class="py-3">London, United Kingdom</td>
-              <td class="py-3"></td>
-              <td class="py-3"></td>
+              <td class="py-3">{{doc.p_nombreproducto}}</td>
+              <td class="py-3">{{doc.doC_cantidad}}</td>
+              <td class="py-3">{{doc.doC_precio}}</td>
+              <td class="py-3">{{doc.doC_subTotal}}</td>
             </tr>
           </tbody>
         </table>

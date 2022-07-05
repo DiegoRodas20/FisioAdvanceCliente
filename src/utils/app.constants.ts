@@ -29,3 +29,9 @@ export const URL_PEDIDO = BASE_URL + 'Pedido/';
 /*******DETALLE PEDIDO******* */
 export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';
 export const URL_MARCA = `${BASE_URL}Marca`;
+
+
+/*******ORDEN DE COMPRA******* */
+export const URL_ORDEN_COMPRA = BASE_URL + 'OrdenCompra/';
+export const URL_ORDEN_COMPRA_ID = URL_ORDEN_COMPRA + 'GetbyID/';
+export const URL_ORDEN_COMPRA_DETALLE = URL_ORDEN_COMPRA + 'DetalleOc/';
