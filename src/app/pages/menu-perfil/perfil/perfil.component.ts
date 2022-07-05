@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router'
-import { CarritoService } from 'src/app/services/carrito.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { Carrito } from 'src/app/shared/models/carrito.model';
 import { Login, UsuarioCliente } from 'src/app/shared/models/usuario.model';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
     selector: 'app-perfil',
@@ -96,7 +94,7 @@ export class PerfilComponent implements OnInit {
           this.nomPerfil = data[0].u_nombre
           this.formPerfil.patchValue(data[0])
           this.formActualizar.patchValue(data[0])
-          console.log(this.idPerfil)
+          console.log(data[0])
       }
       catch (error) {
           console.log("Error: ", error);
