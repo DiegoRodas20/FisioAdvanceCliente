@@ -7,10 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OcService } from 'src/app/services/oc.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Observable } from 'rxjs';
-import { DetalleOc, Oc } from 'src/app/shared/models/oc.model';
+import { DetallePedido, Pedido } from 'src/app/shared/models/pedido.model';
+import { PedidoService } from 'src/app/services/pedido.service';
+
 
 
 @Component({
@@ -18,26 +19,26 @@ import { DetalleOc, Oc } from 'src/app/shared/models/oc.model';
   templateUrl: './seguimiento.component.html',
 })
 export class SeguimientoComponent implements OnInit {
-  @ViewChild('oc') oc: ElementRef;
+  @ViewChild('numPedido') p: ElementRef;
 
-  lOC: Oc[] = [];
-  lDOC: DetalleOc[] = [] ;
+  lP: Pedido[] = [];
+  lDP: DetallePedido[] = [] ;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _ocService: OcService
+    private _pService: PedidoService
   ) {}
 
   ngOnInit() {
   }
 
-  async ordenID() {
+  async pedidoById() {
     try {
-      this._ocService
-        .getOcById(this.oc.nativeElement.value).subscribe(data => {
-          this.lOC = data as [];
+      this._pService
+        .obtenerPedidoById(this.p.nativeElement.value).subscribe(data => {
+          this.lP = data as [];
           console.log(data);
         }
         );
@@ -46,11 +47,11 @@ export class SeguimientoComponent implements OnInit {
       console.log('Error: ', error);
     }
   }
-  async ordenDetalleID() {
+  async detallePedidoById() {
     try {
-      this._ocService
-        .getDetalleOcById(this.oc.nativeElement.value).subscribe(data => {
-          this.lDOC = data as [];
+      this._pService
+        .obtenerDetallePedidoById(this.p.nativeElement.value).subscribe(data => {
+          this.lDP = data as [];
           console.log(data);
         }
         );

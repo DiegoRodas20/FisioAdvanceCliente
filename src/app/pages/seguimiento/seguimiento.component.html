@@ -1,50 +1,65 @@
 <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
   <div class="row">
     <div class="col-lg-4 col-md-5 pb-3 pb-md-0 mb-4">
-      <h1>Rastrea tu Orden de Compra</h1>
+      <h1>Rastrea tu Pedido</h1>
       <p class="fs-lg text-muted pb-md-3">Este formulario le permite buscar detalles desde cualquier lugar dentro del Servicio Disponible.</p>
       <form class="mb-4 pb-lg-2 needs-validation" novalidate="">
         <label for="track-order" class="form-label-lg">N° OC</label>
         <div class="input-group input-group-lg">
-          <input #oc type="text" id="idOC" class="form-control" name="oc" placeholder="Ingrese Orden de Compra" required="">
-          <button type="submit" (click)="ordenID() && ordenDetalleID()" class="btn btn-primary px-4">&nbsp;Buscar&nbsp;</button>
+          <input #oc type="text" id="idOC" class="form-control" name="numPedido" placeholder="Ingrese Orden de Compra" required="">
+          <button type="submit" (click)="pedidoById() && detallePedidoById()" class="btn btn-primary px-4">&nbsp;Buscar&nbsp;</button>
         </div>
       </form>
       <div class="card card-body py-3 shadow mb-4">
         <table class="table mb-0">
-          <tbody *ngFor="let oc of lOC">
+          <tbody *ngFor="let p of lP">
             <tr>
-              <th class="border-0 py-2 ps-0">N° Orden:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_idOC}}</td>
+              <th class="border-0 py-2 ps-0">N° Pedido:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_idPedido}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Proveedor:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{oc.pV_razonSocial}}</td>
+              <th class="border-0 py-2 ps-0">Cliente:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.cL_cliente}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Nombre:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{oc.pV_nombre}}</td>
+              <th class="border-0 py-2 ps-0">Correo:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.cL_correo}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Telefono:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.cL_telefono}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Fecha de Creación:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_fechaCreacion}}</td>
+              <th class="border-0 py-2 ps-0">Metodo de Pago:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_metodoPago}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Total:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{oc.oC_total}}</td>
+              <th class="border-0 py-2 ps-0">Fecha de Emision:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEmision}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Fecha de Envio:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEnvio}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Fecha de Entrega:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEntrega}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Dirección de Envio:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_direccionEnvio}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Referencias de Envio:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_referenciaEnvio}}</td>
             </tr>
             <tr >
               <th class="border-0 py-2 ps-0">Estado:</th>
-              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266322f9231c646f0834446'"><i class="bi bi-send-plus">Creado</i>
-              </td>
-              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266326c9231c646f0834447'"><i class="bi bi-send">Enviado</i>
-              </td>
-              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6266327f9231c646f0834448'"><i class="bi bi-send-check">Confirmado</i>
-              </td>
-              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '626632869231c646f0834449'"><i class="bi bi-send-x">Anulado</i>
-              </td>
-              <td class="border-0 py-2 px-0 text-muted" *ngIf="oc.eoC_idEstadoOC == '6281fcc8f155b216a141e370'"><i class="bi bi-send-check-fill">Recibido</i>
-              </td>
+              <td class="border-0 py-2 px-0 text-muted">{{p.epE_nombreEstado}}</td>
+            </tr>
+            <tr >
+              <th class="border-0 py-2 ps-0">Total:</th>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_total}}</td>
             </tr>
           </tbody>
         </table>
@@ -63,14 +78,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="step-vertical active" *ngFor="let doc of lDOC">
+            <tr class="step-vertical active" *ngFor="let dp of lDP">
               <th class="pe-3 position-relative border-0" scope="row">
                 <div class="step-line"></div>
               </th>
-              <td class="py-3">{{doc.p_nombreproducto}}</td>
-              <td class="py-3">{{doc.doC_cantidad}}</td>
-              <td class="py-3">{{doc.doC_precio}}</td>
-              <td class="py-3">{{doc.doC_subTotal}}</td>
+              <td class="py-3">{{dp.p_nombreProducto}}</td>
+              <td class="py-3">{{dp.dP_cantidad}}</td>
+              <td class="py-3">{{dp.dP_precioUnitario}}</td>
+              <td class="py-3">{{dp.dP_subTotal}}</td>
             </tr>
           </tbody>
         </table>

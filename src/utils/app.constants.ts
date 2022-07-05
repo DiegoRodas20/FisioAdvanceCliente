@@ -25,6 +25,7 @@ export const URL_CATEGORIA = `${BASE_URL}Categoria`;
 
 /*******PEDIDO******* */
 export const URL_PEDIDO = BASE_URL + 'Pedido/';
+export const URL_PEDIDO_ID = URL_PEDIDO + 'GetbyID/';
 
 /*******DETALLE PEDIDO******* */
 export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';
