@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-cambiar-contrasena',
@@ -9,11 +10,11 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class CambiarContrasenaComponent implements OnInit {
   formContrasena: FormGroup;
   constructor(
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder,
+    private _userService:UserService) { }
 
   ngOnInit(): void {
     this.crearFormContrasena();
-    ("siestamoooos");
   }
 
   crearFormContrasena() {
@@ -21,5 +22,10 @@ export class CambiarContrasenaComponent implements OnInit {
       u_correoElectronico:['']
     });
   }
-  cambiarContrasena(){}
+  cambiarContrasena(){
+      this._userService.correoCodigo(this.formContrasena.value.u_correoElectronico).subscribe(data => {
+        console.log("se envio");
+        console.log(data);
+      });
+  }
 }

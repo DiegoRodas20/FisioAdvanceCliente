@@ -1,34 +1,30 @@
-<section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
-  <div class="row">
-    <div class="col-lg-4 col-md-5 pb-3 pb-md-0 mb-4">
-      <h1>Rastrea tu Pedido</h1>
-      <p class="fs-lg text-muted pb-md-3">Este formulario le permite buscar detalles desde cualquier lugar dentro del Servicio Disponible.</p>
-      <form class="mb-4 pb-lg-2 needs-validation" novalidate="">
-        <label for="track-order" class="form-label-lg">N° OC</label>
+<section class="container px-5">
+  <div class="row mx-n2" style="text-align: center;">
+    <div class="py-4">
+      <h3 class="m-0">Seguimiento de compra</h3>
+    </div>      
+  </div>
+  <div class="row mx-n2">
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4"></div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4">
+      
+      <p class="fs-lg text-muted">Ingresa tu numero de pedido</p>
+      <form class="mb-4 pb-lg-2 needs-validation" novalidate="" [formGroup]="formPedido">
         <div class="input-group input-group-lg">
-          <input #oc type="text" id="idOC" class="form-control" name="numPedido" placeholder="Ingrese Orden de Compra" required="">
-          <button type="submit" (click)="pedidoById() && detallePedidoById()" class="btn btn-primary px-4">&nbsp;Buscar&nbsp;</button>
+          <input #oc type="text" id="idPedido" class="form-control" name="idPedido" placeholder="# seguimiento de compra" formControlName="idPedido">
+          <button type="submit" (click)="pedidoById() && detallePedidoById()" class="btn btn-primary px-4">Buscar</button>
         </div>
       </form>
-      <div class="card card-body py-3 shadow mb-4">
+      
+    </div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4"></div>
+ 
+  </div>
+  <div class="row pb-2 pb-lg-0" *ngIf="lP.length >0">
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4">
+      <div class="card card-body py-3 shadow mb-4" >
         <table class="table mb-0">
           <tbody *ngFor="let p of lP">
-            <tr>
-              <th class="border-0 py-2 ps-0">N° Pedido:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.pE_idPedido}}</td>
-            </tr>
-            <tr>
-              <th class="border-0 py-2 ps-0">Cliente:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.cL_cliente}}</td>
-            </tr>
-            <tr>
-              <th class="border-0 py-2 ps-0">Correo:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.cL_correo}}</td>
-            </tr>
-            <tr >
-              <th class="border-0 py-2 ps-0">Telefono:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.cL_telefono}}</td>
-            </tr>
             <tr>
               <th class="border-0 py-2 ps-0">Metodo de Pago:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_metodoPago}}</td>
@@ -37,11 +33,7 @@
               <th class="border-0 py-2 ps-0">Fecha de Emision:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEmision}}</td>
             </tr>
-            <tr >
-              <th class="border-0 py-2 ps-0">Fecha de Envio:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEnvio}}</td>
-            </tr>
-            <tr >
+            <tr *ngIf="p.epE_nombreEstado=='Entregado'">
               <th class="border-0 py-2 ps-0">Fecha de Entrega:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEntrega}}</td>
             </tr>
@@ -49,46 +41,75 @@
               <th class="border-0 py-2 ps-0">Dirección de Envio:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_direccionEnvio}}</td>
             </tr>
-            <tr >
-              <th class="border-0 py-2 ps-0">Referencias de Envio:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.pE_referenciaEnvio}}</td>
-            </tr>
-            <tr >
-              <th class="border-0 py-2 ps-0">Estado:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.epE_nombreEstado}}</td>
-            </tr>
-            <tr >
-              <th class="border-0 py-2 ps-0">Total:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.pE_total}}</td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="col-md-7 ms-auto mb-4">
-      <div class="table-responsive">
-        <table class="table mb-0">
-          <thead class="fs-lg">
-            <tr>
-              <th class="border-0"></th>
-              <th class="border-0">Producto</th>
-              <th class="border-0">Cantidad</th>
-              <th class="border-0">Precio</th>
-              <th class="border-0">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="step-vertical active" *ngFor="let dp of lDP">
-              <th class="pe-3 position-relative border-0" scope="row">
-                <div class="step-line"></div>
-              </th>
-              <td class="py-3">{{dp.p_nombreProducto}}</td>
-              <td class="py-3">{{dp.dP_cantidad}}</td>
-              <td class="py-3">{{dp.dP_precioUnitario}}</td>
-              <td class="py-3">{{dp.dP_subTotal}}</td>
-            </tr>
-          </tbody>
-        </table>
+    
+    <div class="col-lg-8 ms-auto">
+      <div class="accordion accordion-alt " id="orders">
+
+        <div class="accordion-item">
+          <h6 class="accordion-header" id="order-heading-1">
+            <button class="accordion-button accordion-button-indicator-0 flex-wrap justify-content-between fw-normal py-3 fw-normal border-bottom-0" type="button" data-bs-toggle="collapse" data-bs-target="#order-collapse-1" aria-expanded="true" aria-controls="order-collapse-1">
+              <span class="pe-2"># {{id}}</span>
+              <span class="fs-sm text-muted text-nowrap px-2">
+                <i class="ci-clock fs-base align-middle mt-n1 me-1"></i>
+                {{fechaEmision}}
+              </span>
+              <span class="badge bg-info">{{estado}}</span>
+              <span class="text-dark ps-1">s/. {{total}}</span>
+            </button>
+          </h6>
+          <div class="accordion-collapse collapse show" id="order-collapse-1" aria-labelledby="order-heading-1" data-bs-parent="#orders">
+            <div class="accordion-body py-0">
+              <div class="bg-secondary rounded mb-4">
+                <div class="table-responsive">
+                  <table class="table mb-0">
+
+                    <tbody>
+                      <tr  *ngFor="let dp of lDP">
+                        <td class="border-top-0">
+                          <div class="d-flex align-items-start ps-2 py-2">
+                            <a style="min-width: 80px;">
+                              <img src="../assets/img/ecommerce/cart/01.png" width="80" alt="Product thumb">
+                            </a>
+                            <div class="ps-3">
+                              <h3 class="fs-sm mb-3">
+                                <a class="nav-link fw-bold">{{dp.p_nombreProducto}}</a>
+                              </h3>
+                              <ul class="list-unstyled fs-xs mt-n2 mb-2">
+                                <li class="mb-0"><span class="text-muted">Marca:</span> Pink</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2">
+                            <div class="fs-xs text-muted mb-1">Precio:</div>
+                            <div class="fs-sm text-dark">s/. {{dp.dP_precioUnitario}}</div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2">
+                            <div class="fs-xs text-muted mb-1">Cantidad:</div>
+                            <div class="fs-sm text-dark">1</div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2 pe-3 text-end">
+                            <div class="fs-xs text-muted mb-1">Subtotal:</div>
+                            <div class="fs-sm fw-bold text-dark">s/. {{dp.dP_subTotal}}</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { URL_AUTH_BASE, URL_CLIENTE, URL_CLIENTE_ID, URL_DESHABILITIAR_CLIENTE } from 'src/utils/app.constants';
+import { URL_AUTH_BASE, URL_CLIENTE, URL_CLIENTE_ID, URL_CORREO_RECUPERA, URL_DESHABILITIAR_CLIENTE } from 'src/utils/app.constants';
 import { Login } from '../shared/models/usuario.model';
 
 
@@ -20,7 +20,6 @@ export class UserService {
     ) {
     }
 
-
     login(user: any) : Observable<any> {
             var oJSON = JSON.stringify(user);
             let items$ = this.http
@@ -30,9 +29,7 @@ export class UserService {
     }
 
     logout() {
-        // remove user from local storage to log user out
         localStorage.removeItem('user');
-       // this.userSubject.next(null);
         window.location.reload();   
     }
 
@@ -51,4 +48,9 @@ export class UserService {
     public desactivarPerfil(data): Observable<any>{
         return this.http.put(URL_DESHABILITIAR_CLIENTE, data);
     }
+    public correoCodigo(correo:any): Observable<any>{
+        return this.http.get(URL_CORREO_RECUPERA+`${correo}`);
+    }
+
+    
 }

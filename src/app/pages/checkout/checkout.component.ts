@@ -79,7 +79,9 @@ export class CheckoutComponent implements OnInit {
         this.formPedido = this._formBuilder.group({
             direccionEnvio: [null, [Validators.required]],
             referenciaEnvio: [null, [Validators.required]],
-            metodoPago: [null, [Validators.required]],
+            metodoenvio: [null],
+            adicional: [''],
+            metodoPago: ['', [Validators.required]],
             dep: [''],
             prov: [''],
             dist: [''],
@@ -115,10 +117,15 @@ export class CheckoutComponent implements OnInit {
             pE_codigoTransaccion: null,
             pE_numSeguimiento: null,
             pE_fechaEnvio: latest_date,
-            pE_direccionEnvio: form.direccionEnvio+', '+form.dist+', '+form.prov+', '+form.dep,
+            pE_direccionEnvio: form.direccionEnvio + ', ' + form.dist + ', ' + form.prov + ', ' + form.dep,
             pE_referenciaEnvio: form.referenciaEnvio,
-            pE_fechaEntrega: null
+            pE_fechaEntrega: null,
+            pE_adicional: 0,            
+            pE_metodoEnvio: 'fdgrdg'
+            
         }
+        // form.metodoenvio
+            // form.adicional,
 
         try {
             let data = await this._pedidoService.registrarPedido(Pedido)

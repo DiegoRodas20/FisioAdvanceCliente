@@ -16,6 +16,7 @@ export const URL_ACTUALIZAR_CLIENTE= URL_CLIENTE + 'put_cliente/';
 export const URL_USUARIO = BASE_URL + 'Usuario/';
 export const URL_LISTAR_CLIENTE= URL_CLIENTE+  'GetByID/';
 export const URL_TIPO_DOCUMENTO2= URL_USUARIO+ 'TipoDocumento';
+export const URL_CORREO_RECUPERA= URL_USUARIO+ 'CorreoRecuperar/';
 
 // PRODUCTOS
 
