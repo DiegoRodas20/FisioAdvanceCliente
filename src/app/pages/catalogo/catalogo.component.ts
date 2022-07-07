@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service'
 import { Producto, Marca } from '../../shared/models/producto.model'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CarritoService } from 'src/app/services/carrito.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { Carrito } from 'src/app/shared/models/carrito.model';
@@ -35,26 +35,39 @@ export class CatalogoComponent implements OnInit {
     categoriaSeleccionada: string = null
     marcaSeleccionada: string = null
     filterValue: string = '1'
+    idCatalogo:string;
 
     constructor(
         private _productoService: ProductoService,
         private _carritoService: CarritoService,
-        private _router: Router,
+        private _router: Router,         
+        private _route: ActivatedRoute,
     ) { }
 
     ngOnInit() {
 
-        this._productoService.getProductos().subscribe((res) => {
+        this._route.params.subscribe(params => {
+            this.idCatalogo = params['id'];
+            this.categoriaSeleccionada= this.idCatalogo;
+            this.filterProductos()
+            console.log(this.idCatalogo);
+        })
+        console.log(this.idCatalogo);
+        if(this.idCatalogo==undefined){
+            this._productoService.getProductos().subscribe((res) => {
             this.productos = res
         })
 
         this._productoService.getCategoria().subscribe((res) => {
             res.map((categoria) => this.categorias.push({ id: categoria.cP_idCategoria, nombre: categoria.cP_categoria, cuenta: categoria.cP_countProducto, selected: false }))
         })
-
+        }
+        
         this._productoService.getMarcas().subscribe((res) => {
             res.map((categoria) => this.marcas.push({ id: categoria.mP_idMarca, nombre: categoria.mP_marca, cuenta: categoria.mP_countProducto, selected: false }))
         })
+
+        
     }
 
     goProductoId(categoria: string,marca: string,id: string) {

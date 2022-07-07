@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductoService } from 'src/app/services/producto.service';
+import { Categoria, Producto } from 'src/app/shared/models/producto.model';
 declare var tns;
+
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html'
 })
 
+
 export class HomeComponent implements OnInit {
 
-    constructor() { }
+    producto: Producto[]=[];
+    categoria: Categoria[]=[];
+    
+    constructor(private _productoService:ProductoService,
+        private _router: Router,) { }
 
     ngOnInit() {
-        this.animationSlider()
+        this.animationSlider();
+        this.getProductos();;
+        this.getCategorias();
     }
 
     animationSlider() {
@@ -104,31 +115,31 @@ export class HomeComponent implements OnInit {
             });
 
             // Trending products
-            tns({
-                container: '.tns-carousel-inner-five',
-                nav: false,
-                controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
-                controlsContainer: '#custom-controls-trending',
-                responsive: {
-                    0: {
-                        items: 1,
-                        gutter: 20
-                    },
-                    480: {
-                        items: 2,
-                        gutter: 24
-                    },
-                    700: {
-                        items: 3,
-                        gutter: 24
-                    },
-                    1100: {
-                        items: 4,
-                        gutter: 30
-                    }
-                }
+            // tns({
+            //     container: '.tns-carousel-inner-five',
+            //     nav: false,
+            //     controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
+            //     controlsContainer: '#custom-controls-trending',
+            //     responsive: {
+            //         0: {
+            //             items: 1,
+            //             gutter: 20
+            //         },
+            //         480: {
+            //             items: 2,
+            //             gutter: 24
+            //         },
+            //         700: {
+            //             items: 3,
+            //             gutter: 24
+            //         },
+            //         1100: {
+            //             items: 4,
+            //             gutter: 30
+            //         }
+            //     }
 
-            });
+            // });
 
             // Sale Products
             tns({
@@ -198,6 +209,27 @@ export class HomeComponent implements OnInit {
 
 
         }, 500);
+    }
+
+    async getProductos(){
+       await this._productoService.getProductos().subscribe(x=>{
+            this.producto = x.slice(0,3);
+        console.log(this.producto);
+        })
+        return this.producto
+    }
+
+    async getCategorias(){
+        await this._productoService.getCategoria().subscribe(x=>{
+             this.categoria = x.slice(0,3);
+         console.log(this.categoria);
+         })
+         return this.categoria
+     }
+     goCatalogoCategoria(idCategoria:string) {
+        
+        this._router.navigate(['/catalogo/categoria/' + idCategoria]);
+        // /catalogo/categoria/6264dfe84b276b45bbc613b4
     }
 
 }

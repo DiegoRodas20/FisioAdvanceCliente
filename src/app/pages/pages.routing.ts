@@ -19,8 +19,10 @@ const routes: Routes = [
         children: [
             { path: '', component: HomeComponent},
             {
-                path: 'catalogo',
-                component: CatalogoComponent,
+                path: 'catalogo',  children : [ 
+                    {path: '', component: CatalogoComponent },
+                    {path: 'categoria/:id', component: CatalogoComponent}
+                    ],
                 data: { titulo: 'Catálogo' }
             },
             {

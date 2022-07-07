@@ -1,5 +1,5 @@
 <!-- Hero slider -->
-<section class="tns-carousel-wrapper tns-controls-onhover">
+<div class="tns-carousel-wrapper tns-controls-onhover">
 
     <div class="tns-carousel-inner" data-carousel-options=''>
 
@@ -85,46 +85,46 @@
         </div>
     </div>
 
-</section>
+</div>
 
 <!-- Top categories -->
-<section class="container pt-5 pt-lg-0">
+<div class="container pt-5 pt-lg-0">
     <div class="tns-carousel-wrapper tns-nav-outside">
         <div class="tns-carousel-inner tns-carousel-inner-two" data-carousel-options=''>
 
             <!-- Category -->
             <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
                 <div class="image-inner mb-3 rounded">
-                    <img src="../../../assets/img/home/cinta fisiologica.jpg" alt="Women’s">
+                    <img src="../../../assets/img/home/cinta fisiologica.jpg">
                 </div>
                 <h3 class="h5 mb-1">Muscular</h3>
             </a>
 
             <!-- Category -->
-            <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
+            <a  (click)="goCatalogoCategoria('6264dfe84b276b45bbc613b4')" class="d-block image-scale heading-highlight text-center">
                 <div class="image-inner mb-3 rounded">
-                    <img src="../../../assets/img/home/cEjercicio.jpg" alt="Men’s">
+                    <img src="../../../assets/img/home/cEjercicio.jpg">
                 </div>
-                <h3 class="h5 mb-1">Men’s</h3>
+                <h3 class="h5 mb-1">Material de ejercicio</h3>
             </a>
 
             <!-- Category -->
             <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
                 <div class="image-inner mb-3 rounded">
-                    <img src="../../../assets/img/home/equipo-c.jpg" alt="Kids'">
+                    <img src="../../../assets/img/home/equipo-c.jpg">
                 </div>
-                <h3 class="h5 mb-1">Kids'</h3>
+                <h3 class="h5 mb-1">Equipos médicos</h3>
             </a>
         </div>
     </div>
-</section>
+</div>
 
 <!-- New arrivals -->
-<section class="container-fluid px-xl-grid-gutter mt-5 mb-3 mb-sm-4 mt-md-0 mb-lg-5 py-5 py-lg-6">
+<div class="container-fluid px-xl-grid-gutter mt-md-5 mb-lg-5">
     <div class="text-center mb-5 pb-2">
-        <h2 class="h1">New arrivals</h2>
-        <p class="fs-lg text-muted mb-1">Check out our latest arrivals for the upcoming season</p>
-        <a href="/catalogo" class="fs-lg">See the collection here</a>
+        <h2 class="h1">Lo último</h2>
+        <p class="fs-lg text-muted mb-1">Echa un vistazo a nuestras nuevos productos</p>
+        <a href="/catalogo" class="fs-lg"></a>
     </div>
 
     <!-- Product carousel -->
@@ -132,11 +132,11 @@
         <div class="tns-carousel-inner tns-carousel-inner-three" data-carousel-options=''>
 
             <!-- Item -->
-            <div>
+            <div *ngFor="let p of producto">
                 <div class="card card-product">
                     <div class="card-product-img">
                         <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/03.jpg" alt="Product image">
+                            <img src="{{p.p_imagen}}" alt="Product image">
                         </a>
                         <div class="card-product-widgets-top">
                             <div class="star-rating">
@@ -154,186 +154,48 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Black and white sport cap</a>
+                            <a href="" class="nav-link">{{p.p_nombre}}</a>
                         </h3>
                         <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$18.15</span>
+                            <span class="h5 d-inline-block mb-0">S/. {{p.cA_precioVenta}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/13.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Metal bridge sunglasses</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$89.95</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+</div>
+<!-- Popular categories -->
+<div class="container mb-lg-5">
+    <h2 class="h1 mb-5 pb-3 text-center">Categorías populares</h2>
+    <div class="tns-carousel-wrapper tns-nav-outside">
+        <div class="tns-carousel-inner tns-carousel-inner-four" data-carousel-options=''>
 
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/04.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-top">
-                            <div class="star-rating">
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star"></i>
-                            </div>
-                        </div>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
+            <!-- Category -->
+            <div class="pb-2" *ngFor="let c of categoria">
+                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
+                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
+                        <img src="{{c.cP_imagen}}" alt="Category image">
                     </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Green baby romper</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$20.40</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/02.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Mid-rise slim cropped fit jeans</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$40.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/06.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-top">
-                            <div class="star-rating">
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star-filled active"></i>
-                                <i class="sr-star ci-star"></i>
-                                <i class="sr-star ci-star"></i>
-                            </div>
-                        </div>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Red dangle earrings</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$29.95</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/08.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Baby shoes with laces</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$30.75</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-                <div class="card card-product">
-                    <div class="card-product-img">
-                        <a href="shop-single.html" class="card-img-top">
-                            <img src="../../../assets/img/ecommerce/shop/12.jpg" alt="Product image">
-                        </a>
-                        <div class="card-product-widgets-bottom">
-                            <a href="#" class="btn-wishlist ms-auto" data-bs-toggle="tooltip" data-bs-placement="left"
-                                title="Add to wishlist"></a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-product-title text-truncate mb-2">
-                            <a href="shop-single.html" class="nav-link">Men fashion gray shoes</a>
-                        </h3>
-                        <div class="d-flex align-items-center">
-                            <span class="h5 d-inline-block mb-0">$85.00</span>
-                        </div>
-                    </div>
-                </div>
+                    <h3 class="h5 mb-3">{{c.cP_categoria}}</h3>
+                </a>
             </div>
         </div>
     </div>
-</section>
-
+</div>
 <!-- Promo banners -->
-<section class="container-fluid px-xl-grid-gutter">
+<div class="container-fluid px-xl-grid-gutter">
     <div class="row mx-n2">
 
         <!-- Banner -->
         <div class="col-lg-5 px-2 mb-3">
             <div class="d-flex flex-column h-100 bg-size-cover bg-position-center-y rounded py-5 px-md-5 px-4"
-                style="background-image: url(../assets/img/ecommerce/home/banners/01.jpg);">
+                style="background-image: url(../../../assets/img/home/diagnostico.jpg);">
                 <div class="mt-md-3 mb-md-6 pb-6 px-md-2">
-                    <h3 class="mb-2 pb-1 fs-sm text-uppercase">Summer Collections</h3>
-                    <h2 class="pb-3">Sale Up to 70%</h2>
-                    <a href="#" class="btn btn-outline-primary">Explore new prices</a>
+                    <h3 class="mb-2 pb-1 fs-sm text-uppercase">CYBER WOW</h3>
+                    <h2 class="pb-3">Descuento de 50%</h2>
+                    <a href="#" class="btn btn-outline-primary">Explora</a>
                 </div>
             </div>
         </div>
@@ -406,73 +268,4 @@
             </div>
         </div>
     </div>
-</section>
-
-<!-- Popular categories -->
-<section class="container mt-1 mb-3 my-sm-4 py-5 py-lg-6">
-    <h2 class="h1 mb-5 pb-3 text-center">Popular categories</h2>
-    <div class="tns-carousel-wrapper tns-nav-outside">
-        <div class="tns-carousel-inner tns-carousel-inner-four" data-carousel-options=''>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/04.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">Tops</h3>
-                </a>
-            </div>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/05.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">T-shirts</h3>
-                </a>
-            </div>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/06.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">Caps</h3>
-                </a>
-            </div>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/07.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">Sandals</h3>
-                </a>
-            </div>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/08.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">Jackets</h3>
-                </a>
-            </div>
-
-            <!-- Category -->
-            <div class="pb-2">
-                <a href="/catalogo" class="d-block image-scale heading-highlight text-center">
-                    <div class="image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                        <img src="../../../assets/img/ecommerce/home/categories/09.jpg" alt="Category image">
-                    </div>
-                    <h3 class="h5 mb-3">Coats</h3>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+</div>

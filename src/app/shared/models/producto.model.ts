@@ -19,7 +19,8 @@ export interface Producto {
 export interface Categoria {
   cP_idCategoria: string,
   cP_categoria: string,
-  cP_countProducto: number
+  cP_countProducto: number,
+  cP_imagen:string
 }
 
 export interface Marca {
