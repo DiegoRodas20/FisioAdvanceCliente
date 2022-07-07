@@ -48,12 +48,12 @@ export class LoginComponent implements OnInit {
           u_nombre: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
           u_apellidoPaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
           u_apellidoMaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_telefono:[null, [Validators.required,Validators.maxLength(9),Validators.pattern('[0-9]*')]],
-          u_direccion:[null, [Validators.required,Validators.maxLength(50)]],
+          u_telefono:[''],
+          u_direccion:[''],
           u_documentoIdentidad: [null, [Validators.required,Validators.maxLength(20)]],
-          pU_idPerfil: ['6268395e4579943794c6df50', [Validators.required]],
+          pU_idPerfil: ['6268395e4579943794c6df50'],
           tD_idTipoDocumento: [null, [Validators.required]],
-          eU_idEstadoUsuario: ['6268339afa3714a01d9ea2d7', [Validators.required]],
+          eU_idEstadoUsuario: ['6268339afa3714a01d9ea2d7'],
         });
       }
 
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
     }
 
       registrarCliente() {
-        (this.formUser.value);
+        console.log(this.formUser.value);
         if (this.formUser.status == 'VALID') {
           ("valido");
           this._clienteService
