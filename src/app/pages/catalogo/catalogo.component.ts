@@ -36,6 +36,7 @@ export class CatalogoComponent implements OnInit {
     marcaSeleccionada: string = null
     filterValue: string = '1'
     idCatalogo:string;
+    precioxcantidad: number;
 
     constructor(
         private _productoService: ProductoService,
@@ -48,10 +49,13 @@ export class CatalogoComponent implements OnInit {
 
         this._route.params.subscribe(params => {
             this.idCatalogo = params['id'];
-            this.categoriaSeleccionada= this.idCatalogo;
-            this.filterProductos()
-            console.log(this.idCatalogo);
+            if(this.idCatalogo!=undefined){
+                this.categoriaSeleccionada= this.idCatalogo;
+                this.filterProductos()
+                console.log(this.idCatalogo);
+            }
         })
+        
         console.log(this.idCatalogo);
         if(this.idCatalogo==undefined){
             this._productoService.getProductos().subscribe((res) => {
@@ -62,7 +66,6 @@ export class CatalogoComponent implements OnInit {
             res.map((categoria) => this.categorias.push({ id: categoria.cP_idCategoria, nombre: categoria.cP_categoria, cuenta: categoria.cP_countProducto, selected: false }))
         })
         }
-        
         this._productoService.getMarcas().subscribe((res) => {
             res.map((categoria) => this.marcas.push({ id: categoria.mP_idMarca, nombre: categoria.mP_marca, cuenta: categoria.mP_countProducto, selected: false }))
         })
@@ -86,7 +89,7 @@ export class CatalogoComponent implements OnInit {
             p_marca: producto.mP_marca,
             p_Descripcion: producto.p_Descripcion,
             cP_categoria: producto.cP_categoria,
-            cA_precioVenta: producto.cA_precioVenta,
+            cA_precioVenta: this.precioxcantidad,
             cA_descuento: producto.cA_descuento,
             p_imagen: producto.p_imagen,
             cantidad: producto.cantidad
@@ -118,7 +121,7 @@ export class CatalogoComponent implements OnInit {
     }
 
     calcularPrecioCantidad(event, producto) {
-        producto.cA_precioVenta = Number(event.target.value) * Number(producto.p_precio - producto.cA_descuento);
+        this.precioxcantidad = Number(event.target.value) * Number(producto.cA_precioVenta);
         producto.cantidad = Number(event.target.value)
         console.log(producto.cantidad)
     }

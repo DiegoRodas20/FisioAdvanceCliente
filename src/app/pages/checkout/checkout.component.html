@@ -81,7 +81,33 @@
                                   placeholder="Ingresa alguna referencia de tu dirección."
                                   formControlName="referenciaEnvio"></textarea>
                           </div>
-                        </div>               
+                        </div>      
+                        
+                        
+
+
+                        <div class="row pb-3" *ngIf="formPedido.value.metodoenvio=='Contra entrega'">
+
+                          <div class="col-sm-12 mb-4">
+                              <label for="ch-fn" class="form-label-lg">Punto de entrega</label>
+                              <select class="form-select"  formControlName="direccionEnvio" (change)="onChange()">
+                                <option [value]="p.value" *ngFor="let p of puntos">{{p.value}}</option>
+                            </select> 
+                          </div>
+
+                          <div class="col-sm-12 mb-4">
+                            <label for="ch-fn" class="form-label-lg">Horario</label>
+                            <input type="text" class="form-control form-control-lg" id="ch-fn"
+                            placeholder="{{referencia}}" formControlName="referenciaEnvio"  readonly>
+                        </div>
+
+                          <div class="col-sm-12 mb-4"*ngIf="xEstacion">
+                            <label for="ch-fn" class="form-label-lg">Indicar estación</label>
+                            <input type="text" class="form-control form-control-lg" id="ch-fn"
+                                placeholder="Ingresa estación." formControlName="estacion">
+                        </div>
+                          
+                        </div>  
                         
                         <label class="mt-sm-1 mb-sm-4 form-label-lg" for="ch-notes" class="">Método de pago</label>
                         <h4>Pago</h4>

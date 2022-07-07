@@ -37,8 +37,23 @@ export class CheckoutComponent implements OnInit {
     lDetalle: DetallePJson[] = [];
     detalleString: string;
     latest_date:any;
-    list:DetallePJson[]=[];
-
+    xEstacion=false;
+    referencia:string;
+    puntos=[
+        {value: "Plaza norte"},
+        {value: "Mega Plaza"},
+        {value: "Tottus Canta"},
+        {value: "Estación del metropolitano"},
+        {value: "Estación del metro"}
+    ]
+    horario={
+        0:["Lunes de 4:00 pm a 6:00  pm"],
+        1:["Lunes de 6:30 pm a 8:00 pm"],
+        2:["Todos los dias de 8:00 am a 6 pm"],
+        3:["Sabado 9:00 am a 11:30 am"],
+        4:["Domingo 9:00 am a 11:30 am"]
+        }
+       
     constructor(
         private _ubigeoService: UbigeoService,
         private _carritoService: CarritoService,
@@ -58,10 +73,13 @@ export class CheckoutComponent implements OnInit {
             this.hoy = Date.now();
             this.latest_date = this.datepipe.transform(this.hoy, 'yyyy-MM-dd');
             this.perfilLogueado();
-            this.updatevalidartors()
+            this.updatevalidartors();
         }
         this.getCarrito();
         this.getDepartamento();
+        
+        this.puntos;
+        this.horario;
     }
 
     getCarrito() {
@@ -89,6 +107,7 @@ export class CheckoutComponent implements OnInit {
             dep: [''],
             prov: [''],
             dist: [''],
+            estacion:['']
         })
     }
 
@@ -107,6 +126,20 @@ export class CheckoutComponent implements OnInit {
             return
         }
 
+        if(this.formPedido.value.dep==''){
+            this.formPedido.value.referenciaEnvio=  this.referencia;
+
+            this.formPedido.value.direccionEnvio= this.formPedido.value.direccionEnvio + ' ' + 
+            this.formPedido.value.estacion 
+        }
+        else{
+
+            this.formPedido.value.direccionEnvio = this.formPedido.value.direccionEnvio + ', ' + 
+            this.formPedido.value.dist + ', ' + 
+            this.formPedido.value.prov + ', ' + 
+            this.formPedido.value.dep
+        }
+        
         let form = this.formPedido.value
         let Pedido: Pedido = {
             pE_idPedido: '',
@@ -118,13 +151,14 @@ export class CheckoutComponent implements OnInit {
             pE_codigoTransaccion: '',
             pE_numSeguimiento: '',
             pE_fechaEnvio: this.latest_date,
-            pE_direccionEnvio: form.direccionEnvio + ', ' + form.dist + ', ' + form.prov + ', ' + form.dep,
+            pE_direccionEnvio: form.direccionEnvio,
             pE_referenciaEnvio: form.referenciaEnvio,
             pE_fechaEntrega: '',
             pE_adicional: form.adicional,            
             pE_metodoEnvio: form.metodoenvio
         }
-            console.log(Pedido);
+            console.log(Pedido.pE_referenciaEnvio);
+            console.log(Pedido.pE_direccionEnvio)
 
         try {
             let data = await this._pedidoService.registrarPedido(Pedido)
@@ -166,7 +200,7 @@ export class CheckoutComponent implements OnInit {
                     dP_subTotal: element.cA_precioVenta,
                     p_imagen: element.p_imagen
                 }
-                this.list.push(DetallePedidoC);
+                this.lDetalle.push(DetallePedidoC);
             }
 
             let form = this.formPedido.value
@@ -183,7 +217,7 @@ export class CheckoutComponent implements OnInit {
                 epE_nombreEstado:'Recibido'
 
             }
-            this.enviarCorreo(Pedido,this.list);
+            this.enviarCorreo(Pedido,this.lDetalle);
 
             localStorage.removeItem('Carrito')
 
@@ -256,7 +290,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     metodoPago(opcion:any):string{
-        // let opcion = this.formPedido.value.metodoPago;
         switch(opcion) { 
             case opcion="Transferencia bancaria": { 
                 this.cuentaMetodo="Mi número de cuenta BCP Soles es 19193041287096."+
@@ -276,11 +309,10 @@ export class CheckoutComponent implements OnInit {
     }
 
     adicionalPago(opcion:any):number{
-        console.log(opcion)
-        // let opcion = this.formPedido.value.metodoPago;
         switch(opcion) { 
             case opcion="Recoge en tienda": { 
                 this.formPedido.value.adicional=0
+                
                break; 
             } 
             case opcion="Contra entrega": { 
@@ -298,7 +330,6 @@ export class CheckoutComponent implements OnInit {
     async enviarCorreo(correo: PedidoCListar, dPedidoC:DetallePJson[]) {
 
         try {
-            // const data: any = await this._ordenesCompraService.getCorreoxID(correo.oC_idOC).toPromise()
             this.lDetalle = dPedidoC;
             this.detalleString = JSON.stringify(this.lDetalle);
             
@@ -324,4 +355,35 @@ export class CheckoutComponent implements OnInit {
         finally { }
     }
 
+    onChange(){
+        let metodoenvio = this.formPedido.value.direccionEnvio;
+        this.formPedido.reset;
+        switch(metodoenvio) { 
+            case metodoenvio="Plaza norte": { 
+               this.referencia = this.horario[0][0];
+               this.xEstacion=false;
+               break; 
+            } 
+            case metodoenvio="Mega Plaza": { 
+                this.referencia = this.horario[1][0];
+                this.xEstacion=false;
+                break; 
+             } 
+             case metodoenvio="Tottus Canta": { 
+                this.referencia = this.horario[2][0];
+                this.xEstacion=false;
+                break; 
+             } 
+             case metodoenvio="Estación del metropolitano": { 
+                this.referencia = this.horario[3][0];
+                this.xEstacion=true;
+                break; 
+             } 
+             case metodoenvio="Estación del metro": { 
+                this.referencia = this.horario[4][0];
+                this.xEstacion=true;
+                break; 
+             }
+         } 
+    }
 }
