@@ -17,6 +17,7 @@ import { MenuPerfilComponent } from './menu-perfil/menu-perfil.component';
 import { PerfilComponent } from './menu-perfil/perfil/perfil.component';
 import { ComprasComponent } from './menu-perfil/compras/compras.component';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 
 
@@ -30,7 +31,8 @@ const COMPONENTS = [
     MenuPerfilComponent,
     PerfilComponent,
     ComprasComponent,
-    SeguimientoComponent
+    SeguimientoComponent,
+    CambiarContrasenaComponent
 ]
 
 @NgModule({

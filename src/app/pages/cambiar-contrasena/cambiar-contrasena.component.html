@@ -1,0 +1,65 @@
+<!-- <form [formGroup]="formCorreo">
+  <div class="mb-4">
+    <label for="signup-email" class="form-label-lg">Email</label>
+    <input type="email" class="form-control" id="signup-email" formControlName="u_correoElectronico"
+      placeholder="Email">
+  </div>
+<button class="btn btn-primary d-block w-100" type="button" (click)="cambiarContrasena()">Cambiar contraseña</button>
+</form> -->
+
+<section class="container px-5">
+  <div class="row mx-n2" style="text-align: center;">
+    <div class="py-4" *ngIf="enviar">
+      <h1 class="m-0">¿Olvidaste tu contraseña?</h1>
+    </div>  
+    <div class="py-4" *ngIf="validar">
+      <h1 class="m-0">Validar código temporal</h1>
+    </div>  
+    <div class="py-4" *ngIf="cambiar">
+      <h1 class="m-0">Cambiar contraseña</h1>
+    </div>  
+    <!-- <div class="py-4" *ngIf="validar">
+      <h1 class="m-0">¿Olvidaste tu contraseña?</h1>
+    </div>       -->
+  </div>
+  <div class="row mx-n2">
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4"></div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4" *ngIf="enviar">
+      
+      <p class="fs-lg text-muted">Ingresa tu correo para recuperar tu cuenta</p>
+      <form class="mb-4 pb-lg-2 needs-validation" novalidate="" [formGroup]="formCorreo">
+        <div class="input-group input-group-lg">
+          <input #oc type="text" class="form-control"  placeholder="correo electrónico" id="u_correoElectronico" formControlName="u_correoElectronico">
+          <button type="button" (click)="enviarCorreo()" class="btn btn-primary px-4">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4" *ngIf="validar">
+      <p class="fs-lg text-muted">Ingresa el código enviado a tu correo para validarlo</p>
+      <form class="mb-4 pb-lg-2 needs-validation" novalidate="" [formGroup]="formValidar">
+        <div class="input-group input-group-lg">
+          <input #oc type="text" class="form-control"  placeholder="codigo" id="codigo" formControlName="codigo">
+          <button type="button" (click)="validacion()" class="btn btn-primary px-4">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4" *ngIf="cambiar">
+      <form class="mb-4 pb-lg-2 needs-validation" novalidate="" [formGroup]="formContrasena">
+        <div class="mb-4">
+          <label class="form-label">Ingrese una nueva contraseña</label>
+          <input type="password" class="form-control"  placeholder="nueva contraseña" id="newContrasena" formControlName="newContrasena">
+          <div *ngIf="formContrasena.controls['newContrasena'].hasError('required')" class="text-danger mt-2">Ingrese una nueva contraseña</div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Ingrese nuevamente su contraseña</label>
+          <input type="password" class="form-control"  placeholder="repita nueva contraseña" id="new-contrasena" formControlName="repeat_newContrasena"
+          (ngModelChange)="repeat()">
+          <div *ngIf="cbool==false" class="text-danger mt-2">Las contraseñas no coincide</div>
+        </div>
+          <button type="submit" [disabled]="cbool==false || this.formContrasena.invalid" (click)="cambiarContrasena()" class="btn btn-primary px-4">Actualizar</button>
+        
+      </form>
+    </div>
+    <div class="col-md-4 col-sm-6 px-2 mb-2 py-4"></div>
+  </div>
+</section>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  URL_CORREO_PEDIDO,
   URL_DETALLE_PEDIDO,
   URL_PEDIDO,
   URL_PEDIDO_ID,
@@ -33,5 +34,9 @@ export class PedidoService {
   // Obtener detalle pedido por id
   obtenerDetallePedidoById(id: string): Observable<any> {
     return this.http.get<any>(URL_DETALLE_PEDIDO + id);
+  }
+  postCorreo(data: any): Observable<any> {
+    const url = `${URL_CORREO_PEDIDO}`
+    return this.http.post(url,data)
   }
 }

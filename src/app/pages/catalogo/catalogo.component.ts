@@ -63,7 +63,7 @@ export class CatalogoComponent implements OnInit {
     }
 
     agregarProductoCarrito(producto) {
-
+        if(producto.cantidad==undefined){producto.cantidad=1;console.log(producto.cantidad)}
         let productoCarrito: Carrito = {
             p_idProducto:producto.p_idProducto,
             cA_idItem: producto.cA_idItem,
@@ -96,7 +96,7 @@ export class CatalogoComponent implements OnInit {
                 timer: 3000,
                 timerProgressBar: true,
             })
-
+            producto.cantidad=1;
         }
     }
 

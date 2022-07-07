@@ -5040,6 +5040,7 @@ fieldset:disabled .btn {
     display: block;
     padding: .625rem 1.25rem;
     font-weight: bold;
+    font-size: 15px;
     color: #9a9ca5;
     text-decoration: none;
     transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .25s ease-in-out
@@ -9288,7 +9289,8 @@ fieldset:disabled .btn {
 }
 
 .text-danger {
-    color: #e4022d !important
+    color: #e4022d !important;
+    font-size: 12px;
 }
 
 .text-light {
@@ -9306,9 +9308,13 @@ fieldset:disabled .btn {
 .text-body {
     color: #424551 !important
 }
-
+.text-light-r {
+    color: #787a80 !important;
+    font-size: 13px;
+}
 .text-muted {
-    color: #787a80 !important
+    color: #787a80 !important;
+    font-size: 14px;
 }
 
 .text-heading {
@@ -20166,8 +20172,8 @@ _:-ms-lang(x),
 
 .product-badge {
     padding: .5rem;
-    font-size: 1rem;
-    font-weight: 700
+    font-size: .75rem;
+    font-weight: 500
 }
 
 .star-rating {

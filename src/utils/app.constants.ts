@@ -17,6 +17,8 @@ export const URL_USUARIO = BASE_URL + 'Usuario/';
 export const URL_LISTAR_CLIENTE= URL_CLIENTE+  'GetByID/';
 export const URL_TIPO_DOCUMENTO2= URL_USUARIO+ 'TipoDocumento';
 export const URL_CORREO_RECUPERA= URL_USUARIO+ 'CorreoRecuperar/';
+export const URL_VALIDAR_CODIGO= URL_USUARIO+ 'validarCod/';
+export const URL_CAMBIAR_CONTRASENA= URL_USUARIO+ 'CambiarContrasena/';
 
 // PRODUCTOS
 
@@ -27,6 +29,7 @@ export const URL_CATEGORIA = `${BASE_URL}Categoria`;
 /*******PEDIDO******* */
 export const URL_PEDIDO = BASE_URL + 'Pedido/';
 export const URL_PEDIDO_ID = URL_PEDIDO + 'GetbyID/';
+export const URL_CORREO_PEDIDO = URL_PEDIDO + 'Correo/';
 
 /*******DETALLE PEDIDO******* */
 export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';

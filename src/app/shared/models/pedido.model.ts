@@ -42,6 +42,19 @@ export interface PedidoListar {
     pE_fechaEntrega: string
 }
 
+export interface PedidoCListar {
+    pE_idPedido: string,
+    pE_fechaEmision: string,
+    pE_total: number,
+    cL_cliente: string,
+    cL_correo: string,
+    epE_nombreEstado: string,    
+    pE_direccionEnvio: string,
+    pE_metodoEnvio: string,
+    pE_metodoPago: string,
+    pE_adicional: string
+}
+
 export interface DetallePedidoListar {
     dP_idDetallePedido: string,
     pE_idPedido: string,
@@ -51,4 +64,16 @@ export interface DetallePedidoListar {
     dP_precioUnitario: number,
     dP_subTotal: number
 }
+
+export interface DetallePJson {
+    pE_idPedido: string,
+    p_nombreProducto: string,
+    p_imagen: string,
+    dP_cantidad: number,
+    dP_precioUnitario: number,
+    dP_subTotal: number
+}
+
+
+
 

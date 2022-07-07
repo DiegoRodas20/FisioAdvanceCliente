@@ -9,199 +9,112 @@
             <hr class="border-top-0 border-bottom mb-4">
 
             <form [formGroup]="formPedido">
+                      <h4>Entrega</h4>
+                        <label class="mt-sm-1 mb-sm-4 form-label-lg" for="ch-notes">Método de envío</label>
+                        <div class="form-check mb-3">
+                          <input type="radio" value="Recoge en tienda" class="form-check-input" formControlName="metodoenvio">
+                          <label for="courier" class="form-check-label d-flex align-items-center">
+                            <span>                              
+                              <strong class="d-block fs-base"><i class="ci-home me-1"></i>Recoge en tienda</strong>
+                              <span class="text-muted fs-sm">Acércate a nuestro local ubicado en el Callao</span>
+                            </span>
+                            <span class="ms-auto fs-base">Gratis</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" value="Contra entrega" class="form-check-input" formControlName="metodoenvio">
+                          <label for="courier" class="form-check-label d-flex align-items-center">
+                            <span>
+                              <strong class="d-block fs-base"><i class="ci-odnoklassniki me-1"></i>Contra entrega</strong>
+                              <span class="text-muted fs-sm">Centros comerciales, estaciones del metropolitano y del tren</span>
+                            </span>
+                            <span class="ms-auto fs-base">8 soles</span>
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" value="Olva courier" class="form-check-input" formControlName="metodoenvio">
+                          <label for="store-pickup" class="form-check-label d-flex align-items-center">
+                            <span>                              
+                              <strong class="d-block fs-base"><i class="ci-truck me-1"></i>Olva courier</strong>
+                              <span class="text-muted fs-sm">7-10 días</span>
+                            </span>
+                            <span class="ms-auto fs-base">15 soles</span>
+                          </label>
+                        </div>
+                        <div *ngIf="formPedido.controls['metodoenvio'].hasError('required')"
+                        class="text-danger mt-2">*Campo requerido</div>
+                        <hr class="border-top-0 border-bottom my-4">
 
-                <!-- Información del Pedido -->
-                <!-- <h2 class="h4 mb-4">Detalle de envio</h2>
-                <div class="row pb-3">
+                        <div class="row pb-3" *ngIf="formPedido.value.metodoenvio=='Olva courier'">
 
-                    <div class="col-sm-12 mb-4">
-                        <label for="ch-fn" class="form-label-lg">Dirección de Envio</label>
-                        <input type="text" class="form-control form-control-lg" id="ch-fn"
-                            placeholder="Ingresa tu dirección." formControlName="direccionEnvio">
-                        <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
-                            class="text-danger mt-2">*Campo requerido</div>
-                    </div>
-
-                    <div class="col-sm-12 mb-4">
-                        <label for="ch-notes" class="form-label-lg">Referencia de envio</label>
-                        <textarea id="ch-notes" class="form-control form-control-lg" rows="5"
-                            placeholder="Ingresa alguna referencia de tu dirección."
-                            formControlName="referenciaEnvio"></textarea>
-                        <div *ngIf="formPedido.controls['referenciaEnvio'].hasError('required')"
-                            class="text-danger mt-2">*Campo requerido</div>
-                    </div>
-
-                    <div class="col-sm-12 mb-4">
-                        <label class="form-label-lg">Métodos de Pago</label>
-                        <select class="form-select form-select-lg" formControlName="metodoPago">
-                            <option *ngFor="let metodoPago of lMetodoPago">
-                                {{metodoPago.value}}
-                            </option>
-                        </select>
-                        <div *ngIf="formPedido.controls['metodoPago'].hasError('required')"
-                            class="text-danger mt-2">*Campo requerido</div>
-                    </div>
-                </div>
-                <hr class="mb-4"> -->
-                <div class="accordion accordion-alt mb-4" id="accordion">
-
-                    <!-- Item -->
-                    <div class="accordion-item">
-                      <h6 class="accordion-header" id="accordionHeading-1">
-                        <button class="accordion-button border-bottom-0" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#accordionCollapse-1" aria-expanded="true"
-                          aria-controls="accordionCollapse-1">Entrega</button>
-                      </h6>
-                      <div class="accordion-collapse collapse show" id="accordionCollapse-1"
-                        aria-labelledby="accordionHeading-1" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                          <p class="fs-sm">
-                            Free standard shipping on orders <strong>over S/.35</strong> before tax, plus free
-                            returns.
-                          </p>
-                          <div class="row pb-3" *ngIf="direccioningreso==true">
-
-                            <div class="col-sm-12 mb-4">
-                                <label for="ch-fn" class="form-label-lg">Dirección de envio</label>
-                                <input type="text" class="form-control form-control-lg" id="ch-fn"
-                                    placeholder="Ingresa tu dirección." formControlName="direccionEnvio">
-                                <div *ngIf="formPedido.controls['direccionEnvio'].hasError('required')"
-                                    class="text-danger mt-2">*Campo requerido</div>
-                            </div>
-
-                            <div class="col-sm-12 mb-4">
-                              <label for="ch-fn" class="form-label-lg">Departamento</label>
-                              <!-- <select id="sorting-top" class="form-select" >
-                                <option value="1">Precio de menor a mayor</option>
-                              </select> -->
-
-                              <select class="form-select"  formControlName="dep" (ngModelChange)="getProvincia()" placeholder="---seleccione departamento---">
-                                <option [value]="d.path" *ngFor="let d of departamento">{{d.name}}</option>
-                            </select>
-                              <div *ngIf="formPedido.controls['dep'].hasError('required')"
-                                  class="text-danger mt-2">*Campo requerido</div>
+                          <div class="col-sm-12 mb-4">
+                              <label for="ch-fn" class="form-label-lg">Dirección de envio</label>
+                              <input type="text" class="form-control form-control-lg" id="ch-fn"
+                                  placeholder="Ingresa tu dirección." formControlName="direccionEnvio">
                           </div>
 
                           <div class="col-sm-12 mb-4">
-                            <label for="ch-fn" class="form-label-lg">Provincia</label>
-                            <select class="form-select"  formControlName="prov" (ngModelChange)="getDistrito()" placeholder="---seleccione provincia---">
-                              <option [value]="p.path" *ngFor="let p of provincia">{{p.name}}</option>
-                          </select>
-                            <div *ngIf="formPedido.controls['prov'].hasError('required')"
-                                class="text-danger mt-2">*Campo requerido</div>
+                            <label for="ch-fn" class="form-label-lg">Departamento</label>
+
+                            <select class="form-select"  formControlName="dep" (ngModelChange)="getProvincia()" placeholder="---seleccione departamento---">
+                              <option [value]="d.path" *ngFor="let d of departamento">{{d.name}}</option>
+                          </select>                           
                         </div>
 
                         <div class="col-sm-12 mb-4">
-                          <label for="ch-fn" class="form-label-lg">Distrito</label> 
-                          <select class="form-select"  formControlName="dist" placeholder="---seleccione distrito---" >
-                            <option [value]="d.path" *ngFor="let d of distrito">{{d.name}}</option>
+                          <label for="ch-fn" class="form-label-lg">Provincia</label>
+                          <select class="form-select"  formControlName="prov" (ngModelChange)="getDistrito()" placeholder="---seleccione provincia---">
+                            <option [value]="p.path" *ngFor="let p of provincia">{{p.name}}</option>
                         </select>
-                          <div *ngIf="formPedido.controls['dist'].hasError('required')"
-                              class="text-danger mt-2">*Campo requerido</div>
                       </div>
-        
-                            <div class="col-sm-12 mb-4">
-                                <label for="ch-notes" class="form-label-lg">Referencia de envio</label>
-                                <textarea id="ch-notes" class="form-control form-control-lg" rows="5"
-                                    placeholder="Ingresa alguna referencia de tu dirección."
-                                    formControlName="referenciaEnvio"></textarea>
-                                <div *ngIf="formPedido.controls['referenciaEnvio'].hasError('required')"
-                                    class="text-danger mt-2">*Campo requerido</div>
-                            </div>
-                        </div>
-                        
-                        <!-- <h2 class="h4 mb-4">3. Shipping Method</h2> -->
-                        <label class="mb-4" for="ch-notes" class="form-label-lg">Metodo de envio</label>
-                        <div class="form-check mb-3">
-                          <input type="radio" class="form-check-input" id="courier" name="shipping" checked="">
-                          <label for="courier" class="form-check-label d-flex align-items-center">
-                            <span>
-                              <strong class="d-block fs-base">Courier to your address</strong>
-                              <span class="text-muted fs-sm">Estimated date: November 9</span>
-                            </span>
-                            <span class="ms-auto fs-base">$25.00</span>
-                          </label>
-                        </div>
-                        <div class="form-check mb-3">
-                          <input type="radio" class="form-check-input" id="store-pickup" name="shipping">
-                          <label for="store-pickup" class="form-check-label d-flex align-items-center">
-                            <span>
-                              <strong class="d-block fs-base">Pick up from store</strong>
-                              <span class="text-muted fs-sm">Pick up on November 8 from 12:00pm</span>
-                            </span>
-                            <span class="ms-auto fs-base">Free</span>
-                          </label>
-                        </div>
-                        <div class="form-check mb-3">
-                          <input type="radio" class="form-check-input" id="ups" name="shipping">
-                          <label for="ups" class="form-check-label d-flex align-items-center">
-                            <span>
-                              <strong class="d-block fs-base">UPS Ground Shipping</strong>
-                              <span class="text-muted fs-sm">Up to one week</span>
-                            </span>
-                            <span class="ms-auto fs-base">$10.00</span>
-                          </label>
-                        </div>
-                        <div class="form-check mb-3">
-                          <input type="radio" class="form-check-input" id="locker-pickup" name="shipping">
-                          <label for="locker-pickup" class="form-check-label d-flex align-items-center">
-                            <span>
-                              <strong class="d-block fs-base">Pick up at Createx Locker</strong>
-                              <span class="text-muted fs-sm">Pick up on November 8 from 12:00pm</span>
-                            </span>
-                            <span class="ms-auto fs-base">$8.50</span>
-                          </label>
-                        </div>
-                        <div class="form-check mb-3">
-                          <input type="radio" class="form-check-input" id="global-export" name="shipping">
-                          <label for="global-export" class="form-check-label d-flex align-items-center">
-                            <span>
-                              <strong class="d-block fs-base">Createx Global Export</strong>
-                              <span class="text-muted fs-sm">3-4 days</span>
-                            </span>
-                            <span class="ms-auto fs-base">$15.00</span>
-                          </label>
-                        </div>
-            
-                        <hr class="border-top-0 border-bottom my-4">
-            
-                      </div>
+
+                      <div class="col-sm-12 mb-4">
+                        <label for="ch-fn" class="form-label-lg">Distrito</label> 
+                        <select class="form-select"  formControlName="dist" placeholder="---seleccione distrito---" >
+                          <option [value]="d.path" *ngFor="let d of distrito">{{d.name}}</option>
+                      </select>
                     </div>
-                
-                    <!-- Item -->
-                    <div class="accordion-item">
-                      <h6 class="accordion-header" id="accordionHeading-2">
-                        <button class="accordion-button border-bottom-0 collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#accordionCollapse-2" aria-expanded="false"
-                          aria-controls="accordionCollapse-2">Pago</button>
-                      </h6>
-                      <div class="accordion-collapse border-bottom-0 collapse" id="accordionCollapse-2"
-                        aria-labelledby="accordionHeading-2" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                          <p class="fs-sm">
-                            x
-                          </p>
+      
                           <div class="col-sm-12 mb-4">
-                            <label class="form-label-lg">Métodos de Pago</label>
-                            <select class="form-select form-select-lg" formControlName="metodoPago">
-                                <option *ngFor="let metodoPago of lMetodoPago">
-                                    {{metodoPago.value}}
-                                </option>
-                            </select>
-                            <div *ngIf="formPedido.controls['metodoPago'].hasError('required')"
-                                class="text-danger mt-2">*Campo requerido</div>
+                              <label for="ch-notes" class="form-label-lg">Referencia de envio</label>
+                              <textarea id="ch-notes" class="form-control form-control-lg" rows="5"
+                                  placeholder="Ingresa alguna referencia de tu dirección."
+                                  formControlName="referenciaEnvio"></textarea>
+                          </div>
+                        </div>               
+                        
+                        <label class="mt-sm-1 mb-sm-4 form-label-lg" for="ch-notes" class="">Método de pago</label>
+                        <h4>Pago</h4>
+                        <div class="simplebar-content" style="padding: 0px 0px 16px;text-align: center;">
+                          <a class="d-inline-block mb-3 me-xl-4 me-3">
+                            <input type="radio" value="Transferencia bancaria" class="form-check-input me-sm-2" formControlName="metodoPago">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmBcovW6siCL89YgIWT3TCnWgt9eVwC0RN6czXwCVDRlFf74nfWKqIjSae9X9CBZQZ5gA&usqp=CAU" 
+                            class="border rounded" style="width: 120px;">
+                            <label class="d-inline-block mb-3 mx-sm-4">Transferencia bancaria</label>                
+                          </a>
+                          <a class="d-inline-block mb-3 me-xl-4 me-3">
+                            <input type="radio" value="Yape" class="form-check-input me-sm-2" formControlName="metodoPago">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8DI6OB4ly_tRrOsY5SlQZwGxDogJUhXWVRNGfnHq5joGCFc2gMjCQbR_kOd_LFebg66s&usqp=CAU" 
+                            class="border rounded" style="width: 120px;"> 
+                            <label class="d-inline-block mb-3 mx-sm-4">Yape</label>                          
+                          </a>
+                          <a class="d-inline-block mb-3">
+                            <input type="radio" value="Plin" class="form-check-input me-sm-2" formControlName="metodoPago">
+                            <img src="https://www.canadaperu.org/sites/default/files/styles/1024x576/public/store/noticias/img/2021-07/PLIN.png?itok=Q-aOJibG" 
+                            class="border rounded" style="width: 120px;">   
+                            <label class="d-inline-block mb-3 mx-sm-4">Plin</label>                         
+                          </a>
                         </div>
+                        <div *ngIf="formPedido.controls['metodoPago'].hasError('required')"
+                        class="text-danger mt-2">*Campo requerido</div>
+
+                        <div *ngIf="metodoPago(formPedido.value.metodoPago)" class="text-heading mt-2" style="text-align:center;">
+                              <strong>{{cuentaMetodo}}</strong> 
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
             </form>
         </div>
-
         <!-- </form> -->
         <!-- Checkout -->
-
 
         <!-- Order totals (sticky sidebar) -->
         <aside class="col-lg-5">
@@ -258,14 +171,14 @@
 
                         <li class="d-flex justify-content-between mb-2">
                             <span>Montos agregados:</span>
-                            <span>—</span>
+                            <span>S/. {{adicionalPago(formPedido.value.metodoenvio)}}</span>
                         </li>
 
                     </ul>
 
                     <div class="d-flex justify-content-between p-4">
                         <span class="h5 mb-0">Monto total:</span>
-                        <span class="h5 mb-0">S/. {{getSubTotal() | number : '1.2-2'}}</span>
+                        <span class="h5 mb-0">S/. {{getSubTotal() + formPedido.value.adicional | number : '1.2-2'}}</span>
                     </div>
                 </div>
 

@@ -9,6 +9,7 @@ import { ProductoComponent } from "./producto/producto.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { MenuPerfilComponent } from "./menu-perfil/menu-perfil.component";
 import { SeguimientoComponent } from "./seguimiento/seguimiento.component";
+import { CambiarContrasenaComponent } from "./cambiar-contrasena/cambiar-contrasena.component";
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
                 path: 'seguimiento',
                 component: SeguimientoComponent,
                 data: { titulo: 'Seguimiento' }
+            },
+            {
+                path: 'cambia-contrasena',
+                component: CambiarContrasenaComponent,
+                data: { titulo: 'Cambiar contraseña' }
             },
             { path: '', redirectTo: '/', pathMatch: 'full' },
         ]

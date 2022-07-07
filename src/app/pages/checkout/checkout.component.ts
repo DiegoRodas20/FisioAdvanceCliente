@@ -4,7 +4,7 @@ import { Categoria, Producto } from '../../shared/models/producto.model'
 import { Router } from '@angular/router'
 import { CarritoService } from 'src/app/services/carrito.service';
 import { Carrito } from 'src/app/shared/models/carrito.model';
-import { Pedido, DetallePedido } from 'src/app/shared/models/pedido.model';
+import { Pedido, DetallePedido, PedidoCListar, DetallePJson } from 'src/app/shared/models/pedido.model';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { PedidoService } from 'src/app/services/pedido.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -27,17 +27,17 @@ export class CheckoutComponent implements OnInit {
     hoy = Date.now();
     direccioningreso:boolean;
     idCliente: string;
+    correo: string;
+    nomCliente: string;
     departamento:Ubigeo[]=[];
     provincia:Ubigeo[]=[];
     distrito:Ubigeo[]=[];
-
-    lMetodoPago: any[] = [
-        { value: 'Seleccionar una opción' },
-        { value: 'Transferencia Bancaria' },
-        { value: 'Yape' },
-        { value: 'Plin' },
-    ]
     user: UsuarioCliente;
+    cuentaMetodo:string;
+    lDetalle: DetallePJson[] = [];
+    detalleString: string;
+    latest_date:any;
+    list:DetallePJson[]=[];
 
     constructor(
         private _ubigeoService: UbigeoService,
@@ -53,6 +53,10 @@ export class CheckoutComponent implements OnInit {
         if (localStorage.getItem("user") != null) {
             this.user = JSON.parse(localStorage.getItem("user")) as UsuarioCliente;
             this.idCliente = this.user.u_idUsuario;
+            this.nomCliente =this.user.u_nombre;
+            this.correo =this.user.u_correoElectronico;
+            this.hoy = Date.now();
+            this.latest_date = this.datepipe.transform(this.hoy, 'yyyy-MM-dd');
             this.perfilLogueado();
             this.updatevalidartors()
         }
@@ -77,10 +81,10 @@ export class CheckoutComponent implements OnInit {
     crearFormPedido() {
 
         this.formPedido = this._formBuilder.group({
-            direccionEnvio: [null, [Validators.required]],
-            referenciaEnvio: [null, [Validators.required]],
-            metodoenvio: [null],
-            adicional: [''],
+            direccionEnvio: [''],
+            referenciaEnvio: [''],
+            metodoenvio: ['', [Validators.required]],
+            adicional: [0, [Validators.required]],
             metodoPago: ['', [Validators.required]],
             dep: [''],
             prov: [''],
@@ -103,29 +107,24 @@ export class CheckoutComponent implements OnInit {
             return
         }
 
-        let hoy = Date.now();
-        let latest_date = this.datepipe.transform(hoy, 'yyyy-MM-dd');
-
         let form = this.formPedido.value
         let Pedido: Pedido = {
-            pE_idPedido: null,
-            pE_fechaEmision: latest_date,
+            pE_idPedido: '',
+            pE_fechaEmision: this.latest_date,
             pE_total: this.getSubTotal(),
             c_idCliente: this.idCliente,
             epE_idEstadoPedido: '626797e0d62f92af437425b5',
             pE_metodoPago: form.metodoPago,
-            pE_codigoTransaccion: null,
-            pE_numSeguimiento: null,
-            pE_fechaEnvio: latest_date,
+            pE_codigoTransaccion: '',
+            pE_numSeguimiento: '',
+            pE_fechaEnvio: this.latest_date,
             pE_direccionEnvio: form.direccionEnvio + ', ' + form.dist + ', ' + form.prov + ', ' + form.dep,
             pE_referenciaEnvio: form.referenciaEnvio,
-            pE_fechaEntrega: null,
-            pE_adicional: 0,            
-            pE_metodoEnvio: 'fdgrdg'
-            
+            pE_fechaEntrega: '',
+            pE_adicional: form.adicional,            
+            pE_metodoEnvio: form.metodoenvio
         }
-        // form.metodoenvio
-            // form.adicional,
+            console.log(Pedido);
 
         try {
             let data = await this._pedidoService.registrarPedido(Pedido)
@@ -158,11 +157,33 @@ export class CheckoutComponent implements OnInit {
                     dP_precioUnitario: element.p_precio - element.cA_descuento,
                     dP_subTotal: element.cA_precioVenta
                 }
-                console.log(DetallePedido)
                 let responseDetallePedido = await this._pedidoService.registrarDetallePedido(DetallePedido)
-                console.log(responseDetallePedido)
-                
+                let DetallePedidoC: DetallePJson = {
+                    pE_idPedido: data.idPedido,
+                    p_nombreProducto: element.p_nombre,
+                    dP_cantidad: element.cantidad,
+                    dP_precioUnitario: element.p_precio - element.cA_descuento,
+                    dP_subTotal: element.cA_precioVenta,
+                    p_imagen: element.p_imagen
+                }
+                this.list.push(DetallePedidoC);
             }
+
+            let form = this.formPedido.value
+            let Pedido: PedidoCListar = {
+                pE_idPedido: '',
+                pE_fechaEmision: this.latest_date,
+                pE_total: this.getSubTotal(),
+                cL_cliente: this.nomCliente,
+                pE_metodoPago: form.metodoPago,
+                pE_direccionEnvio: form.direccionEnvio + ', ' + form.dist + ', ' + form.prov + ', ' + form.dep,
+                pE_adicional: form.adicional,            
+                pE_metodoEnvio: form.metodoenvio,
+                cL_correo:this.correo,
+                epE_nombreEstado:'Recibido'
+
+            }
+            this.enviarCorreo(Pedido,this.list);
 
             localStorage.removeItem('Carrito')
 
@@ -233,4 +254,74 @@ export class CheckoutComponent implements OnInit {
             this.distrito=res.facet_groups[2].facets;
         }) ; 
     }
+
+    metodoPago(opcion:any):string{
+        // let opcion = this.formPedido.value.metodoPago;
+        switch(opcion) { 
+            case opcion="Transferencia bancaria": { 
+                this.cuentaMetodo="Mi número de cuenta BCP Soles es 19193041287096."+
+                "  Mi número de cuenta interbancaria es 00219119304128709653."
+               break; 
+            } 
+            case opcion="Yape": { 
+                this.cuentaMetodo="Yape: 965847792"
+                break; 
+             } 
+             case opcion="Plin": { 
+                this.cuentaMetodo="Plin: 965847792"
+                break; 
+             } 
+         } 
+         return this.cuentaMetodo;
+    }
+
+    adicionalPago(opcion:any):number{
+        console.log(opcion)
+        // let opcion = this.formPedido.value.metodoPago;
+        switch(opcion) { 
+            case opcion="Recoge en tienda": { 
+                this.formPedido.value.adicional=0
+               break; 
+            } 
+            case opcion="Contra entrega": { 
+                this.formPedido.value.adicional=8
+                break; 
+             } 
+             case opcion="Olva courier": { 
+                this.formPedido.value.adicional=15
+                break; 
+             } 
+         } 
+         return this.formPedido.value.adicional;
+    }
+
+    async enviarCorreo(correo: PedidoCListar, dPedidoC:DetallePJson[]) {
+
+        try {
+            // const data: any = await this._ordenesCompraService.getCorreoxID(correo.oC_idOC).toPromise()
+            this.lDetalle = dPedidoC;
+            this.detalleString = JSON.stringify(this.lDetalle);
+            
+            let pe = {
+                pE_idPedido:correo.pE_idPedido,
+                pE_fechaEmision:correo.pE_fechaEmision ,
+                pE_total: correo.pE_total,
+                cL_cliente: correo.cL_cliente,
+                cL_correo:correo.cL_correo ,
+                epE_nombreEstado:correo.epE_nombreEstado,
+                pE_direccionEnvio:correo.pE_direccionEnvio ,
+                pE_metodoEnvio:correo.pE_metodoEnvio,
+                pE_metodoPago:correo.pE_metodoPago,
+                pE_adicional: correo.pE_adicional,
+                jsonDetalle: this.detalleString
+            }
+            this._pedidoService.postCorreo(pe).subscribe();
+        }
+        catch (error) {
+            console.log("Error: ", error)
+        }
+
+        finally { }
+    }
+
 }

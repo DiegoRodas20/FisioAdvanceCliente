@@ -19,11 +19,8 @@ export class LoginComponent implements OnInit {
     formUser: FormGroup;
     tipoDocumentos : TipoDocumento[]=[];
     errorCaracteres : number;
-    register = false;
-    login = false;
-    contrasena = false;
     formLogin: FormGroup;
-    nomComponent: string;
+    
 
     constructor(
       private _clienteService: ClienteService,
@@ -35,10 +32,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this._clienteService.ListarTipoDocumento().subscribe((data) => this.tipoDocumentos = data);
         this.crearFormCliente();
-        this.login=true;
         this.crearFormLogin();
-
-        this.nomComponent = "Iniciar sesión";
       }
 
       crearFormLogin() {
@@ -49,16 +43,16 @@ export class LoginComponent implements OnInit {
       }
       crearFormCliente() {
         this.formUser = this._formBuilder.group({
-          u_correoElectronico:['', [Validators.required,Validators.maxLength(30),Validators.email]],
-          u_contrasena: ['', [Validators.required,Validators.maxLength(8)]],
-          u_nombre: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_apellidoPaterno: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_apellidoMaterno: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_telefono:[''],
-          u_direccion:[''],
-          u_documentoIdentidad: [''],
+          u_correoElectronico:[null, [Validators.required,Validators.maxLength(30),Validators.email]],
+          u_contrasena: [null, [Validators.required,Validators.maxLength(10)]],
+          u_nombre: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
+          u_apellidoPaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
+          u_apellidoMaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
+          u_telefono:[null, [Validators.required,Validators.maxLength(9),Validators.pattern('[0-9]*')]],
+          u_direccion:[null, [Validators.required,Validators.maxLength(50)]],
+          u_documentoIdentidad: [null, [Validators.required,Validators.maxLength(20)]],
           pU_idPerfil: ['6268395e4579943794c6df50', [Validators.required]],
-          tD_idTipoDocumento: ['626b55fe1b529d8148b615e3'],
+          tD_idTipoDocumento: [null, [Validators.required]],
           eU_idEstadoUsuario: ['6268339afa3714a01d9ea2d7', [Validators.required]],
         });
       }
@@ -73,8 +67,6 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('user', JSON.stringify(user));
 
                 if (res[0].pU_nombrePerfil=="Cliente") {
-                    // var nav = ["/"]
-                    // this._router.navigate(nav);
                     window.location.reload();                
                 }
             }
@@ -141,30 +133,7 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['gestionarcliente']);
       }
 
-    OpenModal(opcion:string){
-      switch(opcion) { 
-          case opcion="register": { 
-              this.register = true;
-              this.login = false;
-              this.contrasena = false;
-              this.nomComponent = "Regístrate";
-             break;
-          }
-          case opcion="login": {
-              this.login = true;
-              this.register = false;
-              this.contrasena = false;
-              this.nomComponent = "Iniciar sesión";
-              break;
-          }
-          case opcion="contrasena": {
-            this.login = false;
-            this.register = false;
-            this.contrasena = true;
-            this.nomComponent = "Recupera tu contraseña";
-            break;
-        }
-        ;
-       }
+    OpenContrasena(){
+      this._router.navigate(['/cambia-contrasena']);
     }
 }
