@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PagesRoutingModule } from './pages.routing';
 import {CustomFilter} from './catalogo/catalogo.pipe'
 import {categoriaFilter} from './catalogo/categorias.pipe'
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // Components
 import { PagesComponent } from './pages.component';
@@ -49,7 +50,7 @@ const COMPONENTS = [
         RouterModule,
         FormsModule,
         ReactiveFormsModule,
-
+        NgxPaginationModule,
         PagesRoutingModule,
         SharedModule,
     ]
