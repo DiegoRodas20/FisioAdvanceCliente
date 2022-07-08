@@ -37,10 +37,11 @@ export class CatalogoComponent implements OnInit {
     filterValue: string = '1'
     idCatalogo:string;
 
+    p: number = 1;
     constructor(
         private _productoService: ProductoService,
         private _carritoService: CarritoService,
-        private _router: Router,         
+        private _router: Router,
         private _route: ActivatedRoute,
     ) { }
 
@@ -62,12 +63,12 @@ export class CatalogoComponent implements OnInit {
             res.map((categoria) => this.categorias.push({ id: categoria.cP_idCategoria, nombre: categoria.cP_categoria, cuenta: categoria.cP_countProducto, selected: false }))
         })
         }
-        
+
         this._productoService.getMarcas().subscribe((res) => {
             res.map((categoria) => this.marcas.push({ id: categoria.mP_idMarca, nombre: categoria.mP_marca, cuenta: categoria.mP_countProducto, selected: false }))
         })
 
-        
+
     }
 
     goProductoId(categoria: string,marca: string,id: string) {

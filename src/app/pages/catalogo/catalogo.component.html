@@ -172,7 +172,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
 
                 <!-- Item -->
-                <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | catalogoFilter: input">
+                <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | catalogoFilter: input |  paginate: { itemsPerPage: 5, currentPage: p }">
 
                     <div class="card card-product mx-auto">
 
@@ -243,6 +243,7 @@
                 </div>
 
             </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
 
     </div>
