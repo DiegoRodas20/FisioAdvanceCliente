@@ -64,8 +64,7 @@ export interface DetallePedidoListar {
     dP_precioUnitario: number,
     dP_subTotal: number,
     mP_marca: string,
-    p_imagen:string,
-    pE_fechaEnvio: string,
+    p_imagen:string
 }
 
 export interface DetallePJson {

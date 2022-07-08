@@ -81,7 +81,9 @@ export class CatalogoComponent implements OnInit {
     }
 
     agregarProductoCarrito(producto) {
-        if(producto.cantidad==undefined){producto.cantidad=1;console.log(producto.cantidad)}
+        console.log(producto)
+        if(producto.cantidad==undefined){this.precioxcantidad = Number(1) * Number(producto.cA_precioVenta);
+            producto.cantidad = Number(1)}
         let productoCarrito: Carrito = {
             p_idProducto:producto.p_idProducto,
             cA_idItem: producto.cA_idItem,
@@ -123,6 +125,7 @@ export class CatalogoComponent implements OnInit {
     }
 
     calcularPrecioCantidad(event, producto) {
+        console.log(producto)
         this.precioxcantidad = Number(event.target.value) * Number(producto.cA_precioVenta);
         producto.cantidad = Number(event.target.value)
         console.log(producto.cantidad)

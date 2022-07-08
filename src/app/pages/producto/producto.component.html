@@ -52,7 +52,7 @@
 
               <!-- Price -->
               <div class="d-flex align-items-center mb-sm-0 mb-4">
-                <span class="h3 d-inline-block mb-0 text-danger">S/.{{producto.p_precio}}</span>
+                <span class="h3 d-inline-block mb-0 text-danger" style="font-size:30px;">S/.{{producto.p_precio}}</span>
                 <del class="d-inline-block ms-2 ps-1 fs-lg text-muted" *ngIf="producto.cA_precioVenta!=producto.p_precio">S/.{{
                   producto.p_precio+producto.cA_descuento}}</del>
                 <span class="ms-4 p-2 badge bg-danger fs-base fw-bold" *ngIf="producto.cA_precioVenta!=producto.p_precio">-
@@ -87,9 +87,17 @@
             </form>
 
 
-            <div class="text-danger mt-3 fw-bold">
+            <!-- <div class="text-danger mt-3 fw-bold">
               Stock Disponible {{producto.p_stock}}
-            </div>
+            </div> -->
+            
+              <div class="mt-5">
+                <h6 style="color: #506e9b;">
+                  Stock Disponible
+                </h6>
+                <p class="fw-bold">{{producto.p_stock}} unidades</p>
+              </div>
+           
 
             <!-- Terms -->
 
@@ -101,7 +109,7 @@
                 <h6 class="accordion-header" id="accordionHeading-2">
                   <button class="accordion-button border-bottom-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#accordionCollapse-2" aria-expanded="true"
-                    aria-controls="accordionCollapse-2">Descripcion</button>
+                    aria-controls="accordionCollapse-2">Descripción</button>
                 </h6>
                 <div class="accordion-collapse collapse show" id="accordionCollapse-2"
                   aria-labelledby="accordionHeading-2" data-bs-parent="#accordion">
@@ -120,7 +128,7 @@
 
             <!-- Share -->
             <div class="mb-5 text-nowrap">
-              <h6 class="d-inline-block align-middle me-2 mb-0">Share:</h6>
+              <h6 class="d-inline-block align-middle me-2 mb-0">Síguenos en:</h6>
               <a href="#" class="btn-social bs-solid align-middle me-2" data-bs-toggle="tooltip" title="Facebook">
                 <i class="ci-facebook"></i>
               </a>
@@ -133,7 +141,7 @@
             </div>
 
             <!-- Payment -->
-            <div class="pb-3 text-nowrap" data-simplebar data-simplebar-auto-hide="false">
+            <!-- <div class="pb-3 text-nowrap" data-simplebar data-simplebar-auto-hide="false">
               <a class="d-inline-block mb-3 me-xl-4 me-3">
                 <img src="../assets/img/ecommerce/shop/single/cards/visa.jpg" alt="Visa" class="border rounded">
               </a>
@@ -144,7 +152,7 @@
               <a class="d-inline-block mb-3">
                 <img src="../assets/img/ecommerce/shop/single/cards/pay-pal.jpg" alt="PayPal" class="border rounded">
               </a>
-            </div>
+            </div> -->
 
           </div>
 
