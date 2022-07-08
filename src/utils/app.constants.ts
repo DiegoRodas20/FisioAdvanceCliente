@@ -30,6 +30,8 @@ export const URL_CATEGORIA = `${BASE_URL}Categoria`;
 export const URL_PEDIDO = BASE_URL + 'Pedido/';
 export const URL_PEDIDO_ID = URL_PEDIDO + 'GetbyID/';
 export const URL_CORREO_PEDIDO = URL_PEDIDO + 'Correo/';
+export const URL_SEGUIMIENTO_PEDIDO = URL_PEDIDO + 'Seguimiento/';
+
 
 /*******DETALLE PEDIDO******* */
 export const URL_DETALLE_PEDIDO = URL_PEDIDO + 'DetallePedido/';

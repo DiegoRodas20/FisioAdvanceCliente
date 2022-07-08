@@ -6,6 +6,7 @@ import {
   URL_DETALLE_PEDIDO,
   URL_PEDIDO,
   URL_PEDIDO_ID,
+  URL_SEGUIMIENTO_PEDIDO,
 } from 'src/utils/app.constants';
 import { DetallePedido, Pedido } from '../shared/models/pedido.model';
 
@@ -35,6 +36,11 @@ export class PedidoService {
   obtenerDetallePedidoById(id: string): Observable<any> {
     return this.http.get<any>(URL_DETALLE_PEDIDO + id);
   }
+   
+  detalleSeguimiento(id: string){
+    return this.http.get<any>(URL_SEGUIMIENTO_PEDIDO + id);    
+  }
+
   postCorreo(data: any): Observable<any> {
     const url = `${URL_CORREO_PEDIDO}`
     return this.http.post(url,data)

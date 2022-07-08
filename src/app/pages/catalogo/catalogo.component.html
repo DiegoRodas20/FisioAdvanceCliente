@@ -51,7 +51,7 @@
                 </div>
 
                 <nav class="ms-auto" aria-label="Pagination">
-                    <ul class="pagination mb-0">
+                    <!-- <ul class="pagination mb-0">
                         <li class="page-item d-sm-none">
                             <span class="page-link page-link-static">1 / 5</span>
                         </li>
@@ -65,7 +65,8 @@
                                 <i class="ci-arrow-right"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </nav>
 
             </div>
@@ -243,7 +244,7 @@
                 </div>
 
             </div>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   
         </div>
 
     </div>

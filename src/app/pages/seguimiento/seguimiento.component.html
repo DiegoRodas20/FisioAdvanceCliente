@@ -26,16 +26,16 @@
         <table class="table mb-0">
           <tbody *ngFor="let p of lP">
             <tr>
-              <th class="border-0 py-2 ps-0">Metodo de Pago:</th>
+              <th class="border-0 py-2 ps-0">Método de Pago:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_metodoPago}}</td>
             </tr>
             <tr>
-              <th class="border-0 py-2 ps-0">Fecha de Emision:</th>
+              <th class="border-0 py-2 ps-0">Fecha de Emisión:</th>
               <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEmision}}</td>
             </tr>
             <tr *ngIf="p.epE_nombreEstado=='Entregado'">
               <th class="border-0 py-2 ps-0">Fecha de Entrega:</th>
-              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEntrega}}</td>
+              <td class="border-0 py-2 px-0 text-muted">{{p.pE_fechaEnvio}}</td>
             </tr>
             <tr >
               <th class="border-0 py-2 ps-0">Dirección de Envio:</th>
@@ -72,14 +72,14 @@
                         <td class="border-top-0">
                           <div class="d-flex align-items-start ps-2 py-2">
                             <a style="min-width: 80px;">
-                              <img src="../assets/img/ecommerce/cart/01.png" width="80" alt="Product thumb">
+                              <img src="{{dp.p_imagen}}" width="80" alt="Product thumb">
                             </a>
                             <div class="ps-3">
                               <h3 class="fs-sm mb-3">
                                 <a class="nav-link fw-bold">{{dp.p_nombreProducto}}</a>
                               </h3>
                               <ul class="list-unstyled fs-xs mt-n2 mb-2">
-                                <li class="mb-0"><span class="text-muted">Marca:</span> Pink</li>
+                                <li class="mb-0"><span class="text-muted">Marca:</span>{{dp.mP_marca}}</li>
                               </ul>
                             </div>
                           </div>
@@ -93,13 +93,13 @@
                         <td class="border-top-0">
                           <div class="py-2">
                             <div class="fs-xs text-muted mb-1">Cantidad:</div>
-                            <div class="fs-sm text-dark">1</div>
+                            <div class="fs-sm text-dark">{{dp.dP_cantidad}}</div>
                           </div>
                         </td>
                         <td class="border-top-0">
                           <div class="py-2 pe-3 text-end">
                             <div class="fs-xs text-muted mb-1">Subtotal:</div>
-                            <div class="fs-sm fw-bold text-dark">s/. {{dp.dP_subTotal}}</div>
+                            <div class="fs-sm fw-bold text-dark">s/. {{dp.dP_precioUnitario * dp.dP_cantidad}}</div>
                           </div>
                         </td>
                       </tr>

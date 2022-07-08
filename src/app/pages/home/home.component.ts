@@ -213,16 +213,14 @@ export class HomeComponent implements OnInit {
 
     async getProductos(){
        await this._productoService.getProductos().subscribe(x=>{
-            this.producto = x.slice(0,3);
-        console.log(this.producto);
+            this.producto = x.slice(0,7);
         })
         return this.producto
     }
 
     async getCategorias(){
         await this._productoService.getCategoria().subscribe(x=>{
-             this.categoria = x.slice(0,3);
-         console.log(this.categoria);
+             this.categoria = x.slice(0,10);
          })
          return this.categoria
      }

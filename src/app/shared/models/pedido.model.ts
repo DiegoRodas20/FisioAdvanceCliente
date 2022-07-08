@@ -39,7 +39,7 @@ export interface PedidoListar {
     pE_fechaEnvio: string,
     pE_direccionEnvio: string,
     pE_referenciaEnvio: string,
-    pE_fechaEntrega: string
+    pE_fechaEntrega: string,
 }
 
 export interface PedidoCListar {
@@ -62,7 +62,10 @@ export interface DetallePedidoListar {
     p_nombreProducto: string,
     dP_cantidad: number,
     dP_precioUnitario: number,
-    dP_subTotal: number
+    dP_subTotal: number,
+    mP_marca: string,
+    p_imagen:string,
+    pE_fechaEnvio: string,
 }
 
 export interface DetallePJson {

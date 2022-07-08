@@ -51,7 +51,7 @@ export class SeguimientoComponent implements OnInit {
   async detallePedidoById() {
     try {
       this._pService
-        .obtenerDetallePedidoById(this.formPedido.value.idPedido).subscribe(data => {
+        .detalleSeguimiento(this.formPedido.value.idPedido).subscribe(data => {
           this.lDP = data as [];
           console.log(data);
         }
