@@ -51,7 +51,7 @@
                          <a href="/perfil" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
                          <a href="/ordenes" class="dropdown-item d-flex align-items-center"><i class="ci-bag fs-base me-2"></i><span>Mis ordenes</span></a>
                          <div class="dropdown-divider"></div>
-                         <a class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
+                         <a href="/catalogo" class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
                       </div>
                    </div>
                   </li>
@@ -198,79 +198,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- <div class="navbar navbar-expand-lg navbar-light bg-light navbar-sticky" data-fixed-element>
-    <div class="container px-0 px-xl-3">
-
-        <a class="navbar-brand order-lg-1 me-0 pe-lg-3 me-lg-4 click" (click)="home()">
-            <img class="w-logo" src="../../../../assets/img/logo.png">
-        </a>
-        <nav class="collapse navbar-collapse order-lg-2" id="navbarCollapse">
-
-            <ul class="navbar-nav me-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link click" (click)="showCatalogo()">Catálogo</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="d-flex align-items-center order-lg-3">
-            <ul class="nav nav-tools flex-nowrap"  *ngIf="cod=='000'">
-                <a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view"
-                    class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap">
-                    <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>
-                    Iniciar Sesión
-                </a>
-            </ul>
-
-            <ul class="nav nav-tools flex-nowrap" *ngIf="cod=='200'">
-                <div class="dropdown">
-                  <a href="#" data-bs-toggle="dropdown" class="topbar-link dropdown-toggle d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"><i class="ci-profile me-1 fs-base align-middle"></i> {{nombreUsuario}} </a>
-                  <div class="dropdown-menu dropdown-menu-end">
-                     <a href="/perfil" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
-                     <a href="/ordenes" class="dropdown-item d-flex align-items-center"><i class="ci-bag fs-base me-2"></i><span>Mis ordenes</span></a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
-                  </div>
-               </div>
-              </ul>
-
-            <ul class="nav nav-tools flex-nowrap">
-
-                <li class="nav-item align-self-center mb-0">
-                    <a href="#" class="nav-tool pe-lg-0" data-bs-toggle="offcanvas" data-bs-target="#cart">
-                        <i class="ci-cart nav-tool-icon"></i>
-                        <span
-                            class="badge bg-success align-middle mt-n1 ms-2 px-2 py-1 fs-xs">{{lCarrito.length}}</span>
-                    </a>
-                </li>
-
-                <li class="divider-vertical mb-0 d-lg-none d-block"></li>
-
-                <li class="nav-item mb-0">
-                    <button class="navbar-toggler mt-n1 me-n3" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse" aria-expanded="false">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </li>
-
-            </ul>
-        </div>
-
-    </div>
-</div> -->
-
-
-
-
 
 
 <!-- <li class="nav-item dropdown mega-dropdown">

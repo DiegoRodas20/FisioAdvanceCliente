@@ -51,21 +51,7 @@
                 </div>
 
                 <nav class="ms-auto" aria-label="Pagination">
-                    <!-- <ul class="pagination mb-0">
-                        <li class="page-item d-sm-none">
-                            <span class="page-link page-link-static">1 / 5</span>
-                        </li>
-                        <li class="page-item active d-none d-sm-block" aria-current="page">
-                            <span class="page-link">1
-                                <span class="visually-hidden">(current)</span>
-                            </span>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="ci-arrow-right"></i>
-                            </a>
-                        </li>
-                    </ul> -->
+                    
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </nav>
 
@@ -86,84 +72,48 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body pb-4">
-                    <!-- Accordion -->
-                    <div class="accordion accordion-alt " id="sidebarAccordion">
-                        <!-- Item -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="sidebarAccordionHeading-5">
-                                <button class="accordion-button border-bottom-0 collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#sidebarAccordionCollapse-5"
-                                    aria-expanded="false" aria-controls="sidebarAccordionCollapse-5">Categoria</button>
-                            </h6>
-                            <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-5"
-                                aria-labelledby="sidebarAccordionHeading-5" data-bs-parent="#sidebarAccordion">
-                                <div class="accordion-body pt-0">
-                                    <div class="widget">
-                                        <div class="widget-data-list filter">
-                                            <!-- <div class="position-relative mb-3">
-                          <input class="filter-search form-control form-control-sm pe-5" type="text"
-                            placeholder="Search the material" [(ngModel)]="categoria">
-                          <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                        </div> -->
-                                            <ul class="filter-list list-unstyled pe-3" style="height: 12rem;"
-                                                data-simplebar data-simplebar-auto-hide="false">
-                                                <li class="filter-item" *ngFor="let categoria of categorias "
-                                                    (click)="selectCategoria(categoria.id);filterProductos()">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="material-1"
-                                                            [checked]="categoria.selected">
-                                                        <label class="form-check-label" for="material-1">
-                                                            <span class="filter-item-text">{{categoria.nombre}}</span>
-                                                            <!-- <span class="ps-1 text-muted">{{categoria.cuenta}}</span> -->
-                                                        </label>
-                                                    </div>
-                                                </li>
-
-
-                                            </ul>
-                                        </div>
+                    <div class="widget">
+                        <h5 class="mb-2 mb-md-3">Categoría</h5>
+                        <div class="widget-data-list filter">
+                            <ul class="filter-list list-unstyled pe-3" style="height: 12rem;"
+                                data-simplebar data-simplebar-auto-hide="false">
+                                <li class="filter-item" *ngFor="let categoria of categorias "
+                                    (click)="selectCategoria(categoria.id);filterProductos()">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="material-1"
+                                            [checked]="categoria.selected">
+                                        <label class="form-check-label" for="material-1">
+                                            <span class="filter-item-text">{{categoria.nombre}}</span>
+                                            <!-- <span class="ps-1 text-muted">{{categoria.cuenta}}</span> -->
+                                        </label>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
-                        <!-- Item -->
-                        <div class="accordion-item">
-                            <h6 class="accordion-header" id="sidebarAccordionHeading-6">
-                                <button class="accordion-button border-bottom-0 collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#sidebarAccordionCollapse-6"
-                                    aria-expanded="false" aria-controls="sidebarAccordionCollapse-6">Marca</button>
-                            </h6>
-                            <div class="accordion-collapse collapse" id="sidebarAccordionCollapse-6"
-                                aria-labelledby="sidebarAccordionHeading-6" data-bs-parent="#sidebarAccordion">
-                                <div class="accordion-body pt-0">
-                                    <div class="widget">
-                                        <div class="widget-data-list filter">
-                                            <!-- <div class="position-relative mb-3">
-                          <input class="filter-search form-control form-control-sm pe-5" type="text"
-                            placeholder="Search the brand">
-                          <i class="ci-search fs-sm position-absolute top-50 end-0 translate-middle-y me-3 zindex-5"></i>
-                        </div> -->
-                                            <ul class="filter-list list-unstyled pe-3" style="height: 12rem;"
-                                                data-simplebar data-simplebar-auto-hide="false">
-                                                <li class="filter-item" *ngFor="let marca of marcas"
-                                                    (click)="selectMarcas(marca.id);filterProductos()">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="material-1"
-                                                            [checked]="marca.selected">
-                                                        <label class="form-check-label" for="material-1">
-                                                            <span class="filter-item-text">{{marca.nombre}}</span>
-                                                            <!-- <span class="ps-1 text-muted">{{marca.cuenta}}</span> -->
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+                    <hr class="border-top-0 border-bottom mb-4">
+                    <div class="widget">
+                        <h5 class="mb-2 mb-md-3">Marca</h5>
+                        <div class="widget-data-list filter">
+                         <ul class="filter-list list-unstyled pe-3" style="height: 12rem;"
+                                data-simplebar data-simplebar-auto-hide="false">
+                                <li class="filter-item" *ngFor="let marca of marcas"
+                                    (click)="selectMarcas(marca.id);filterProductos()">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="material-1"
+                                            [checked]="marca.selected">
+                                        <label class="form-check-label" for="material-1">
+                                            <span class="filter-item-text">{{marca.nombre}}</span>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    
+                    
                 </div>
             </div>
         </div>
@@ -176,12 +126,6 @@
                 <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | catalogoFilter: input |  paginate: { itemsPerPage: 5, currentPage: p }">
 
                     <div class="card card-product mx-auto">
-
-                        <!-- Imagen -->
-                        <!-- <div class="card-product-img text-center" (click)="goProductoId(producto.cP_categoria,producto.mP_marca,producto.cA_idItem)">
-                            <img [src]="producto.p_imagen" class="w-50">
-                        </div> -->
-
                         <div class="card-product-img text-center" (click)="goProductoId(producto.cP_categoria,producto.mP_marca,producto.cA_idItem)">
                             <a class="card-img-top">
                                 <img [src]="producto.p_imagen" class="w-50">

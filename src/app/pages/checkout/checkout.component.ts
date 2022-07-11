@@ -39,6 +39,7 @@ export class CheckoutComponent implements OnInit {
     latest_date:any;
     xEstacion=false;
     referencia:string;
+    direccion:string;
     puntos=[
         {value: "Plaza norte"},
         {value: "Mega Plaza"},
@@ -129,12 +130,12 @@ export class CheckoutComponent implements OnInit {
         if(this.formPedido.value.dep==''){
             this.formPedido.value.referenciaEnvio=  this.referencia;
 
-            this.formPedido.value.direccionEnvio= this.formPedido.value.direccionEnvio + ' ' + 
+            this.direccion=this.formPedido.value.direccionEnvio= this.formPedido.value.direccionEnvio + ' ' + 
             this.formPedido.value.estacion 
         }
         else{
 
-            this.formPedido.value.direccionEnvio = this.formPedido.value.direccionEnvio + ', ' + 
+            this.direccion=this.formPedido.value.direccionEnvio = this.formPedido.value.direccionEnvio + ', ' + 
             this.formPedido.value.dist + ', ' + 
             this.formPedido.value.prov + ', ' + 
             this.formPedido.value.dep
@@ -210,7 +211,7 @@ export class CheckoutComponent implements OnInit {
                 pE_total: this.getSubTotal(),
                 cL_cliente: this.nomCliente,
                 pE_metodoPago: form.metodoPago,
-                pE_direccionEnvio: form.direccionEnvio + ', ' + form.dist + ', ' + form.prov + ', ' + form.dep,
+                pE_direccionEnvio: this.direccion,
                 pE_adicional: form.adicional,            
                 pE_metodoEnvio: form.metodoenvio,
                 cL_correo:this.correo,
@@ -311,8 +312,9 @@ export class CheckoutComponent implements OnInit {
     adicionalPago(opcion:any):number{
         switch(opcion) { 
             case opcion="Recoge en tienda": { 
-                this.formPedido.value.adicional=0
-                
+                this.formPedido.value.adicional=0;
+                this.formPedido.value.referenciaEnvio="Recoge en tienda";
+                this.direccion=this.formPedido.value.direccionEnvio="Recoge en tienda";
                break; 
             } 
             case opcion="Contra entrega": { 

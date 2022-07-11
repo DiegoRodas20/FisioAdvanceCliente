@@ -54,8 +54,9 @@ export class HeaderComponent implements OnInit {
     }
 
     CerrarSesion(){
-        this._router.navigate(['/catalogo']);
+        
         this._userService.logout();
+        this._router.navigate(['/catalogo']);
     }
 
     getCarrito() {

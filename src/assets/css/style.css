@@ -648,7 +648,7 @@ h1,
 .h1 {
     margin-top: 0;
     margin-bottom: 1.5rem;
-    font-weight: 700;
+    font-weight: 500 !important;
     line-height: 1.2;
     color: #1e212c
 }
