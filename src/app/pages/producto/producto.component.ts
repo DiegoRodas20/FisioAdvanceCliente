@@ -18,7 +18,7 @@ export class ProductoComponent implements OnInit {
   producto: Producto;
   carrito:Carrito;
   lentgh : any;
-
+  precioxcantidad:number;
   constructor(private _productoService: ProductoService, private _route: ActivatedRoute, private _carritoService: CarritoService,) { }
 
   ngOnInit() {
@@ -32,7 +32,8 @@ export class ProductoComponent implements OnInit {
   }
  
   agregarCarrito(producto) {
-
+    if(producto.cantidad==undefined){this.precioxcantidad = Number(1) * Number(producto.cA_precioVenta);
+      producto.cantidad = Number(1)}
     var estado = this._carritoService.addCarrito(producto)
 
     if (estado == 0) {
@@ -78,6 +79,7 @@ export class ProductoComponent implements OnInit {
         }
       }
 
+      
       // Product card carousel
       // tns({
       //     container: '.tns-carousel-inner-two',
@@ -173,5 +175,10 @@ export class ProductoComponent implements OnInit {
     }, 500)
 
   }
-
+  calcularPrecioCantidad(event, producto) {
+    console.log(producto)
+    this.precioxcantidad = Number(event.target.value) * Number(producto.cA_precioVenta);
+    producto.cantidad = Number(event.target.value)
+    console.log(producto.cantidad)
+  }
 }

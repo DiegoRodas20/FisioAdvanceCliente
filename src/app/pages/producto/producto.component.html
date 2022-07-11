@@ -1,9 +1,9 @@
 <div *ngIf="lentgh > 0">
   <!-- Page title -->
-  <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
+  <!-- <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
     <h1 class="mb-2 mb-md-0">{{producto.p_nombre}}</h1>
     <span class="text-muted"><strong>Art. No.</strong> {{producto.cA_idItem}}</span>
-  </section>
+  </section> -->
 
   <!-- Single product -->
   <section class="container mb-lg-3">
@@ -47,7 +47,10 @@
           </div>
 
           <div class="col-md-6 ps-xl-5">
-
+            <h1 class="mb-4 mb-md-4">{{producto.p_nombre}}</h1>
+            <div class="mb-3 mb-md-3">
+              <span class="text-muted"><strong>Art. No.</strong> {{producto.cA_idItem}}</span>
+            </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
               <!-- Price -->
@@ -67,14 +70,10 @@
 
 
               <div
-                class="col-lg-2 col-4 order-lg-3 order-1">
+                class="col-lg-2 col-4 order-lg-3 order-1" style="padding-top: 5px;">
                 <div class="">
-                  <select class="form-control form-select pe-3" id="select-input">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>5</option>
-                    <option>10</option>
-                  </select>
+                  <input value=1 (input)="calcularPrecioCantidad($event, producto)" type="number" [min]=1
+                                        [max]=10 class="form-control form-control-sm bg-light me-3" style="text-align: center;">
                 </div>
               </div>
               <div class="col-lg-6 order-lg-4 order-4">
@@ -91,7 +90,7 @@
               Stock Disponible {{producto.p_stock}}
             </div> -->
             
-              <div class="mt-5">
+              <div class="mt-4">
                 <h6 style="color: #506e9b;">
                   Stock Disponible
                 </h6>
@@ -102,9 +101,8 @@
             <!-- Terms -->
 
             <!-- Accordion -->
-            <div class="accordion accordion-alt mb-4" id="accordion">
+            <!-- <div class="accordion accordion-alt mb-4" id="accordion">
 
-              <!-- Item -->
               <div class="accordion-item">
                 <h6 class="accordion-header" id="accordionHeading-2">
                   <button class="accordion-button border-bottom-0" type="button" data-bs-toggle="collapse"
@@ -124,6 +122,15 @@
                   </div>
                 </div>
               </div>
+            </div> -->
+            <div>
+              <h4 class="fs-sm">
+                {{producto.p_Descripcion}}
+              </h4>
+              <ul class="ps-3">
+                <li>Marca : {{producto.mP_marca}}</li>
+                <li>Categoria : {{producto.cP_categoria}}</li>
+              </ul>
             </div>
 
             <!-- Share -->

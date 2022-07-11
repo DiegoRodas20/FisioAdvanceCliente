@@ -246,7 +246,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     goCatalogo() {
-        this._router.navigate(['/catalogo'])
+        this._router.navigate(['/catalogo']);  
     }
 
     perfilLogueado():Boolean{
@@ -313,7 +313,7 @@ export class CheckoutComponent implements OnInit {
         switch(opcion) { 
             case opcion="Recoge en tienda": { 
                 this.formPedido.value.adicional=0;
-                this.formPedido.value.referenciaEnvio="Recoge en tienda";
+                this.referencia=this.formPedido.value.referenciaEnvio="Recoge en tienda";
                 this.direccion=this.formPedido.value.direccionEnvio="Recoge en tienda";
                break; 
             } 
