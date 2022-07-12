@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     tipoDocumentos : TipoDocumento[]=[];
     errorCaracteres : number;
     formLogin: FormGroup;
-    
+    tempDNI: string;
+    validateDNI:any;
 
     constructor(
       private _clienteService: ClienteService,
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
       registrarCliente() {
         console.log(this.formUser.value);
         if (this.formUser.status == 'VALID') {
-          ("valido");
           this._clienteService
             .RegistrarCliente(this.formUser.value)
             .subscribe((data) => {
@@ -129,11 +129,21 @@ export class LoginComponent implements OnInit {
           ])}
       }
 
-      cerrarVentana() {
-        this._router.navigate(['gestionarcliente']);
+      dniChange(){
+        this.tempDNI = this.formUser.value.u_documentoIdentidad;
+        console.log(this.tempDNI)
+        if(this.formUser.controls['tD_idTipoDocumento'].value == '626b55fe1b529d8148b615e3'){
+          if(this.formUser.controls['u_documentoIdentidad'].valid){
+            this._loginService.ValidarDNI(this.tempDNI).subscribe(res=>{this.validateDNI = res.success;})
+          }
+        }       
       }
 
-    OpenContrasena(){
+      cerrarVentana() {
+        // this._router.navigate(['']);
+      }
+
+      OpenContrasena(){
       this._router.navigate(['/cambia-contrasena']);
     }
 }

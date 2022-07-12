@@ -28,4 +28,20 @@ export class LoginService {
        // this.userSubject.next(null);
         this.router.navigate(['/login']);
     }
+
+    public ValidarDNI(dni:string): Observable<any> {
+        let data=[{"dni":dni}]
+        let apiUrl = "https://www.softwarelion.xyz/api/reniec/reniec-dni"
+        let auth_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4NDQsImNvcnJlbyI6ImthdHlhdmVyZ2FyYXkud0BnbWFpbC5jb20iLCJpYXQiOjE2NTc1OTYyMDB9.RPv4Dd8a-z0KEfnhf1A1OB-fJjnhxRD5uWE0JZf8_Mw"
+        
+        // let apiUrl = "https://apiperu.dev/api/dni/"
+        // let auth_token="9221fc5c2a3f46d2428607e2b42f8c9214170c28a22662c718330ade3330a04a"
+  
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${auth_token}`
+        }
+        return this.http.post(apiUrl,data[0],{ headers: headers })
+        // return this.http.get(apiUrl+`${dni}`, { headers: headers })
+      } 
 }

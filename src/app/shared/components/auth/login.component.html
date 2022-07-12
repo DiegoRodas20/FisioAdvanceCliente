@@ -88,21 +88,15 @@
               <div class="col">
                 <div class="mb-4">
                   <label for="regular-form-1" class="form-label">Documento de Identidad</label>
-                <input id="regular-form-1" type="text" maxlength="60" class="form-control"
+                <input id="regular-form-1" type="text" maxlength="60" class="form-control" (change)="dniChange()"
                 formControlName="u_documentoIdentidad" placeholder="N° documento"> 
-                <div *ngIf="formUser.controls['u_documentoIdentidad'].hasError('required')" class="text-danger mt-2">Ingrese su numero de DNI</div>
-                <div *ngIf="formUser.controls['u_documentoIdentidad'].hasError('maxlength')" class="text-danger mt-2">Máximo de {{errorCaracteres}}</div>
+                <div *ngIf="formUser.controls['u_documentoIdentidad'].hasError('required')" class="text-danger mt-2">Ingrese su numero de documento</div>
                 <div *ngIf="formUser.controls['u_documentoIdentidad'].hasError('pattern')" class="text-danger mt-2"> Ingrese un numero de documento valido</div>
-              
+                <div *ngIf="!validateDNI" class="text-danger mt-2">El DNI ingresado no es valido</div>
                 </div>
               </div>
                 
             </div>
-
-
-
-
-
               <div class="row align-items-start">
                 <div class="col">
                   <div class="mb-4">

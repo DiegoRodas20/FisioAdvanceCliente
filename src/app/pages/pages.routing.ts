@@ -10,6 +10,7 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { MenuPerfilComponent } from "./menu-perfil/menu-perfil.component";
 import { SeguimientoComponent } from "./seguimiento/seguimiento.component";
 import { CambiarContrasenaComponent } from "./cambiar-contrasena/cambiar-contrasena.component";
+import { AuthGuardService } from "../services/auth-guard.service";
 
 
 const routes: Routes = [
@@ -33,12 +34,14 @@ const routes: Routes = [
             {
                 path: 'checkout',
                 component: CheckoutComponent,
-                data: { titulo: 'Pedido' }
+                data: { titulo: 'Pedido' },
+                canActivate: [AuthGuardService] 
             },
             {
                 path: 'perfil',
                 component: MenuPerfilComponent,
-                data: { titulo: 'Perfil' }
+                data: { titulo: 'Perfil' },
+                canActivate: [AuthGuardService] 
             },
             {
                 path: 'seguimiento',

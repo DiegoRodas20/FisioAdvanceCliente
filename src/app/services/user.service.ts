@@ -50,5 +50,6 @@ export class UserService {
     }
     public actualizarContrasena(data:any): Observable<any>{
         return this.http.put(URL_CAMBIAR_CONTRASENA, data);
-    }    
+    }
+       
 }
