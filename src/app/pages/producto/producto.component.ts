@@ -34,9 +34,10 @@ export class ProductoComponent implements OnInit {
   agregarCarrito(producto) {
     if(producto.cantidad==undefined){this.precioxcantidad = Number(1) * Number(producto.cA_precioVenta);
       producto.cantidad = Number(1)}
+      producto.cA_precioVenta= this.precioxcantidad;
     var estado = this._carritoService.addCarrito(producto)
 
-    if (estado == 0) {
+    if (estado == 0 ) {
         Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -176,9 +177,12 @@ export class ProductoComponent implements OnInit {
 
   }
   calcularPrecioCantidad(event, producto) {
-    console.log(producto)
-    this.precioxcantidad = Number(event.target.value) * Number(producto.cA_precioVenta);
-    producto.cantidad = Number(event.target.value)
-    console.log(producto.cantidad)
+    if(Number(event.target.value)==0){}
+    else{
+      this.precioxcantidad = Number(event.target.value) * Number(producto.cA_precioVenta);
+      producto.cantidad = Number(event.target.value)
+      console.log(producto.cantidad)
+    }
+    
   }
 }
