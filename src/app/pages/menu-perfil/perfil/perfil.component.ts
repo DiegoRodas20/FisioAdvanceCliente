@@ -263,8 +263,7 @@ export class PerfilComponent implements OnInit {
     console.log(this.formPerfil.value.u_idUsuario)
       this._userService.deleteClienteXid(data).subscribe(
           res => {
-            console.log(res)
-            //   this.salir()
+              this.salir()
               Swal.fire({
                   text: 'cuenta eliminada correctamente',
                   icon: 'success',
