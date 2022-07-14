@@ -97,7 +97,10 @@ export class CambiarContrasenaComponent implements OnInit {
             title: data.mensaje,
             icon: 'success',
             timer: 3000,
-            showConfirmButton: false,
+            timerProgressBar: true,
+            confirmButtonColor: '#6bc362',
+            confirmButtonText: 'Ok',
+            showCancelButton: false,
           }).then(() => this.cerrarVentana());
         });
       }

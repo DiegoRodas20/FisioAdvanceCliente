@@ -41,16 +41,24 @@ export class ProductoComponent implements OnInit {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'No puedes añadir un producto que ya se encuentra en el carrito'
+            text: 'No puedes añadir un producto que ya se encuentra en el carrito',
+            timer: 3000,
+            timerProgressBar: true,
+            confirmButtonColor: '#9d9d9d',
+            confirmButtonText: 'Ok',
+            showCancelButton: false,
         })
     }
     else {
         Swal.fire({
             icon: 'success',
-            title: 'Exito',
-            text: 'Se añadio el producto en el carrito',
+            title: 'Éxito',
+            text: 'Se añadió el producto en el carrito',
             timer: 3000,
             timerProgressBar: true,
+            confirmButtonColor: '#9d9d9d',
+            confirmButtonText: 'Ok',
+            showCancelButton: false,
         })
     }
 }

@@ -48,11 +48,16 @@
                     <div class="dropdown">
                       <a href="#" data-bs-toggle="dropdown" class="topbar-link dropdown-toggle d-lg-inline-block d-none mx-sm-4 ps-1 text-decoration-none text-nowrap"><i class="ci-profile me-1 fs-base align-middle"></i> {{nombreUsuario}} </a>
                       <div class="dropdown-menu dropdown-menu-end">
-                         <a href="/perfil" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
+                         <!-- <a href="/perfil" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
                          <a href="/ordenes" class="dropdown-item d-flex align-items-center"><i class="ci-bag fs-base me-2"></i><span>Mis ordenes</span></a>
                          <div class="dropdown-divider"></div>
-                         <a href="/catalogo" class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
-                      </div>
+                         <a href="/catalogo" class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a> -->
+                         <a href="/perfil" type="button" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
+                         <a href="/seguimiento" type="button" class="dropdown-item d-flex align-items-center"><i class="ci-map-pin-outline fs-lg me-2"></i><span>Seguimiento de mi orden</span></a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item d-flex align-items-center" type="button" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
+                      
+                        </div>
                    </div>
                   </li>
               
@@ -103,10 +108,10 @@
                 <div class="dropdown">
                   <a data-bs-toggle="dropdown" class="nav-link d-lg-none"><i class="ci-profile me-1 fs-base align-middle"></i> {{nombreUsuario}} </a>
                   <div class="dropdown-menu dropdown-menu-end">
-                     <a href="/perfil" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
-                     <a href="/ordenes" class="dropdown-item d-flex align-items-center"><i class="ci-bag fs-base me-2"></i><span>Mis ordenes</span></a>
+                     <a href="/perfil" type="button" class="dropdown-item d-flex align-items-center"><i class="ci-profile fs-base me-2"></i><span>Mi perfil</span></a>
+                     <a href="/seguimiento" type="button" class="dropdown-item d-flex align-items-center"><i class="ci-map-pin-outline fs-lg me-2"></i><span>Seguimiento de mi orden</span></a>
                      <div class="dropdown-divider"></div>
-                     <a class="dropdown-item d-flex align-items-center" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
+                     <a class="dropdown-item d-flex align-items-center" type="button" (click)="CerrarSesion()"><i class="ci-logout fs-base me-2"></i><span>Cerrar Sesión</span></a>
                   </div>
                </div>
               </li>

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LoginService } from 'src/app/services/login.service';
 import { UsuarioCliente } from '../../models/usuario.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
       private _clienteService: ClienteService,
       private _router: Router,
       private _formBuilder: FormBuilder,
-      private _loginService: LoginService
+      private _loginService: LoginService,
+      private _userService: UserService
     ) {}
 
     ngOnInit() {
@@ -46,9 +48,9 @@ export class LoginComponent implements OnInit {
         this.formUser = this._formBuilder.group({
           u_correoElectronico:[null, [Validators.required,Validators.maxLength(30),Validators.email]],
           u_contrasena: [null, [Validators.required,Validators.maxLength(10)]],
-          u_nombre: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_apellidoPaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
-          u_apellidoMaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern('[a-z,A-Z]*')]],
+          u_nombre: [null, [Validators.required,Validators.maxLength(50),Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
+          u_apellidoPaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
+          u_apellidoMaterno: [null, [Validators.required,Validators.maxLength(50),Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
           u_telefono:[''],
           u_direccion:[''],
           u_documentoIdentidad: [null, [Validators.required,Validators.maxLength(20)]],
@@ -59,15 +61,22 @@ export class LoginComponent implements OnInit {
       }
 
       LogIn(formLogin: FormGroup) {
-        (formLogin.value);
         this._loginService.login(formLogin.value).subscribe((res) => {
-          (res);
+          console.log(res);
             if (res[0].cod == "200") {
-                let user = res[0] as UsuarioCliente;
-               (user);
-                localStorage.setItem('user', JSON.stringify(user));
-
+              if(res[0].eU_idEstadoUsuario="6268342cfa3714a01d9ea2d8"){
+                  let data={
+                      u_idUsuario: res[0].u_idUsuario,
+                      eU_idEstadoUsuario: "6268339afa3714a01d9ea2d7",
+                      u_contrasena: formLogin.value.u_contrasena
+                  }
+                    this._userService.desactivarPerfil(data).subscribe();
+              }
+                
                 if (res[0].pU_nombrePerfil=="Cliente") {
+                  let user = res[0] as UsuarioCliente;
+                  localStorage.setItem('user', JSON.stringify(user));
+                  localStorage.setItem('contra', JSON.stringify(formLogin.value));
                     window.location.reload();                
                 }
             }
@@ -93,18 +102,31 @@ export class LoginComponent implements OnInit {
           this._clienteService
             .RegistrarCliente(this.formUser.value)
             .subscribe((data) => {
-              (data);
-              Swal.fire({
-                title: 'Usuario Registrado !',
-                icon: 'success',
-                timer: 3000,
-                showConfirmButton: false,
-              }).then(() => this.cerrarVentana());
+              if(data.mensaje=="Se ha registrado correctamente!!"){
+                Swal.fire({
+                  // title: 'Usuario Registrado!',
+                  title: data.mensaje,
+                  icon: 'success',
+                  timer: 3000,
+                  showConfirmButton: false,
+                }).then(() => this.cerrarVentana());
+                
+              }else{
+                Swal.fire({
+                  title: 'Error',
+                  text: data.mensaje,
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'error',
+                  timer: 3000,
+                  showConfirmButton: false,
+                });
+              }
             });
         } else {
           Swal.fire({
             title: 'Error',
-            text: 'Error al registrar el usuario',
+            text: 'Los datos ingresados son invalidos',
             toast: true,
             position: 'top-end',
             icon: 'error',

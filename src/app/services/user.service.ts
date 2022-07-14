@@ -2,17 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { URL_AUTH_BASE, URL_CAMBIAR_CONTRASENA, URL_CLIENTE, URL_CLIENTE_ID, URL_CORREO_RECUPERA, URL_DESHABILITIAR_CLIENTE, URL_VALIDAR_CODIGO } from 'src/utils/app.constants';
+import { URL_AUTH_BASE, URL_CAMBIAR_CONTRASENA, URL_CLIENTE, URL_CLIENTE_ID, URL_CORREO_RECUPERA, URL_DELETE_CLIENTE, URL_DESHABILITIAR_CLIENTE, URL_VALIDAR_CODIGO } from 'src/utils/app.constants';
 import { Login } from '../shared/models/usuario.model';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    SelectLogin: Login = {
-        
-        Username:'',
-        Password:''
-    };
+   
   
     constructor(
         private router: Router,
@@ -36,8 +32,8 @@ export class UserService {
     public putClienteXid(data: any): Observable<any>{
         return this.http.put(URL_CLIENTE, data);
     }
-    public deleteClienteXid(id:string): Observable<any>{
-        return this.http.delete(URL_CLIENTE_ID+'?idCliente=' + `${id}`);
+    public deleteClienteXid(data:any): Observable<any>{
+        return this.http.post(URL_DELETE_CLIENTE,data);
     }    
     public desactivarPerfil(data): Observable<any>{
         return this.http.put(URL_DESHABILITIAR_CLIENTE, data);

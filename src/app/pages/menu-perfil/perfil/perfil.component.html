@@ -13,7 +13,10 @@
     </div>
     <div class="col-sm-6 mb-4">
       <label for="ac-email" class="form-label-lg">Correo Electronico</label>
-      <input type="email" id="ac-ln" class="form-control form-control-lg" formControlName="u_correoElectronico">
+      <input type="email" id="ac-ln" class="form-control form-control-lg" formControlName="u_correoElectronico" (ngModelChange)="correo()">
+        <div *ngIf="formPerfil.controls['u_correoElectronico'].hasError('required')" class="text-danger mt-2">Campo vacío</div>
+        <div *ngIf="formPerfil.controls['u_correoElectronico'].hasError('maxlength')" class="text-danger mt-2">Máximo de 30 caracteres</div>
+        <div *ngIf="formPerfil.controls['u_correoElectronico'].hasError('email')" class="text-danger mt-2">Email no válido</div>
     </div>
     <div class="col-sm-6 mb-4">
       <label for="ac-email" class="form-label-lg">Tipo de Documento de Identidad</label>
@@ -28,15 +31,20 @@
       <input class="form-control form-control-lg" type="text" id="ac-password" formControlName="eU_nombreEstadoUsuario" readonly>
     </div>
     <div class="col-sm-6 mb-4">
-      <label for="ac-zip" class="form-label-lg">Telefono</label>
-      <input class="form-control form-control-lg" type="text" id="ac-zip" formControlName="u_telefono">
+      <label for="ac-zip" class="form-label-lg">Teléfono</label>
+      <input class="form-control form-control-lg" type="text" id="ac-zip" formControlName="u_telefono"  (ngModelChange)="telefono()">
+      <div *ngIf="formPerfil.controls['u_telefono'].hasError('required')" class="text-danger mt-2">Campo vacío</div>
+      <div *ngIf="formPerfil.controls['u_telefono'].hasError('maxlength')" class="text-danger mt-2">Máximo de 9 caracteres</div>
+      <div *ngIf="formPerfil.controls['u_telefono'].hasError('pattern')" class="text-danger mt-2">Solamente números</div>
     </div>
     <div class="col-sm-6 mb-4">
       <label for="ac-address" class="form-label-lg">Dirección</label>
-      <input class="form-control form-control-lg" type="text" id="ac-address" formControlName="u_direccion">
+      <input class="form-control form-control-lg" type="text" id="ac-address" formControlName="u_direccion" (ngModelChange)="direccion()">
+        <div *ngIf="formPerfil.controls['u_direccion'].hasError('required')" class="text-danger mt-2">Campo vacío</div>
+        <div *ngIf="formPerfil.controls['u_direccion'].hasError('maxlength')" class="text-danger mt-2">Máximo de 60 caracteres</div>
     </div>
   </div>
-  <button (click)="putPerfil()" class="btn btn-primary btn-lg">&nbsp;Actualizar Perfil&nbsp;</button>
+  <button (click)="putCliente()" class="btn btn-primary btn-lg">Actualizar Perfil</button>
 </form>
 
 

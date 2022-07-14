@@ -19,10 +19,9 @@ export class PerfilComponent implements OnInit {
   user: UsuarioCliente;
   cod:string;
   contra: Login;
+  validatecontra:string;
 
   formPerfil: FormGroup
-    formActualizar: FormGroup
-    formEliminar: FormGroup
 
     constructor(
       private _formBuilder: FormBuilder,
@@ -42,29 +41,17 @@ export class PerfilComponent implements OnInit {
     }
     crearFormPerfil() {
       this.formPerfil = this._formBuilder.group({
-          u_idUsuario: [null,[]],
-          u_correoElectronico: [null, []],
-          u_nombre: [null, []],
-          u_documentoIdentidad: [null, []],
-          eU_idEstadoUsuario: [null, []],
-          eU_nombreEstadoUsuario: [null, []],
-          tD_idTipoDocumento: [null, []],
-          tD_TipoDocumento: [null, []],
-          u_telefono: [null, []],
-          u_direccion: [null, []],
-      }),
-      this.formActualizar = this._formBuilder.group({
-          u_idUsuario: [null,[]],
-          u_correoElectronico: [null, [Validators.email, Validators.required]],
-          u_telefono: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-          u_direccion: [null, [Validators.required, Validators.maxLength(50)]],
+          u_idUsuario: ['',[]],
+          u_correoElectronico: ['', []],
+          u_nombre: ['', []],
+          u_documentoIdentidad: ['', []],
+          eU_idEstadoUsuario: ['', []],
+          eU_nombreEstadoUsuario: ['', []],
+          tD_idTipoDocumento: ['', []],
+          tD_TipoDocumento: ['', []],
+          u_telefono: ['', []],
+          u_direccion: ['', []],
       })
-      //Formulario para eliminar con el id del perfil y la contraseña
-      this.formEliminar = this._formBuilder.group({
-          u_idUsuario: [null,[]],
-          u_contraseña: [null, [Validators.required, Validators.minLength(6)]],
-      })
-
   }
 
   //Loggearse con el correo electronico y la contraseña
@@ -93,154 +80,120 @@ export class PerfilComponent implements OnInit {
           this.idPerfil = data[0].u_idUsuario
           this.nomPerfil = data[0].u_nombre
           this.formPerfil.patchValue(data[0])
-          this.formActualizar.patchValue(data[0])
           console.log(data[0])
       }
       catch (error) {
           console.log("Error: ", error);
       }
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Actualizar Perfil/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Logica de Validaciones
-  /*async*/ putPerfil(){
-/*
-    const { value: formActualizar} = await Swal.fire({
-      title: 'Actualizar Perfil',
-      html:
-            '<div class="row pb-3">'+
-              '<div class="col-sm-6 mb-4">'+
-                '<label for="ac-fn" class="form-label-lg">Correo Electronico</label>'+
-                '<input type="text" id="ac-fn" class="form-control form-control-lg" formControlName="u_correoElectronico">'+
-              '</div>'+
-              '<div class="col-sm-6 mb-4">'+
-                '<label for="ac-email" class="form-label-lg">Telefono</label>'+
-                '<input type="email" id="ac-ln" class="form-control form-control-lg" formControlName="u_telefono">'+
-              '</div>'+
-              '<div class="col-sm-6 mb-4">'+
-                '<label for="ac-email" class="form-label-lg">Dirección</label>'+
-                '<input type="text" id="ac-email" class="form-control form-control-lg" formControlName="u_direccion">'+
-              '</div>'+
-            '</div>',
-      focusConfirm: false,
-      preConfirm: () => {
-          const email = (document.getElementById('correoPerfil') as HTMLInputElement).value;
-          const telefono = (document.getElementById('telefonoPerfil') as HTMLInputElement).value;
-          const direccion = (document.getElementById('direccionPerfil') as HTMLInputElement).value;
-      }
-    })
-    /*if (formActualizar) {
-      Swal.fire(JSON.stringify(formValues))
-    }*/
-    //Si se quiere usar modal para que habra la ventanita, se debe cambiar el formPerfil por formActualizar
-      if (this.formPerfil.value.u_correoElectronico == '' || this.formPerfil.value.u_telefono == '' || this.formPerfil.value.u_direccion == '') {
-          Swal.fire({
-              text: 'Complete los datos correctamente',
-              icon: 'warning',
-              showCancelButton: false,
-              customClass: {
-                  confirmButton: 'btn btn-warning'
-              },
-              buttonsStyling: false
-          });
-      }  else {
-          let cel: boolean
-          let email: boolean
-          if(this.soloNumeros(this.formPerfil.value.u_telefono) == true){
-              cel = true;
-          } else {
-              Swal.fire({
-                  text: 'El telefono solo puede contener numeros',
-                  icon: 'warning',
-                  showCancelButton: false,
-                  customClass: {
-                      confirmButton: 'btn btn-warning'
-                  },
-                  buttonsStyling: false
-              });
-          }
-          if(this.validarEmail(this.formPerfil.value.u_correoElectronico) == true){
-              email = true;
-          } else {
-              Swal.fire({
-                  text: 'El correo electronico no es valido',
-                  icon: 'warning',
-                  showCancelButton: false,
-                  customClass: {
-                      confirmButton: 'btn btn-warning'
-                  },
-                  buttonsStyling: false
-              });
-          }
-          if(cel == true && email == true){
-              this.putCliente();
-          }
-      }
-  }
+//     putPerfil(){
+
+//     //Si se quiere usar modal para que habra la ventanita, se debe cambiar el formPerfil por formActualizar
+//       if (this.formPerfil.value.u_correoElectronico == '' || this.formPerfil.value.u_telefono == '' || this.formPerfil.value.u_direccion == '') {
+//           Swal.fire({
+//               text: 'Complete los datos correctamente',
+//               icon: 'warning',
+//               showCancelButton: false,
+//               customClass: {
+//                   confirmButton: 'btn btn-warning'
+//               },
+//               buttonsStyling: false
+//           });
+//       }  else {
+//           let cel: boolean
+//           let email: boolean
+//           if(this.soloNumeros(this.formPerfil.value.u_telefono) == true){
+//               cel = true;
+//           } else {
+//               Swal.fire({
+//                   text: 'El teléfono solo puede contener números',
+//                   icon: 'warning',
+//                   showCancelButton: false,
+//                   customClass: {
+//                       confirmButton: 'btn btn-warning'
+//                   },
+//                   buttonsStyling: false
+//               });
+//           }
+//           if(this.validarEmail(this.formPerfil.value.u_correoElectronico) == true){
+//               email = true;
+//           } else {
+//               Swal.fire({
+//                   text: 'El correo electrónico no es válido',
+//                   icon: 'warning',
+//                   showCancelButton: false,
+//                   customClass: {
+//                       confirmButton: 'btn btn-warning'
+//                   },
+//                   buttonsStyling: false
+//               });
+//           }
+//           if(cel == true && email == true){
+//               this.putCliente();
+//           }
+//       }
+//   }
   //Actualizar perfil
-  putCliente(){
-      let data = {
-          u_idUsuario: this.formPerfil.value.u_idUsuario,
-          u_correoElectronico: this.formPerfil.value.u_correoElectronico,
-          u_telefono: this.formPerfil.value.u_telefono,
-          u_direccion: this.formPerfil.value.u_direccion
-      }
-      this._userService.putClienteXid(data).subscribe(
-          res => {
-              this.getPCliente();
-              Swal.fire({
-                  text: 'Actualizado correctamente',
-                  icon: 'success',
-                  showCancelButton: false,
-                  customClass: {
-                      confirmButton: 'btn btn-success'
-                  },
-                  buttonsStyling: false
-              });
-          },
-          (err) => {
-              console.log(err);
-              Swal.fire({
-                  text: 'Error al actualizar',
-                  icon: 'error',
-                  showCancelButton: false,
-                  customClass: {
-                      confirmButton: 'btn btn-danger'
-                  },
-                  buttonsStyling: false
-              });
-          }
-      );
+  telefono(){
+     
+     this.formPerfil.controls['u_telefono'].setValidators([Validators.required, Validators.maxLength(9), Validators.pattern('^[0-9]*$')]);
+     
   }
-  //Validar solo numeros
-  soloNumeros(cel){
-      let numero = cel.match(/^[0-9]*$/);
-      if(numero == null){
-          return false;
-      } else {
-          return true;
-      }
-  }
-  //Validar correo electronico
-  validarEmail(email: any) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-  }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Eliminar Perfil///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Logica de Validaciones
+  correo(){
+    this.formPerfil.controls['u_correoElectronico'].setValidators([Validators.email, Validators.required]);
+  }
+
+  direccion(){
+    this.formPerfil.controls['u_direccion'].setValidators([Validators.required, Validators.maxLength(60)]); 
+  }
+
+  putCliente(){
+    if(this.formPerfil.valid){
+        let data = {
+            u_idUsuario: this.formPerfil.value.u_idUsuario,
+            u_correoElectronico: this.formPerfil.value.u_correoElectronico,
+            u_telefono: this.formPerfil.value.u_telefono,
+            u_direccion: this.formPerfil.value.u_direccion
+        }
+        this._userService.putClienteXid(data).subscribe(
+            res => {
+                this.getPCliente();
+                Swal.fire({
+                    title: 'Actualizado correctamente',
+                    icon: 'success',
+                    showCancelButton: false,
+                    customClass: {
+                        confirmButton: 'btn btn-success'
+                    },
+                    buttonsStyling: false
+                });
+            },
+            (err) => {
+                console.log(err);
+                Swal.fire({
+                    title: 'Error al actualizar',
+                    icon: 'error',
+                    showCancelButton: false,
+                    customClass: {
+                        confirmButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                });
+            }
+        );
+    }
+      
+  }
+ 
+ //Logica de Validaciones
   eliminarOdeshabilitar(){
     Swal.fire({
       title: 'Eliminar Cuenta',
       text: 'Ingrese su contraseña para eliminar su cuenta',
-      input: 'text',
+      input: 'password',
       icon: 'warning',
       inputAttributes: {
         autocapitalize: 'off'
@@ -250,28 +203,30 @@ export class PerfilComponent implements OnInit {
         cancelButton: 'btn btn-danger'
       },
       showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#6BC362',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: '<i _ngcontent-elo-c51="" class="ci-checkmark me-1 align-middle"></i>Confirmar',
+      cancelButtonText: '<i _ngcontent-elo-c51="" class="ci-cross me-1 align-middle"></i>Cancelar',
       showLoaderOnConfirm: true,
       preConfirm: (contra) => {
         //logica de validacion
-        contra == this.contra.Password
+        this.validatecontra=contra;
+
       },
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
-      if (result.isConfirmed) {
+        console.log(result)
+      if (result.isConfirmed && (String)(result.value) == this.contra.u_contrasena) {
           //Preguntar si se desea eliminar o deshabilitar
           Swal.fire({
-              title: '¿Desea eliminar o deshabilitar el perfil?',
+              title: '¿Desea eliminar o deshabilitar su cuenta?',
               text: '¡Si elimina no podrá revertir esta acción!',
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Eliminar',
-              cancelButtonText: 'Deshabilitar',
+              confirmButtonColor: '#dc3545',
+              cancelButtonColor: '#9d9d9d',
+              confirmButtonText: '<i _ngcontent-elo-c51="" class="ci-cross me-1 align-middle"></i>Eliminar',
+              cancelButtonText: '<i _ngcontent-elo-c51="" class="ci-minus-round me-1 align-middle"></i>Deshabilitar',
               customClass: {
                   confirmButton: 'btn btn-warning',
                   cancelButton: 'btn btn-danger'
@@ -286,7 +241,7 @@ export class PerfilComponent implements OnInit {
           })
       } else {
           Swal.fire({
-              text: 'Contraseña incorrecta',
+              text: 'La contraseña ingresada es incorrecta',
               icon: 'warning',
               showCancelButton: false,
               customClass: {
@@ -300,11 +255,18 @@ export class PerfilComponent implements OnInit {
   }
   //Eliminar perfil
   deleteCliente(){
-      this._userService.deleteClienteXid(this.user.u_idUsuario).subscribe(
+    let data={
+        u_correoElectronico: this.formPerfil.value.u_correoElectronico,
+        u_idUsuario: this.formPerfil.value.u_idUsuario,
+        u_contrasena: this.contra.u_contrasena
+    }
+    console.log(this.formPerfil.value.u_idUsuario)
+      this._userService.deleteClienteXid(data).subscribe(
           res => {
-              this.salir()
+            console.log(res)
+            //   this.salir()
               Swal.fire({
-                  text: 'Eliminado correctamente',
+                  text: 'cuenta eliminada correctamente',
                   icon: 'success',
                   showCancelButton: false,
                   customClass: {
@@ -316,7 +278,7 @@ export class PerfilComponent implements OnInit {
           (err) => {
               console.log(err);
               Swal.fire({
-                  text: 'Error al eliminar',
+                  text: 'Error al eliminar cuenta',
                   icon: 'error',
                   showCancelButton: false,
                   customClass: {
@@ -327,16 +289,17 @@ export class PerfilComponent implements OnInit {
           }
       );
   }
-  //Confirmar eliminacion
+ 
   confirmarEliminacion(){
       Swal.fire({
-          title: '¿Estas seguro?',
-          text: "No podras revertir esto!",
+          title: '¿Estás seguro?',
+          text: "No podrás revertir esto!",
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, Eliminar!'
+          confirmButtonColor: '#dc3545',
+          cancelButtonColor: '#9d9d9d',
+          confirmButtonText: '<i _ngcontent-elo-c51="" class="ci-checkmark me-1 align-middle"></i>Sí, eliminar mi cuenta!',
+          cancelButtonText: '<i _ngcontent-elo-c51="" class="ci-cross me-1 align-middle"></i>Cancelar',
       }).then((result) => {
           if (result.value) {
               this.deleteCliente();
@@ -344,30 +307,40 @@ export class PerfilComponent implements OnInit {
       }
       )
   }
-  //Desactivar Perfil
+
   desactivarPerfil(){
-      this._userService.desactivarPerfil(this.formPerfil.value.u_idUsuario).subscribe(
+    let data={
+        u_idUsuario: this.formPerfil.value.u_idUsuario,
+        eU_idEstadoUsuario: "6268342cfa3714a01d9ea2d8",
+        u_contrasena: this.contra.u_contrasena
+    }
+    console.log(data)
+      this._userService.desactivarPerfil(data).subscribe(
           res => {
-              this.salir()
-              //Mensaje de desactivacion
-              Swal.fire(
-                  'Desactivado!',
-                  'Tu perfil ha sido desactivado.',
-                  'success'
-              )
+            if(res.mensaje=='La cuenta fue deshabilitada correctamente, esperamos verte pronto'){
+
+                Swal.fire({
+                    icon: 'success',
+                    title: res.mensaje + " !!!",
+                    timer: 3000,
+                    timerProgressBar: true,
+                  }).then(() => this.salir());
+
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: res.mensaje,
+                    timer: 3000,
+                    showConfirmButton: false,
+                }
+                )
+            } 
           }
       );
   }
   //Salida
   salir(){
-      localStorage.removeItem('idCliente');
-      localStorage.removeItem('idPerfil');
-      localStorage.removeItem('nombre');
-      localStorage.removeItem('token');
-      this._router.navigate(['/login']);
+    this._userService.logout();
+    window.location.replace('/')
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 }

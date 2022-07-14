@@ -19,6 +19,7 @@ export const URL_TIPO_DOCUMENTO2= URL_USUARIO+ 'TipoDocumento';
 export const URL_CORREO_RECUPERA= URL_USUARIO+ 'CorreoRecuperar/';
 export const URL_VALIDAR_CODIGO= URL_USUARIO+ 'validarCod/';
 export const URL_CAMBIAR_CONTRASENA= URL_USUARIO+ 'CambiarContrasena/';
+export const URL_DELETE_CLIENTE= URL_CLIENTE + 'DeleteCliente';
 
 // PRODUCTOS
 

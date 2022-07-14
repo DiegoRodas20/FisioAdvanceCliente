@@ -30,11 +30,12 @@ export class Usuario {
 }
 
   export class Login {
+    [x: string]: string;
 
     
     constructor(
-      public Username: string,
-      public Password: string
+      public u_correoElectronico: string,
+      public u_contrasena: string
 
     ) {}
 }

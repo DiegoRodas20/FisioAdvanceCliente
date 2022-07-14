@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
     CerrarSesion(){
         
         this._userService.logout();
-        this._router.navigate(['/catalogo']);
+        window.location.replace('/')
     }
 
     getCarrito() {
@@ -91,18 +91,8 @@ export class HeaderComponent implements OnInit {
             this._router.navigate(['/checkout']);
         }
         else{
-            // Swal.fire({
-            //     title: '',
-            //     text: "Debe iniciar sesion para continuar",
-            //     icon: 'warning',
-            //     // confirmButtonColor: '#3085d6',
-            //     confirmButtonText:
-            //     '<a _ngcontent-elo-c51="" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view" class="topbar-link d-lg-inline-block d-none ms-4 ps-1 text-decoration-none text-nowrap"> <i _ngcontent-elo-c51="" class="ci-profile me-1 fs-base align-middle"></i>Iniciar Sesión</a>',
-            //     confirmButtonAriaLabel: 'Thumbs up, great!',
-            //   })
 
               swalWithBootstrapButtons.fire({
-                // title: '¿Está seguro de eliminar el producto?',
                 text: "Debe iniciar sesion para continuar",
                 icon: 'info',
                 // showCancelButton: true,

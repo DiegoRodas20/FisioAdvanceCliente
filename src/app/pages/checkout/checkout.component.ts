@@ -74,7 +74,7 @@ export class CheckoutComponent implements OnInit {
             this.hoy = Date.now();
             this.latest_date = this.datepipe.transform(this.hoy, 'yyyy-MM-dd');
             this.perfilLogueado();
-            this.updatevalidartors();
+            
         }
         this.getCarrito();
         this.getDepartamento();
@@ -225,7 +225,12 @@ export class CheckoutComponent implements OnInit {
             Swal.fire({
                 icon: 'success',
                 title: 'Exito',
-                text: 'Se registro completamente el pedido'
+                text: 'Se registro completamente el pedido',
+                timer: 3000,
+                timerProgressBar: true,
+                confirmButtonColor: '#9d9d9d',
+                confirmButtonText: 'Ok',
+                showCancelButton: false,
             }).then(
                 (result) =>
                     this.goCatalogo()
@@ -246,7 +251,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     goCatalogo() {
-        this._router.navigate(['/catalogo']);  
+        window.location.replace('/')  
     }
 
     perfilLogueado():Boolean{
@@ -322,6 +327,7 @@ export class CheckoutComponent implements OnInit {
                 break; 
              } 
              case opcion="Olva courier": { 
+                this.updatevalidartors();
                 this.formPedido.value.adicional=15
                 break; 
              } 
